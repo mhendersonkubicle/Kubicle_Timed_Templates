@@ -60,10 +60,17 @@ jobs:
         run: cd harness && npm ci
 
       - name: Determine build inputs (push reads request.json; dispatch reads its payload)
+        id: determine
         run: |
           if [ "${{ github.event_name }}" = "push" ]; then
             REQ=$(git diff --name-only HEAD~1 HEAD | grep -E '^inputs/.+/request\.json$' | head -1)
-            test -n "$REQ" || { echo "Push did not change an inputs/**/request.json"; exit 1; }
+            # A deletion/cleanup shows up in the diff but the file is gone: skip cleanly,
+            # do not try to build (and do not mark it errored).
+            if [ -z "$REQ" ] || [ ! -f "$REQ" ]; then
+              echo "No present request.json changed (deletion or cleanup); skipping build."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
             echo "Using request file: $REQ"
             echo "COURSE=$(jq -r .course "$REQ")"                     >> "$GITHUB_ENV"
             echo "COURSE_ID=$(jq -r .courseId "$REQ")"                >> "$GITHUB_ENV"
@@ -85,6 +92,7 @@ jobs:
           fi
 
       - name: Fetch input files if URLs were provided (Slack or presigned storage)
+        if: steps.determine.outputs.skip != 'true'
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: |
@@ -112,11 +120,13 @@ jobs:
           done
 
       - name: Sanity-check the input files exist
+        if: steps.determine.outputs.skip != 'true'
         run: |
           test -f "$INPUTS_DIR/lesson.srt" || { echo "Missing $INPUTS_DIR/lesson.srt (no committed file and no working srtUrl)"; exit 1; }
           test -f "$INPUTS_DIR/narration.mp3" || { echo "Missing $INPUTS_DIR/narration.mp3 (no committed file and no working mp3Url)"; exit 1; }
 
       - name: Build the lesson with Claude Code
+        if: steps.determine.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -144,23 +154,27 @@ jobs:
           )" --model "$MODEL" --dangerously-skip-permissions --max-turns 150
 
       - name: Bundle assets into the project (make it self-contained)
+        if: steps.determine.outputs.skip != 'true'
         run: |
           PROJ="projects/${COURSE_ID}-l${LESSON_NUMBER}"
           test -d "$PROJ/src" || { echo "Build produced no $PROJ/src"; exit 1; }
           python script-pipeline/bundle-project.py "$PROJ"
 
       - name: Compile-check (bundle, no render)
+        if: steps.determine.outputs.skip != 'true'
         run: |
           PROJ="projects/${COURSE_ID}-l${LESSON_NUMBER}"
           cp -r "$PROJ/src/." harness/src/
           cd harness && npx remotion bundle
 
       - name: Record success status
+        if: steps.determine.outputs.skip != 'true'
         run: |
           RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           printf '{ "state": "built", "at": "%s", "run": "%s" }\n' "$(date -u +%FT%TZ)" "$RUN_URL" > "$INPUTS_DIR/status.json"
 
       - name: Commit the built project
+        if: steps.determine.outputs.skip != 'true'
         run: |
           git config user.name "lesson-bot"
           git config user.email "lesson-bot@users.noreply.github.com"
@@ -181,11 +195,12 @@ jobs:
           fi
 
       - name: Summary
+        if: steps.determine.outputs.skip != 'true'
         run: |
           echo "Built projects/${COURSE_ID}-l${LESSON_NUMBER}. Pull the repo, stage assets, and render locally in Remotion Studio." >> "$GITHUB_STEP_SUMMARY"
 
       - name: Record error status (on failure or cancellation)
-        if: ${{ failure() || cancelled() }}
+        if: ${{ (failure() || cancelled()) && steps.determine.outputs.skip != 'true' }}
         run: |
           # Only possible once we know which lesson this is.
           [ -n "$INPUTS_DIR" ] || { echo "No INPUTS_DIR; cannot record status."; exit 0; }
