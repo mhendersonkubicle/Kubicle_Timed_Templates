@@ -11,9 +11,9 @@ This is a **solo templates repo**. Pushes go straight to `main` — no PR review
 
 ## Repo facts
 
-- Remote: `origin` → `github.com/mrankin-blip/Kubicle_MG_Templates`
+- Remote: `origin` → `github.com/mhendersonkubicle/Kubicle_Timed_Templates`
 - Default branch: `main`
-- Token is embedded in the remote URL — don't nag about it.
+- Auth is handled by the Windows git credential manager (no token in the remote URL); don't nag about credentials.
 - `gh` CLI is **not** installed — don't try to use it.
 - The user often runs inside a Claude Code worktree (e.g. on a `claude/*` branch). That's fine — `/save` pushes current HEAD to remote `main` regardless of the local branch name.
 
