@@ -1,0 +1,19 @@
+{
+  "lesson": "Vendor Management, Lesson 8: Monitoring Vendor Performance",
+  "totalSeconds": 138.743, "fps": 30,
+  "scenes": [
+    { "id":"scene-1","template":"LessonTitle","cues":"1","peopleTemplate":false },
+    { "id":"scene-2","template":"LessonGoal","cues":"2-3","peopleTemplate":false },
+    { "id":"scene-3","template":"Topic1Subtopics6Character","cues":"4-11","peopleTemplate":true,
+      "rationale":"One core question (why monitor) with 3 supporting reasons; presenter-led variant fits content with no specific people." },
+    { "id":"scene-4","template":"Checklist5Pills","cues":"12-19","peopleTemplate":false },
+    { "id":"scene-5","template":"IconPointsV1","cues":"20-25","peopleTemplate":false,
+      "note":"icons must be -light (template-enforced); pills retimed to term utterances." },
+    { "id":"scene-6","template":"WordDefinition","cues":"26-31","peopleTemplate":false },
+    { "id":"scene-7","template":"BigPoints3V1","cues":"32-37","peopleTemplate":false,
+      "pulse":"point2 (reviews) @12.66 re-mention" },
+    { "id":"scene-8","template":"Timeline5TilesCharacter","cues":"38-42","peopleTemplate":true,
+      "rationale":"Worked example is a genuine 3-step sequence (review -> finding -> action); presenter walks it." },
+    { "id":"scene-9","template":"LessonSummary","cues":"43-46","peopleTemplate":false }
+  ]
+}

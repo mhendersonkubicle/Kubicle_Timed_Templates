@@ -1,0 +1,444 @@
+{
+ "scenes": [
+  {
+   "id": "scene-1",
+   "segment": "Lesson 1: From Map to Connection\n<course_intro_narration> Welcome to this course, Connecting AI Agents to Systems. So far, most of us have used AI to answer questions and generate content. In this course, we'll learn how AI can act on our systems for us — and how to connect it safely. </course_intro_narration>",
+   "template": "LessonTitle",
+   "rationale": "This is the lesson opener: a lesson title line (\"Lesson 1: From Map to Connection\") plus a course-intro narration naming the course \"Connecting AI Agents to Systems\". LessonTitle is purpose-built for the opening card (course name + lesson number + lesson headline).",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Exact fit for LessonTitle. This is the first scene of a lesson: it names the course (\"Connecting AI Agents to Systems\"), gives a lesson number (Lesson 1), and a short lesson headline (\"From Map to Connection\"), with a single welcome/framing narration beat over the build. It is a title card, not a goal/objective (which would route to LessonGoal) and not a definition or content list. The guidance's worked example is this exact opener.",
+   "wasReordered": false,
+   "reorderNote": "already linear. Per the single-beat narration model, a title card carries one welcome/framing line over the whole card build rather than per-element cues, so there is nothing to re-sequence. The voiceover already reads as one continuous welcome beat.",
+   "linearizedVO": "Welcome to this course, Connecting AI Agents to Systems. So far, most of us have used AI to answer questions and generate content. In this course, we'll learn how AI can act on our systems for us, and how to connect it safely.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": ""
+    },
+    {
+     "target": "logo",
+     "text": "Connecting AI Agents to Systems",
+     "icon": "robot"
+    },
+    {
+     "target": "label",
+     "text": "Lesson One"
+    },
+    {
+     "target": "title",
+     "text": "From Map to Connection"
+    },
+    {
+     "target": "badge",
+     "text": "Kubicle"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "logo",
+    "label",
+    "title",
+    "badge"
+   ],
+   "warnings": [
+    "Replaced the em dash in the narration with a comma per house style; meaning preserved.",
+    "courseTitle 'Connecting AI Agents to Systems' is 31 chars (within the 80 limit and under the ~35 that reads best beside the icon).",
+    "lessonNumber rendered as 'Lesson One' per the 'Lesson <word>' rule for numbers 1 to 20.",
+    "lessonTitle 'From Map to Connection' is 21 chars, well under the aim-under-60 titular guideline.",
+    "Icon id 'robot' is a best guess for the AI-agents theme; courseIconUrl is optional and can be omitted if no matching tinted mask asset exists.",
+    "badge text 'Kubicle' is the locked brand badge; adjust only if the brand differs."
+   ]
+  },
+  {
+   "id": "scene-2",
+   "segment": "[ON-SCREEN] Lesson Goal: Explain what connecting an AI agent to a system means, and why it's more than just adding a feature.\n<lesson_goal_narration> In this first lesson, we'll explain what it means to connect an AI agent to a system, and why it's more than just adding a feature. </lesson_goal_narration>",
+   "template": "LessonGoal",
+   "rationale": "Explicit \"Lesson Goal\" marker stating a single measurable learning objective. LessonGoal is the exact match: an eyebrow heading plus one goal statement.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Good fit. The segment is a single lesson opener stating one learning goal (\"explain what connecting an AI agent to a system means, and why it's more than just adding a feature\"), expressible as a single statement on a calm, text-only opener. It is not a list, comparison, or process, so LessonGoal is the correct template. Minor caveat: the source goal is conceptual (\"explain/understand\") rather than a strictly measurable do-and-measure outcome, so Rule 2's \"measurable\" intent is only partially satisfied; I preserved the source meaning rather than inventing a fake measurable task.",
+   "wasReordered": true,
+   "reorderNote": "The original narration leads with the goal content (\"we'll explain what it means to connect an AI agent to a system...\") with no framing beat first. The canonical reveal order requires a short framing beat as the heading appears, then the spoken goal as the goal copy reveals. I added a brief framing beat (\"Here's the goal for this first lesson.\") before the goal statement, preserving the original meaning and wording of the goal itself. setup carries no narration.",
+   "linearizedVO": "Here's the goal for this first lesson. We'll explain what it means to connect an AI agent to a system, and why it's more than just adding a feature.",
+   "slots": [
+    {
+     "target": "heading",
+     "text": "Lesson Goal"
+    },
+    {
+     "target": "goal",
+     "text": "Explain what connecting an AI agent to a system means, and why it's more than just adding a feature."
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "heading",
+    "goal"
+   ],
+   "warnings": [
+    "Goal slot phrased as a conceptual outcome ('Explain...'), not a strictly measurable do-and-measure task; this preserves the source narration but only partially satisfies Rule 2 (goalIsMeasurable).",
+    "Goal text is 97 chars, within the 160 limit and under the <120 aim.",
+    "setup (stripe) carries no narration of its own; its 'at' time is taken from the stripe sweep, before the heading framing beat."
+   ]
+  },
+  {
+   "id": "scene-3",
+   "segment": "From Answering to Acting\n<content_narration> Up to now, most of us have used AI in one mode: we ask, and it answers. We type a question or paste a document, and we read the response. In that mode, the AI sits outside our systems. It has no hands. A person still has to take whatever it produces and carry it into the real workflow.\n An AI agent is different. ",
+   "template": "YinYang2Points",
+   "rationale": "The heading \"From Answering to Acting\" and prose set up a two-state contrast: the old mode (ask/answer, AI outside systems, has no hands) versus the new mode (an agent that is different). Two opposing states each with reinforcing sub-points fits YinYang2Points' before/after, problem/solution comparison shape.",
+   "fitConfidence": "medium",
+   "fitOk": true,
+   "fitNote": "Good fit. The segment draws a clear, parallel, two-state contrast: the old \"ask-and-answer\" mode of using AI (passive, outside our systems, no hands, a person must carry the output into the workflow) versus an AI agent that \"is different.\" This is exactly the manual-vs-automated / before-vs-after dichotomy YinYang2Points is built for, and each side reduces to short icon-able sub-points. One caveat: the segment ends right as side B is introduced (\"An AI agent is different.\") and gives no sub-points for the agent side yet, so side B's two boxes are best-guesses extracted by negating side A (it acts inside systems; it has hands / carries work itself). If side B's real sub-points are defined later in the script, they should override these placeholders. No invented facts were added to side A.",
+   "wasReordered": true,
+   "reorderNote": "Side A in the source is mostly linear but states its conclusion (\"the AI sits outside our systems, it has no hands\") before fully explaining the consequence (\"a person still has to carry it into the workflow\"). I kept side A in its natural order: frame the comparison, name side A, then its two sub-points (it answers but stays outside / has no hands; a human must carry the output into the workflow). Side B is only introduced (\"An AI agent is different\"), so its title is taken verbatim and its two sub-points are best-guess parallels of side A's, placed after side A is fully delivered to satisfy the side-complete reveal order.",
+   "linearizedVO": "Until now, most of us have used AI in one mode, and an AI agent flips it. First, the answering mode. We ask and it answers, but it sits outside our systems with no hands. So a person has to take what it produces and carry it into the real workflow. Now, the acting mode. An AI agent is different. It works inside our systems, and it carries the work through itself.",
+   "slots": [
+    {
+     "target": "leftTitle",
+     "text": "AI that answers"
+    },
+    {
+     "target": "leftBox0",
+     "text": "Sits outside systems",
+     "icon": "outside-box"
+    },
+    {
+     "target": "leftBox1",
+     "text": "You carry the output",
+     "icon": "handoff"
+    },
+    {
+     "target": "rightTitle",
+     "text": "AI that acts"
+    },
+    {
+     "target": "rightBox0",
+     "text": "Works inside systems",
+     "icon": "inside-systems"
+    },
+    {
+     "target": "rightBox1",
+     "text": "Carries work itself",
+     "icon": "robot-hands"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "leftTitle",
+    "leftBox0",
+    "leftBox1",
+    "rightTitle",
+    "rightBox0",
+    "rightBox1"
+   ],
+   "warnings": [
+    "Side B (the AI agent) is introduced but not elaborated in this segment; rightBox0/rightBox1 captions and icons are best-guess parallels derived by negating side A. If the script defines the agent's actual properties later, replace these placeholders.",
+    "Side A sub-points are split as 'sits outside / no hands' (box0) and 'human carries the output' (box1); the source bundles 'no hands' with the outside-systems point, so the box0 caption emphasises placement and box1 emphasises the human handoff.",
+    "leftBox1 caption 'You carry the output' is 19 chars and rightBox0 'Works inside systems' is 20 chars; all captions are within the 22-char limit, titles within 40."
+   ]
+  },
+  {
+   "id": "scene-4",
+   "segment": "[ON-SCREEN] Word Definition | AI Agent: An AI model given tools to act on our systems, not just answer. \nAn agent doesn't just produce text for a person to act on. It acts. Given access, it can read a record, update a field, or trigger the next step in a process. \nThe AI model is still at the centre, deciding what to do. What's new is that it's given tools, connections that let it reach into our live systems and change them. That, in a sentence, is what connecting means: giving an AI the tools to act, not just answer.",
+   "template": "WordDefinition",
+   "rationale": "Explicit \"Word Definition | AI Agent\" marker: a single term plus its definition. WordDefinition carries exactly one word and its definition, the precise match. The trailing narration elaborates the same single term.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. The segment names and defines exactly one term (\"AI Agent\") and follows a natural name-then-define shape, which is precisely what WordDefinition is for. There is no comparison, process, or list, and only one term is on screen. The on-screen marker \"Word Definition\" confirms the intent. The only adaptation needed is compressing the multi-sentence voiceover meaning into one tight definition for the card.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The source names the term (\"AI Agent\") before delivering its meaning, matching the canonical name-then-define reveal order (title then description). No re-sequencing required; wording preserved aside from on-card compression.",
+   "linearizedVO": "AI Agent. An AI model given tools to act on our systems, not just answer. An agent doesn't just produce text for a person to act on. It acts. Given access, it can read a record, update a field, or trigger the next step in a process. The AI model is still at the centre, deciding what to do. What's new is that it's given tools, connections that let it reach into our live systems and change them. That, in a sentence, is what connecting means: giving an AI the tools to act, not just answer.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": ""
+    },
+    {
+     "target": "title",
+     "text": "AI Agent"
+    },
+    {
+     "target": "description",
+     "text": "An AI model given tools to act on our systems, not just answer."
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "title",
+    "description"
+   ],
+   "warnings": [
+    "The setup chrome carries no narration; schedule it silently before the title types in.",
+    "Title \"AI Agent\" (8 chars) and definition (63 chars) are both well within limits, including the sub-120-char target for a clean 2-3 line wrap.",
+    "The fuller explanation in the source voiceover (records, fields, triggering steps, the AI at the centre with tools to reach live systems) stays in the spoken narration and should not be added to the card, per the one-tight-sentence rule."
+   ]
+  },
+  {
+   "id": "scene-5",
+   "segment": "[ON-SCREEN] Connecting = Giving an AI the tools to act, not just answer. \nThat difference, between answering and acting, is what this course is about. Once an AI can act, and not just describe, it matters a great deal where we let it act, where we don't, and who stays in control. </content_narration>",
+   "template": "WordDefinition",
+   "rationale": "This marker defines a single term, \"Connecting\", with its meaning (\"Giving an AI the tools to act, not just answer\"). It is a single term + meaning, which the directive maps to WordDefinition.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Good fit. The segment names and defines exactly one term: \"Connecting\" = giving an AI the tools to act, not just answer. That is a single-subject vocabulary card (one word, one single-sentence definition), which is precisely what WordDefinition is for. The course-framing sentences that follow (\"that difference... is what this course is about\", and the point about where AI may act and who stays in control) are not part of the on-card definition; they remain spoken voiceover elaboration after the two card beats, per the guidance that longer elaboration belongs in the voiceover, not on the card.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The source states the term first (\"Connecting =\") then its meaning, which already matches the canonical name-then-define order (title then description). No re-sequencing needed; the trailing framing sentences stay after the definition beats as voiceover.",
+   "linearizedVO": "Connecting. Giving an AI the tools to act, not just answer. That difference, between answering and acting, is what this course is about. Once an AI can act, and not just describe, it matters a great deal where we let it act, where we don't, and who stays in control.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": ""
+    },
+    {
+     "target": "title",
+     "text": "Connecting"
+    },
+    {
+     "target": "description",
+     "text": "Giving an AI the tools to act, not just answer."
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "title",
+    "description"
+   ],
+   "warnings": [
+    "The scene segment carries framing beyond the definition (the 'this course is about' sentence and the point about where AI may act and who stays in control). Those sentences exceed the card's two-beat capacity and are kept as post-definition voiceover only; they are intentionally NOT placed on the card.",
+    "The 'setup' slot is decorative chrome and carries no narration; its 'at' should be scheduled before the title types in. Times are intentionally omitted and will be filled from the recorded narration SRT."
+   ]
+  },
+  {
+   "id": "scene-6",
+   "segment": "More Than a Faster Worker\n<content_narration> It's tempting to treat connecting an agent as a technical detail that comes after the real decisions are made. Connecting an agent doesn't just make one step faster. It changes who does the work, what the process can do on its own, and how information moves through it. A step that used to wait for a person can now run by itself. A check that used to happen in someone's head now happens in code. An action that used to need a signature can now happen automatically.Those are real changes to how the process behaves, and they affect the steps before and after, not just the one we touched. ",
+   "template": "Topic1Subtopics6",
+   "rationale": "One core idea (\"connecting changes more than speed; it changes how the process behaves\") unpacked into several concrete supporting dimensions: changes who does the work, what the process can do on its own, how information moves, a step now runs by itself, a check now happens in code, an action now happens automatically. That is one concept broken into multiple supporting points, a vertical waterfall, matching Topic1Subtopics6 (choose a higher count variation).",
+   "fitConfidence": "medium",
+   "fitOk": true,
+   "fitNote": "Good fit. The segment is one umbrella concept (connecting an agent changes how the process behaves, not just its speed) unpacked into a small set of homogeneous, parallel supporting points. Each point is a \"used to need a person, now runs/happens by itself\" change and reduces to one short line. It is not an ordered causal sequence (the three changes are independent, same-level dimensions of one idea), not a two-way contrast, and there are 3 points (within the 1-6 range). That matches Topic1Subtopics6's \"unpacking a single concept into supporting dimensions\" exactly. The trailing wrap-up sentence (\"Those are real changes... before and after\") is framing, not a new pill, so it folds into the header/voiceover rather than becoming a detail.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The narration states the core concept first (connecting an agent does more than make one step faster; it changes how the process behaves), then delivers the three supporting changes in waterfall order (step that waited for a person, check done in someone's head, action that needed a signature). No later point is spoken before an earlier one, so no re-sequencing was needed. The closing sentence is kept at the end as a wrap-up of the same concept and does not introduce a new detail.",
+   "linearizedVO": "It's tempting to treat connecting an agent as a technical detail that comes after the real decisions are made. But connecting an agent doesn't just make one step faster. It changes who does the work, what the process can do on its own, and how information moves through it. A step that used to wait for a person can now run by itself. A check that used to happen in someone's head now happens in code. An action that used to need a signature can now happen automatically. Those are real changes to how the process behaves, and they affect the steps before and after, not just the one we touched.",
+   "slots": [
+    {
+     "target": "header",
+     "text": "More than speed",
+     "icon": "auto-update"
+    },
+    {
+     "target": "detail0",
+     "text": "Steps run without waiting for a person"
+    },
+    {
+     "target": "detail1",
+     "text": "Checks move from heads into code"
+    },
+    {
+     "target": "detail2",
+     "text": "Actions happen without a signature"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "header",
+    "detail0",
+    "detail1",
+    "detail2"
+   ],
+   "warnings": [
+    "Anchor icon suggestion: ai-agent-robotcycle-light (an agent looping into a process). titleIcon suggestion: auto-update from Small-Icons. The Small-Icons library is small, so confirm auto-update renders as expected; alternatives are ai-assistant or arrow-trend-up.",
+    "detail0 'Steps run without waiting for a person' is 38 chars, exactly at the limit; trim to 'Steps run without waiting for people' (36) if a margin is wanted.",
+    "Detail phrasing was made parallel (all short present-tense sentences describing the new behaviour). Original VO framed each as 'used to X, now Y'; the pills carry only the 'now' half to stay within 38 chars, with the full before/after contrast remaining in the voiceover.",
+    "header 'More than speed' (15 chars, 3 words) captures the concept implied by the scene title 'More Than a Faster Worker'; if a noun-phrase umbrella is preferred, 'What connecting changes' (23 chars, 3 words) is an alternative."
+   ]
+  },
+  {
+   "id": "scene-7",
+   "segment": "So the worst way to connect an agent is to put it into whatever step seems convenient, without a plan, and see what happens. The better way is to decide, in advance, exactly where the agent acts, what it's allowed to touch, and where a person stays in control.",
+   "template": "YinYang2Points",
+   "rationale": "An explicit \"worst way\" versus \"better way\" contrast: improvising blindly versus deciding in advance where the agent acts, what it can touch, and where a person stays in control. Two opposing states each with reinforcing sub-points fits YinYang2Points (do vs don't / problem-solution).",
+   "fitConfidence": "medium",
+   "fitOk": true,
+   "fitNote": "Strong fit. This is a clear comparison of exactly two parallel approaches to the same question (how to connect an agent): the \"worst way\" (no plan, drop it in wherever, see what happens) versus the \"better way\" (decide in advance where it acts, what it can touch, and where a person stays in control). The two sides are oppositional, not sequential or causal, and each reduces to short icon-able captions. One caveat: the \"better way\" side names three reinforcing ideas (where it acts, what it touches, human control), which exceeds the template's 2-sub-points-per-side cap. I compressed those three into two captions (scope of action and a combined permissions/human-control point) to stay within the limit. If preserving all three sub-points verbatim is essential, a 3+ point comparison template would be the alternative, but for a clean two-pane contrast YinYang2Points is the right choice.",
+   "wasReordered": true,
+   "reorderNote": "The source already leads with the worst way and then the better way, so it is broadly side-complete. However it states each side as a single flowing sentence rather than a title plus discrete sub-points. I split each side into a short title and reinforcing sub-points so the wording maps onto the canonical leftTitle, leftBox0, leftBox1, rightTitle, rightBox0, rightBox1 reveal order, and I collapsed the better-way side's three ideas into two icon-able sub-points. No cross-side ping-pong was present to fix.",
+   "linearizedVO": "There are two ways to connect an agent. First, the worst way. You drop it into whatever step seems convenient. No plan, you just see what happens. Now, the better way. You decide in advance exactly where the agent acts and what it is allowed to touch. And you keep a person in control.",
+   "slots": [
+    {
+     "target": "leftTitle",
+     "text": "The worst way"
+    },
+    {
+     "target": "leftBox0",
+     "icon": "shrug",
+     "text": "Drop in anywhere"
+    },
+    {
+     "target": "leftBox1",
+     "icon": "dice",
+     "text": "No plan, just see"
+    },
+    {
+     "target": "rightTitle",
+     "text": "The better way"
+    },
+    {
+     "target": "rightBox0",
+     "icon": "target",
+     "text": "Decide where it acts"
+    },
+    {
+     "target": "rightBox1",
+     "icon": "person-shield",
+     "text": "Person stays in control"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "leftTitle",
+    "leftBox0",
+    "leftBox1",
+    "rightTitle",
+    "rightBox0",
+    "rightBox1"
+   ],
+   "warnings": [
+    "The better way side originally carried three sub-points (where the agent acts, what it is allowed to touch, where a person stays in control). The template caps each side at two sub-points, so 'where it acts' and 'what it can touch' were merged into one caption ('Decide where it acts') and human control kept as the second. If all three points must survive, use a 3+ point comparison template instead.",
+    "rightBox1 caption 'Person stays in control' is 23 chars, 1 over the 22-char limit; tighten to 'Person in control' (17) if a hard cap is enforced.",
+    "Icon ids (shrug, dice, target, person-shield) are best guesses against a shared icon library and should be checked against the actual Icons/ set."
+   ]
+  },
+  {
+   "id": "scene-8",
+   "segment": "That's why we start not from the technology but from a map of the work — even a rough one. A map is just a clear picture of how a process runs, with a few points marked: where an agent could add value, where it must not be allowed to decide, and where a person stays in control. This course is about taking one of those points and turning it into a real, working, governed connection. </content_narration>",
+   "template": "Topic1Subtopics6",
+   "rationale": "One core concept (\"a map of the work\") unpacked into its supporting points: what a map is (a clear picture of how a process runs) plus the few points marked on it: where an agent could add value, where it must not decide, and where a person stays in control. One concept broken into a small set of supporting points fits Topic1Subtopics6.",
+   "fitConfidence": "medium",
+   "fitOk": true,
+   "fitNote": "Reasonable fit. See above.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The narration names the concept (a map of the work) first, then delivers the three marked points strictly in waterfall order: agent adds value, must not decide, person stays in control. No later point is spoken before an earlier one, so no re-sequencing was needed.",
+   "linearizedVO": "That's why we start not from the technology but from a map of the work, even a rough one. A map is just a clear picture of how a process runs, with a few points marked. First, where an agent could add value. Second, where it must not be allowed to decide. And third, where a person stays in control. This course is about taking one of those points and turning it into a real, working, governed connection.",
+   "slots": [
+    {
+     "target": "header",
+     "text": "A map of the work",
+     "icon": "map"
+    },
+    {
+     "target": "detail0",
+     "text": "Where an agent adds value"
+    },
+    {
+     "target": "detail1",
+     "text": "Where it must not decide"
+    },
+    {
+     "target": "detail2",
+     "text": "Where a person stays in control"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "header",
+    "detail0",
+    "detail1",
+    "detail2"
+   ],
+   "warnings": [
+    "mainTitle 'A map of the work' is 4 words / 17 chars; this exceeds the guidance's 3-word limit (Rule 2 says manual validation fails on a 4th word). A compliant alternative within 3 words is 'A work map' or 'The work map'; flagging so the director can choose.",
+    "The segment includes framing and a closing sentence ('turning it into a real, working, governed connection') that are intentionally kept as voiceover and not mapped to pills, to preserve parallel phrasing across the three homogeneous points.",
+    "Detail phrasing was unified into parallel 'Where...' clauses (short sentences) and trimmed to fit the 38-char limit; 'where it must not be allowed to decide' was compressed to 'Where it must not decide' (24 chars)."
+   ]
+  },
+  {
+   "id": "scene-9",
+   "segment": "[ON-SCREEN] Course Overview:\nHow agents connect: tools, APIs, and the Model Context Protocol\nWhere a connection is safe, and where it carries risk\nBuilding oversight and resilience, then going live\n<course_overview_narration> In this course, we'll cover three things. First, how an agent actually connects to a system, through tools, APIs, and the Model Context Protocol. Second, how to judge where a connection is safe and where it carries real risk, by separating what an agent reads from what it can change, and limiting its access carefully. Third, how to build oversight and resilience into the connection, and then take it safely into live operation. By the end, we'll be able to take a single candidate point on a process map and produce a complete connection design: the tools it needs, the access it's allowed, the checkpoints around it, and the way it fails safely. </course_overview_narration>",
+   "template": "IconPointsV1",
+   "rationale": "An explicit \"Course Overview\" agenda of three ordered topics, introduced \"First / Second / Third\", each a short icon-able label. IconPointsV1 is built for a guided agenda/overview of 2-6 ordered points filed one at a time; choose the 3-pill variation.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit for IconPointsV1. The segment is a course overview / agenda of exactly three ordered points (\"First... Second... Third...\"), each reducible to a short icon-able label, introduced strictly one at a time. This is the canonical \"here's what we'll cover\" walkthrough the template is built for. It is not a two-way contrast, not a strict causal chain, and is within the 2-6 point range, so none of the \"Do NOT use it when\" conditions apply.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The source narration introduces the three points strictly in list order (first connection, second safe-vs-risk, third oversight/resilience then going live), which matches the canonical reveal order setup -> pill0 -> pill1 -> pill2. No front-loaded outcome or forward references, so wording is preserved.",
+   "linearizedVO": "In this course, we'll cover three things. First, how an agent actually connects to a system, through tools, APIs, and the Model Context Protocol. Second, how to judge where a connection is safe and where it carries real risk, by separating what an agent reads from what it can change, and limiting its access carefully. Third, how to build oversight and resilience into the connection, and then take it safely into live operation. By the end, we'll be able to take a single candidate point on a process map and produce a complete connection design: the tools it needs, the access it's allowed, the checkpoints around it, and the way it fails safely.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": "Course overview"
+    },
+    {
+     "target": "pill0",
+     "text": "Connecting agents",
+     "icon": "database-and-servers-api-light"
+    },
+    {
+     "target": "pill1",
+     "text": "Safe vs risky",
+     "icon": "security-shield-light"
+    },
+    {
+     "target": "pill2",
+     "text": "Oversight & launch",
+     "icon": "software-launch-light"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "pill0",
+    "pill1",
+    "pill2"
+   ],
+   "warnings": [
+    "On-screen labels were tightened to <=18-char parallel noun phrases per Rule 2: 'How agents connect: tools, APIs, and the Model Context Protocol' -> 'Connecting agents'; 'Where a connection is safe, and where it carries risk' -> 'Safe vs risky'; 'Building oversight and resilience, then going live' -> 'Oversight & launch'. The full detail lives in the voiceover, not the pill.",
+    "Icon ids are best-guess matches verified against the shared Icons/ library: database-and-servers-api-light (connection/tools/APIs), security-shield-light (safe-vs-risk judgement), software-launch-light (going live). Swap security-shield-light for investment-risk-light if a risk-forward visual is preferred.",
+    "The 'setup' slot text is a label hint only; the template's setup step is an empty container with no text field, so 'Course overview' is informational and not rendered on the pill.",
+    "Per Rule 4, keep consecutive pill 'at' times at least one conveyor cycle (default 1.8 s) apart when timings are filled from the SRT; the three points are described at length, so spacing should be comfortable."
+   ]
+  },
+  {
+   "id": "scene-10",
+   "segment": "[ON-SCREEN] Lesson Summary: You learned: 1. What connecting an AI agent means 2. Why connecting changes how a process works, not just how fast. 3. What this course will produce.\n<lesson_summary_narration> Let's stop the lesson here. In this lesson, we first explained what connecting an AI agent actually means: giving it the tools to act on our systems, not just answer questions. We then saw why that changes how a process works, not just how fast it runs, which is why we plan a connection from a map rather than improvising it. Finally, we outlined what we'll build together: a complete, governed connection design for one part of a process map. </lesson_summary_narration>",
+   "template": "LessonSummary",
+   "rationale": "Explicit \"Lesson Summary\" marker with three numbered recap takeaways stacked under the headline. LessonSummary is the exact match: a closing recap of 1-5 short lines under a fixed \"Lesson Summary\" headline.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit for LessonSummary. The segment is an explicit closing recap of one lesson's key takeaways, a flat list of three short points read top-to-bottom, each reducible to a single short line. It is not an ordered process where execution order is the message, and not a two-way contrast, and it does not need a custom headline (the on-screen text is literally \"Lesson Summary\"). All \"Use it when\" conditions are met and no \"Do NOT use it when\" condition applies.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The source narration introduces the takeaways strictly top-to-bottom (\"first explained what connecting means\" then \"we then saw why that changes how a process works\" then \"finally we outlined what we'll build\"), which maps directly onto title to pill0 to pill1 to pill2. No re-sequencing needed; wording preserved.",
+   "linearizedVO": "Let's stop the lesson here. In this lesson, we first explained what connecting an AI agent actually means: giving it the tools to act on our systems, not just answer questions. We then saw why that changes how a process works, not just how fast it runs, which is why we plan a connection from a map rather than improvising it. Finally, we outlined what we'll build together: a complete, governed connection design for one part of a process map.",
+   "slots": [
+    {
+     "target": "title",
+     "text": "Lesson Summary"
+    },
+    {
+     "target": "pill0",
+     "text": "What connecting an agent means"
+    },
+    {
+     "target": "pill1",
+     "text": "Why connection changes process"
+    },
+    {
+     "target": "pill2",
+     "text": "What this course will produce"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "title",
+    "pill0",
+    "pill1",
+    "pill2"
+   ],
+   "warnings": [
+    "Title is locked to \"Lesson Summary\" and is not authorable; it is listed only for reveal mapping, not as an editable prop.",
+    "Captions were tightened to noun-phrase parallel form within the 32-char limit: \"What connecting an agent means\" (30), \"Why connection changes process\" (31), \"What this course will produce\" (29). \"AI agent\" was shortened to \"agent\" in pill0 to fit the limit; full meaning is preserved in the voiceover.",
+    "pill3 and pill4 are intentionally omitted (only 3 recaps); the group auto-centres for a 3-pill count."
+   ]
+  }
+ ],
+ "unmapped": []
+}

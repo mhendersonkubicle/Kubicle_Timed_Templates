@@ -1,0 +1,19 @@
+{ "scenes": [
+  { "id":"scene-3","span":[41.503,76.100],"objects":[
+    {"target":"leftTitle","anchor":"linear thinking","revealAt":8.0},
+    {"target":"rightBox1","anchor":"wrong over time","revealAt":29.2}]},
+  { "id":"scene-4","span":[76.100,100.624],"objects":[
+    {"target":"petal1","anchor":"pressure","revealAt":4.6}]},
+  { "id":"scene-5","span":[100.624,160.263],"objects":[
+    {"target":"title0","anchor":"returning","revealAt":6.8},
+    {"target":"title1","anchor":"blame","revealAt":19.3},
+    {"target":"title2","anchor":"intervention","revealAt":38.6}]},
+  { "id":"scene-6","span":[160.263,175.566],"objects":[
+    {"target":"title","anchor":"systems thinking","revealAt":3.0}]},
+  { "id":"scene-7","span":[175.566,192.098],"objects":[
+    {"target":"leftPoint","anchor":"analytical thinking","revealAt":3.7},
+    {"target":"rightPoint","anchor":"systems thinking","revealAt":6.5}]},
+  { "id":"scene-8","span":[192.098,212.721],"objects":[
+    {"target":"leftPill0","anchor":"variable","revealAt":3.2},
+    {"target":"leftPill1","anchor":"diagrams","revealAt":8.6}]}
+]}

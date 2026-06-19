@@ -1,0 +1,89 @@
+import { AbsoluteFill, Audio, Composition, Series, staticFile } from 'remotion';
+
+import { LessonTitle } from './LessonTitle';
+import { LessonGoal } from './LessonGoal';
+import { YinYang2Points } from './YinYang2Points';
+import { WordDefinition } from './WordDefinition';
+import { Topic1Subtopics6 } from './Topic1Subtopics6';
+import { ComparativePoints2 } from './ComparativePoints2';
+import { BigPoints3V1 } from './BigPoints3V1';
+import { Process5Steps } from './Process5Steps';
+import { CaseStudyIntro } from './CaseStudyIntro';
+import { IconPointsV1 } from './IconPointsV1';
+import { BulletList6Pills } from './BulletList6Pills';
+import { LessonSummary } from './LessonSummary';
+
+import {
+  FPS,
+  TOTAL_SECONDS,
+  SCENE_SPANS,
+  scene1, scene2, scene3, scene4, scene5, scene6,
+  scene7, scene8, scene9, scene10, scene11, scene12,
+} from './lessonScenes';
+
+const WIDTH = 1920;
+const HEIGHT = 1080;
+
+const frames = (i: number) => {
+  const [start, end] = SCENE_SPANS[i]!;
+  return Math.round((end - start) * FPS);
+};
+
+const Lesson: React.FC = () => {
+  return (
+    <AbsoluteFill>
+      <Audio src={staticFile('narration.mp3')} />
+      <Series>
+        <Series.Sequence durationInFrames={frames(0)}>
+          <LessonTitle {...scene1} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(1)}>
+          <LessonGoal {...scene2} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(2)}>
+          <YinYang2Points {...scene3} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(3)}>
+          <WordDefinition {...scene4} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(4)}>
+          <Topic1Subtopics6 {...scene5} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(5)}>
+          <ComparativePoints2 {...scene6} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(6)}>
+          <BigPoints3V1 {...scene7} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(7)}>
+          <Process5Steps {...scene8} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(8)}>
+          <CaseStudyIntro {...scene9} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(9)}>
+          <IconPointsV1 {...scene10} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(10)}>
+          <BulletList6Pills {...scene11} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={frames(11)}>
+          <LessonSummary {...scene12} />
+        </Series.Sequence>
+      </Series>
+    </AbsoluteFill>
+  );
+};
+
+export const RemotionRoot: React.FC = () => {
+  return (
+    <Composition
+      id="Lesson"
+      component={Lesson}
+      durationInFrames={Math.ceil(TOTAL_SECONDS * FPS)}
+      fps={FPS}
+      width={WIDTH}
+      height={HEIGHT}
+    />
+  );
+};

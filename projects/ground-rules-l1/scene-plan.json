@@ -1,0 +1,17 @@
+{
+  "lesson": "Team Ground Rules, Lesson 1: What Ground Rules Are, and Why They Matter",
+  "firstLessonOfCourse": true,
+  "totalSeconds": 305.424, "fps": 30,
+  "scenes": [
+    { "id":"scene-1","template":"LessonTitle","cues":"1-2","role":"first-lesson opener" },
+    { "id":"scene-2","template":"ComparativePoints2","cues":"3-6","beat":"the gap: task vs behavioural clarity" },
+    { "id":"scene-3","template":"LessonGoal","cues":"7-8" },
+    { "id":"scene-4","template":"SplitscreenPointsV1","cues":"9-18","beat":"policies vs ground rules (side-complete)" },
+    { "id":"scene-5","template":"WordDefinition","cues":"19-23","beat":"define ground rules" },
+    { "id":"scene-6","template":"Points3Subtopics2","cues":"24-48","beat":"three benefits","pulses":["title0@22.7","title2@79.64"] },
+    { "id":"scene-7","template":"Process5Steps","cues":"49-60","beat":"cost of skipping (escalation, not a cycle)" },
+    { "id":"scene-8","template":"YinYang2Points","cues":"61-70","beat":"ground rules vs working agreement","pulses":["leftTitle@12.24","leftTitle@31.0","rightTitle@35.82"] },
+    { "id":"scene-9","template":"BulletList6Pills","cues":"71-74","role":"course outline (first-lesson-only)" },
+    { "id":"scene-10","template":"LessonSummary","cues":"75-83","beat":"recap + next-lesson teaser" }
+  ]
+}

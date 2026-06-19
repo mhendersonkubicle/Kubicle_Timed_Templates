@@ -1,0 +1,474 @@
+{
+ "scenes": [
+  {
+   "id": "scene-1",
+   "segment": "Most project teams know what they need to deliver. Far fewer have agreed on how they will work together to deliver it. That gap, between task clarity and behavioral clarity, is where friction, confusion, and conflict tend to take root.",
+   "template": "LessonTitle",
+   "rationale": "This is the lesson opener establishing the course's central tension. The course is 'Defining Team Ground Rules' (per the H1 heading) and this is Lesson 1. LessonTitle is the correct opener card carrying course name + lesson number + headline on a branded background, used once at the very start.",
+   "fitConfidence": "high",
+   "fitOk": false,
+   "fitNote": "This segment does not fit LessonTitle. LessonTitle is the opening card of a lesson and requires a course name, a lesson number (1 to 99), and a short titular lesson headline, spoken over with a single welcome/framing beat. The assigned segment is a conceptual content passage arguing that teams know what to deliver but rarely agree on how to work together, and that this gap between task clarity and behavioral clarity breeds friction. It contains no course name, no lesson number, and no titular headline; it is explanatory prose, not an opener. The guidance explicitly says do NOT use this template when the screen is not a lesson opener or when the content lists/explains rather than names. A better-fitting template would be a contrast/comparison template (to stage \"task clarity\" against \"behavioral clarity\") such as a TwoColumn/Comparison template, or a single-statement/quote template like a BigStatement/KeyIdea template to land the \"where friction takes root\" insight. Best-effort mapping below treats the core idea as a titular headline with a synthesized framing line.",
+   "wasReordered": true,
+   "reorderNote": "The narration was not authored in the template's canonical reveal order (setup, logo, label, title, badge), because it is content prose rather than an opener. For a best-effort mapping I treated it as a single framing beat (per Narration Rule 1) covering the whole card build, and distilled the segment's thesis into one titular lesson headline. The framing/welcome line plays over setup and logo; the distilled headline lands on label and title; badge pops at the end. The original three-sentence argument was compressed into one beat plus one headline, preserving meaning (task vs behavioral clarity gap drives friction) without inventing facts.",
+   "linearizedVO": "Most project teams know what they need to deliver, but far fewer have agreed on how they will work together to deliver it. That gap, between task clarity and behavioral clarity, is where friction, confusion, and conflict tend to take root.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": ""
+    },
+    {
+     "target": "logo",
+     "text": "Team Effectiveness"
+    },
+    {
+     "target": "label",
+     "text": "Lesson One"
+    },
+    {
+     "target": "title",
+     "text": "The Gap Between Task and Behavioral Clarity"
+    },
+    {
+     "target": "badge",
+     "text": ""
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "logo",
+    "label",
+    "title",
+    "badge"
+   ],
+   "warnings": [
+    "Fit mismatch: the segment is conceptual content, not a lesson opener. LessonTitle requires a course name, lesson number, and titular headline; none are present in the source.",
+    "courseTitle 'Team Effectiveness' is a best-guess placeholder, not present in the source segment. A human must supply the real course name.",
+    "lessonNumber is unknown; 'Lesson One' is a placeholder default and must be confirmed.",
+    "The lesson headline 'The Gap Between Task and Behavioral Clarity' (43 chars) is a synthesized titular distillation of the segment's thesis, not authored title text.",
+    "The linearized voiceover is content narration, not a single welcome/framing line as Rule 1 expects; it exceeds the typical single-beat opener style.",
+    "No course icon, background image, or brand badge content is specified in the source; setup and badge slots are intentionally empty.",
+    "Recommend rerouting to a Comparison/TwoColumn template (task clarity vs behavioral clarity) or a BigStatement template rather than LessonTitle."
+   ]
+  },
+  {
+   "id": "scene-2",
+   "segment": "In this course, we'll explore how team ground rules close that gap, and how to define, facilitate, document, and sustain them across a project's full lifecycle.",
+   "template": "IconPointsV1",
+   "rationale": "A guided agenda of the four ordered course actions introduced one at a time (define, facilitate, document, sustain) plus the framing verb 'close that gap'. IconPointsV1 is a walkthrough/agenda of 2-6 short icon-able labels filed into a covered-topics stack, which matches a course-overview preview better than a recap template. Chosen over BulletList6Pills/Carousel to reserve those and because the 'agenda/overview' intent is IconPointsV1's exact use case.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. The segment is a course-intro agenda: it names what the course covers (team ground rules) and lists four ordered actions to walk through (define, facilitate, document, sustain). That maps cleanly to IconPointsV1's \"here's what we'll cover\" conveyor walkthrough of 2-6 short, icon-able, ordered points. It is not a two-way contrast (rules out YinYang2Points), not a strict causal chain where order is the message (Process5Steps not needed), and has exactly 4 points (within the 2-6 range).",
+   "wasReordered": true,
+   "reorderNote": "The four actions in the source were already in their natural execution order (define, facilitate, document, sustain), but they were buried inside a single trailing clause after the \"close that gap\" aside. I lifted the walkthrough framing to the front and broke the four points into discrete \"First / Next / Then / Finally\" agenda beats so each maps to one pill cue in list order. No facts added or dropped.",
+   "linearizedVO": "Here's what this course covers: how team ground rules close that gap. First, we'll define them. Next, facilitate them. Then, document them. And finally, sustain them across a project's full lifecycle.",
+   "slots": [
+    {
+     "target": "pill0",
+     "text": "Define rules",
+     "icon": "checklist-edit-light"
+    },
+    {
+     "target": "pill1",
+     "text": "Facilitate",
+     "icon": "meeting-team-light"
+    },
+    {
+     "target": "pill2",
+     "text": "Document",
+     "icon": "document-text-light"
+    },
+    {
+     "target": "pill3",
+     "text": "Sustain",
+     "icon": "refresh-cycle-light"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "pill0",
+    "pill1",
+    "pill2",
+    "pill3"
+   ],
+   "warnings": [
+    "Labels were tightened to fit the 18-char limit and parallel phrasing; the guidance prefers a single grammar across all pills. I kept them verb-led (Define / Facilitate / Document / Sustain) for parallelism, but pill0 reads 'Define rules' while the rest are bare verbs. If strict parallelism matters, use 'Define' to match the others, accepting slightly less clarity.",
+    "Icon ids are best-guess concepts; verify each against the shared Icons/ light-mode library and confirm every id resolves and ends in '-light' before render.",
+    "Only 4 pills are scheduled (pill0-pill3); pill4 and pill5 targets are unused and will be ignored by the template.",
+    "Per the org reminder: this voiceover is course-facing content, so a human owner should review the final copy before publishing."
+   ]
+  },
+  {
+   "id": "scene-3",
+   "segment": "In this first lesson, we'll distinguish team ground rules from general project policies and explain their role in enabling productive collaboration.",
+   "template": "LessonGoal",
+   "rationale": "A single measurable learning goal stated at the lesson opener: 'distinguish ground rules from policies and explain their role.' LessonGoal is the dedicated single-goal-statement opener template, a perfect 1:1 fit and used once.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. The segment is a single lesson opener stating one learning goal (\"distinguish team ground rules from general project policies and explain their role in enabling productive collaboration\"). It is one statement, not a list, comparison, or process, which matches LessonGoal's \"Use it when\" (opening a lesson, one measurable outcome, calm text-only opener). It does not trip any \"Do NOT use it when\" condition: there is a single combined goal, no comparison, no step sequence, and no need for icons or imagery.",
+   "wasReordered": true,
+   "reorderNote": "The original is a single forward-moving statement, but it opens straight into the goal content (\"In this first lesson, we'll...\") with no separate framing beat. LessonGoal requires a short framing beat as the heading reveals, then the goal as the goal copy reveals. I split it into a framing beat (\"Here's the goal for this first lesson.\") followed by the measurable outcome, so the spoken goal lands when the goal slot appears rather than while only the heading is on screen.",
+   "linearizedVO": "Here's the goal for this first lesson. By the end, you'll be able to distinguish team ground rules from general project policies and explain how they enable productive collaboration.",
+   "slots": [
+    {
+     "target": "heading",
+     "text": "Lesson Goal"
+    },
+    {
+     "target": "goal",
+     "text": "Distinguish team ground rules from general project policies and explain how they enable productive collaboration."
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "heading",
+    "goal"
+   ],
+   "warnings": [
+    "The goal statement is 109 chars, within the <120 aim and the 160 limit, but it bundles two verbs (distinguish + explain). It reads as a single measurable outcome, but if a tighter single-action goal is preferred it could be trimmed.",
+    "The setup (stripe) slot carries no narration of its own, as required by the guidance; timing for all three slots is left for the SRT pass."
+   ]
+  },
+  {
+   "id": "scene-4",
+   "segment": "Let's begin with a distinction that's easy to blur. A project policy is a formal rule or procedure: how change requests are submitted, how risks are escalated, how budgets are approved. These exist at the organizational or project-governance level, and they apply whether a team agrees with them or not. Ground rules are different. They are the behavioral norms a team sets for itself: how members communicate with one another, how disagreements are raised, how decisions get made when there's no single authority. They describe how the team will work together day to day, not just what the team is expected to produce.",
+   "template": "SplitscreenPointsV1",
+   "rationale": "An explicit two-state contrast (project policy vs ground rules) where EACH side carries multiple parallel bullet points: policies = submit change requests / escalate risks / approve budgets, set at governance level; ground rules = how members communicate / how disagreements are raised / how decisions get made, set by the team. Multiple bullets per side make SplitscreenPointsV1 (1-4 pills per side) the best fit over ComparativePoints2 (one caption per side) or YinYang2Points (only 1-2 sub-points per side).",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. The segment is an explicit comparison of exactly two parallel concepts, project policies versus ground rules, that answer the same question (what kind of rule governs the team) from opposite positions: imposed formal governance versus self-set behavioral norms. Each side reduces cleanly to a short title plus a list of 1 to 4 concrete points under 22 chars (policies: change-request, risk-escalation, budget-approval, imposed externally; ground rules: communication, raising disagreement, deciding without authority). The two sides are genuinely parallel and oppositional rather than sequential or causal, so SplitscreenPointsV1 is appropriate. No need for a process or 3-plus template.",
+   "wasReordered": true,
+   "reorderNote": "The source was already largely side-complete (it describes policies in full, then ground rules in full), so no cross-side interleaving had to be unwound. The only re-sequencing was within side A: the original states the \"applies whether the team agrees or not\" / org-governance framing AFTER the three example mechanisms, but for top-to-bottom pill order it is cleaner to lead the policy list with the concrete mechanisms (change requests, risk escalation, budget approval) and place the \"imposed externally\" idea as the closing point, matching row order. Side B was kept in source order (communicate, raise disagreement, decide without authority). Wording and meaning preserved; nothing invented.",
+   "linearizedVO": "Let's begin with a distinction that's easy to blur. First, project policies, the formal rules and procedures of the project. They govern how change requests are submitted. They govern how risks are escalated. They govern how budgets are approved. And they sit at the organizational or governance level, applying whether a team agrees with them or not. Now, ground rules. These are different. They set how members communicate with one another. They set how disagreements are raised. And they set how decisions get made when there's no single authority. They describe how the team will work together day to day, not just what it is expected to produce.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": ""
+    },
+    {
+     "target": "leftTitle",
+     "text": "Project policies",
+     "icon": ""
+    },
+    {
+     "target": "leftPill0",
+     "text": "Submit change requests",
+     "icon": "add-document"
+    },
+    {
+     "target": "leftPill1",
+     "text": "Escalate risks",
+     "icon": "arrow-trend-up"
+    },
+    {
+     "target": "leftPill2",
+     "text": "Approve budgets",
+     "icon": "benefit"
+    },
+    {
+     "target": "leftPill3",
+     "text": "Imposed externally",
+     "icon": "angle-double-small-right"
+    },
+    {
+     "target": "rightTitle",
+     "text": "Ground rules",
+     "icon": ""
+    },
+    {
+     "target": "rightPill0",
+     "text": "How we communicate",
+     "icon": "ai-assistant"
+    },
+    {
+     "target": "rightPill1",
+     "text": "How we disagree",
+     "icon": "user (1)"
+    },
+    {
+     "target": "rightPill2",
+     "text": "How we decide",
+     "icon": "high-five-celebration-yes"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "leftTitle",
+    "leftPill0",
+    "leftPill1",
+    "leftPill2",
+    "leftPill3",
+    "rightTitle",
+    "rightPill0",
+    "rightPill1",
+    "rightPill2"
+   ],
+   "warnings": [
+    "Asymmetric layout: left side carries 4 pills, right side carries 3 (rightPill3 intentionally left blank); this is permitted by the template (asymmetricAllowed, top-anchored fill).",
+    "Left pill captions are phrased as the actions the policies govern (submit change requests, escalate risks, approve budgets) to keep them parallel with the right side's 'how we ...' norms; 'Submit change requests' is 22 chars, exactly at the limit.",
+    "Icon ids are best-guess from the shared Small-Icons set; 'user (1)' and 'document (1)' carry literal filename suffixes in the library, so the renderer may need the exact id including the ' (1)'.",
+    "The day-to-day closing line was folded into the right-side framing narration rather than a separate pill, to keep the right list to three concrete norms."
+   ]
+  },
+  {
+   "id": "scene-5",
+   "segment": "Ground rules are agreed behavioral norms that govern how a team works together, distinct from project policies or governance procedures. Ground rules are set by the team, for the team. Because members participate in creating them, they carry a sense of shared ownership that a policy document rarely achieves.",
+   "template": "WordDefinition",
+   "rationale": "A single term ('Ground rules') paired with its formal definition. This is the verbatim definition sentence the script foregrounds. WordDefinition is the exact-fit glossary card carrying one word plus its definition.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. The segment names and defines exactly one term, \"Ground rules,\" and follows a name-then-define shape. There is no comparison, process, or list, and no second term to define (project policies/governance are mentioned only as contrast, not as a competing definition). This is exactly what WordDefinition is for: one word, one definition.",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The source names \"Ground rules\" first, then delivers the meaning, matching the canonical name-then-define reveal order (title before description). No re-sequencing needed; wording preserved, only compressed to fit slot limits.",
+   "linearizedVO": "Ground rules. They're the agreed behavioral norms that govern how a team works together, distinct from project policies or governance procedures.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": ""
+    },
+    {
+     "target": "title",
+     "text": "Ground Rules"
+    },
+    {
+     "target": "description",
+     "text": "Agreed behavioral norms that govern how a team works together, distinct from project policies or governance procedures."
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "title",
+    "description"
+   ],
+   "warnings": [
+    "The source segment carries a third idea, that ground rules are set by the team and carry shared ownership. This does not fit on a one-word/one-definition card and has been dropped from the slots; keep it in voiceover only, or it will overflow the description.",
+    "Description is 117 chars, within the <=120 aim for 2-3 lines. Definition was tightened from the source's two sentences to one to satisfy Rule 3 (one tight sentence)."
+   ]
+  },
+  {
+   "id": "scene-6",
+   "segment": "It's tempting to treat ground rules as a soft formality, something that gets mentioned in a kick-off meeting and then forgotten. But that underestimates what they actually do. The first thing they create is psychological safety. When a team has agreed norms around how disagreement is handled, or how quieter voices get heard, people feel safer raising problems early. Research consistently shows that psychological safety, the belief that it's safe to speak up without penalty, is one of the strongest predictors of team effectiveness. Ground rules are a practical mechanism for building that safety into the team's structure rather than leaving it to chance. The second thing they do is reduce ambiguity. Without agreed norms, every interaction carries an implicit question: what are the rules here? Is it acceptable to challenge a senior colleague's estimate in a team meeting? How quickly is someone expected to respond to a message? These questions get answered one way or another, but without ground rules they're answered inconsistently, by whoever happens to have the most social authority in the moment. The third thing ground rules do is support accountability without requiring conflict. When a norm has been agreed collectively, calling it out when it's violated is not a personal criticism, it's a reference to a commitment the whole team made. That shift from personal to collective accountability changes how difficult conversations feel for everyone involved.",
+   "template": "BigPoints3V2",
+   "rationale": "The script explicitly enumerates exactly three parallel things ground rules do: (1) create psychological safety, (2) reduce ambiguity, (3) support accountability. Each has a headline plus a supporting phrase. BigPoints3V2 is the fixed-3-card 'pillars/takeaways with headline + supporting noun phrase + icon' template, a precise structural match for these three sequential pillars.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. The segment lands exactly three parallel, peer takeaways about what ground rules do for a team: (1) create psychological safety, (2) reduce ambiguity, (3) support accountability without conflict. They are peers, not a contrast (rules out YinYang2Points) and not a sequential/causal pipeline (rules out Process5Steps), and each reduces cleanly to a short headline plus one supporting noun phrase with an anchorable icon. The only adaptation needed is compression: the source wraps each point in heavy supporting prose and a research citation, which must be trimmed to fit the 25/30-char slots. Frame line and the closing reflection are also trimmed since the template carries no body-paragraph slot.",
+   "wasReordered": false,
+   "reorderNote": "Already linear by card. The source delivers the three points in canonical order using explicit \"first / second / third\" signposting and never previews a later point while an earlier one is being made, so it maps directly onto card0 -> card1 -> card2. No re-sequencing was needed; the edit was compression, not reordering. The long research aside on psychological safety and the closing sentence were trimmed to keep each card to a headline plus one supporting line.",
+   "linearizedVO": "Ground rules are easy to dismiss as a formality, but they do real work, and there are three things in particular. First, psychological safety: with agreed norms for handling disagreement and hearing quieter voices, people feel safer raising problems early, and that safety is one of the strongest predictors of team effectiveness. Second, reduced ambiguity: without agreed norms, questions like whether you can challenge a senior colleague or how fast to reply get answered inconsistently, by whoever holds the most social authority. And third, shared accountability: when a norm was agreed collectively, calling out a breach is not a personal criticism, it is a reference to a commitment the whole team made, which changes how difficult conversations feel.",
+   "slots": [
+    {
+     "target": "card0",
+     "text": "Psychological safety",
+     "icon": "shield"
+    },
+    {
+     "target": "card0",
+     "text": "Safe to speak up early",
+     "icon": "shield"
+    },
+    {
+     "target": "card1",
+     "text": "Reduce ambiguity",
+     "icon": "compass"
+    },
+    {
+     "target": "card1",
+     "text": "No guessing the rules",
+     "icon": "compass"
+    },
+    {
+     "target": "card2",
+     "text": "Shared accountability",
+     "icon": "handshake"
+    },
+    {
+     "target": "card2",
+     "text": "Norms, not personal blame",
+     "icon": "handshake"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "card0",
+    "card1",
+    "card2"
+   ],
+   "warnings": [
+    "Slot rows are paired per card (title then subtopic) because the schema exposes one text field per row; in props they collapse to card0={title:'Psychological safety', subtopic:'Safe to speak up early'}, card1={title:'Reduce ambiguity', subtopic:'No guessing the rules'}, card2={title:'Shared accountability', subtopic:'Norms, not personal blame'}.",
+    "Subtopics were tightened to stay under 30 chars: 'No guessing the unwritten rules' (31) was shortened to 'No guessing the rules' (21).",
+    "Titles use noun-phrase parallelism rather than the all-verb Plan/Build/Launch style; this keeps them as peer headlines but is a mix of adjective+noun and verb+noun, acceptable but slightly less uniform than the guidance ideal.",
+    "The research-citation aside (psychological safety as a predictor of team effectiveness) is preserved in the voiceover but cannot be shown on a card; verify it is acceptable to keep as spoken-only.",
+    "Icon ids (shield, compass, handshake) are best-guess concepts and must be confirmed against the shared Icons/ library before render."
+   ]
+  },
+  {
+   "id": "scene-7",
+   "segment": "Teams that skip ground rules don't avoid the need for norms. They just allow them to develop informally, which means they develop unevenly. Some members assume behaviors that others find frustrating. Dominant personalities set precedents that quieter members feel unable to challenge. Ambiguity about decision-making authority gets resolved through whoever escalates fastest, not through a shared understanding of the process. The pattern that tends to follow is a slow accumulation of small frustrations that eventually surface as larger conflicts. By the time the conflict is visible, it's carrying the weight of everything that wasn't said before. That's a much harder conversation to have than the one you could have had at the start.",
+   "template": "Topic1Subtopics6",
+   "rationale": "One core idea ('teams that skip ground rules let norms develop unevenly') unpacked into several supporting consequences: members assume frustrating behaviors; dominant personalities set precedents; authority resolved by who escalates fastest; small frustrations accumulate into larger conflicts. This is a single-topic breakdown into supporting drivers, the exact shape of Topic1Subtopics6 (1-6 detail waterfall under a header). Chosen over a list/points template because it elaborates ONE concept rather than presenting co-equal takeaways.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Good fit. The segment unpacks a single concept (what happens when ground rules are skipped: norms still form, but informally and unevenly) into a small set of homogeneous supporting symptoms, each reducible to one short line. This matches the \"one concept into 1-6 homogeneous facts/dimensions\" model. Mild caveat: the final point (small frustrations accumulating into larger conflict) reads slightly more as a downstream consequence than a parallel symptom, so phrasing is kept parallel to fit the waterfall. It is not a causal step sequence (Process5Steps), not a two-way contrast (YinYang2Points), and stays within the 6-item limit, so Topic1Subtopics6 is appropriate. If the emphasis were on the accumulation-over-time chain (frustrations -> larger conflict -> harder conversation), Process5Steps would be the alternative; here the breakdown reading is stronger.",
+   "wasReordered": true,
+   "reorderNote": "The source opens with the umbrella idea spread across two sentences (\"don't avoid the need for norms... they develop informally, which means unevenly\") and closes with two reflective sentences about conflict carrying accumulated weight and being a harder conversation. To make it linear header-then-down, I front-loaded the umbrella concept into one statement, then delivered the four supporting points strictly top-to-bottom, folding the closing reflection into the fourth point (accumulation surfacing as conflict) rather than as separate trailing items, since the template reveals only the supplied details in order.",
+   "linearizedVO": "Skip ground rules and norms still form, just informally and unevenly. First, some members assume behaviors that others quietly find frustrating. Second, dominant personalities set precedents that quieter members feel unable to challenge. Third, ambiguity over decision authority gets resolved by whoever escalates fastest, not by a shared process. And fourth, small frustrations accumulate and eventually surface as a much harder conflict than the conversation you could have had at the start.",
+   "slots": [
+    {
+     "target": "header",
+     "text": "Uneven informal norms",
+     "icon": "triangle-exclamation"
+    },
+    {
+     "target": "detail0",
+     "text": "Behaviors others find frustrating"
+    },
+    {
+     "target": "detail1",
+     "text": "Loud voices set the precedents"
+    },
+    {
+     "target": "detail2",
+     "text": "Fastest escalator wins decisions"
+    },
+    {
+     "target": "detail3",
+     "text": "Frustrations build into conflict"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "header",
+    "detail0",
+    "detail1",
+    "detail2",
+    "detail3"
+   ],
+   "warnings": [
+    "Header 'Uneven informal norms' is 3 words / 21 chars, within limits.",
+    "All four detail lines are <=38 chars and use parallel short-clause phrasing.",
+    "Final detail compresses the closing reflection (accumulation -> harder conversation) into one line; the fuller 'weight of everything that wasn't said' nuance lives in the voiceover, not the pill.",
+    "titleIcon 'triangle-exclamation' and anchor are best-guess ids; verify against Small-Icons and Icons/ (-light) catalogues before render.",
+    "Suggested anchor id (best guess): 'teamwork-collaboration-light' or similar from Icons/; confirm exact catalogue id."
+   ]
+  },
+  {
+   "id": "scene-8",
+   "segment": "One last distinction worth making in this opening lesson: \"ground rules\" and \"working agreements\" are often used interchangeably, and for our purposes in this course that's fine. If there's a nuance, it's this: \"ground rules\" tends to emphasize the behavioral norms themselves, while \"working agreement\" tends to refer to the document that captures those norms in a format the team can refer back to. We'll use both terms throughout this course. When we talk about the process of facilitating and defining norms, we'll generally say \"ground rules.\" When we talk about the artifact that records them, we'll say \"working agreement.\".",
+   "template": "ComparativePoints2",
+   "rationale": "A pairing of exactly two closely-associated terms (ground rules vs working agreement) each reducible to one short caption: 'ground rules = the behavioral norms' vs 'working agreement = the document that captures them.' Two parallel concepts joined by a linkage relationship, one caption per side, is ComparativePoints2's exact shape. SplitscreenPointsV1 and YinYang2Points are already used / better reserved; the single-caption-per-side here makes ComparativePoints2 the cleanest fit and keeps comparison templates varied across the lesson.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Good fit. The segment pairs exactly two parallel, linked terms (\"ground rules\" and \"working agreement\") that are largely interchangeable, with one nuance: \"ground rules\" leans on the behavioral norms themselves (the process of defining them), while \"working agreement\" leans on the document that records them. This is a linkage/association of two complementary halves of one idea, not a stark either/or opposition and not a multi-step sequence, so the centre chain connector (\"these go together\") is exactly right. Each side reduces to one short, icon-able caption. The only mild stretch is that the source has a lot of qualifying prose, but it linearizes cleanly into a two-point linkage.",
+   "wasReordered": true,
+   "reorderNote": "The source narration repeatedly interleaves the two terms (uses them interchangeably, then draws a nuance, then explains when each is used) rather than delivering one side fully before the other. Re-sequenced to side-complete order: first name the link (the two terms are often used interchangeably), then deliver \"ground rules\" fully (emphasizes the behavioral norms / facilitating and defining them), then \"working agreement\" fully (the document that records those norms for the team to refer back to).",
+   "linearizedVO": "These two terms are often used interchangeably, and that's fine. First, \"ground rules\": this emphasizes the behavioral norms themselves, the process of facilitating and defining how the team works. And it links directly to \"working agreement\": the document that captures those norms in a format the team can refer back to.",
+   "slots": [
+    {
+     "target": "setup",
+     "text": "Two terms, used interchangeably"
+    },
+    {
+     "target": "leftPoint",
+     "text": "Ground rules: the norms",
+     "icon": "handshake"
+    },
+    {
+     "target": "rightPoint",
+     "text": "Working agreement: the doc",
+     "icon": "document"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "leftPoint",
+    "rightPoint"
+   ],
+   "warnings": [
+    "Both captions sit close to the 30-char limit; 'Working agreement: the doc' is 26 chars and 'Ground rules: the norms' is 23 chars, both within ≤30 but verify they do not clip in the fixed pill bbox.",
+    "Icon ids 'handshake' and 'document' are best-guesses; confirm they resolve in the shared Icons/ library (alternatives: 'rules'/'norms' for left, 'file'/'contract' for right)."
+   ]
+  },
+  {
+   "id": "scene-9",
+   "segment": "In this course, we'll cover what ground rules are, where they fit in a team's development, and how to facilitate, document, and sustain them. By the end, we'll be able to design and lead a ground rule-setting process for a real project team and adapt it for hybrid or virtual contexts.",
+   "template": "CirclePoints4",
+   "rationale": "A flat set of parallel course coverage points (what ground rules are; where they fit in team development; how to facilitate/document/sustain; the end capability of designing and leading the process). These are co-equal scope highlights with presentational rather than dependency order, matching CirclePoints4 (1-4 parallel noun-phrase points + icons). Distinct from the scene-2 IconPointsV1 agenda by being a coverage/benefits set rather than a sequential walkthrough, keeping list/points templates varied.",
+   "fitConfidence": "medium",
+   "fitOk": true,
+   "fitNote": "Good fit. The scene previews three parallel course themes (what ground rules are, where they fit, how to facilitate/document/sustain them), each reducible to a short noun-phrase label with an icon, sitting at the same level with no causal dependency between them. That matches CirclePoints4's \"flat set of 1-4 parallel points.\" The closing goal sentence is treated as set-up/payoff voiceover rather than a separate point, keeping the count at 3. If the director preferred to emphasise the facilitate/document/sustain trio as an ordered lifecycle, Process5Steps would be an alternative, but as a course-overview \"here's what we'll cover\" preview these read as parallel highlights, so CirclePoints4 is appropriate.",
+   "wasReordered": true,
+   "reorderNote": "The source bundles the three \"we'll cover\" items into a single breath and then appends the by-the-end goal. Linearized to introduce each of the three themes one at a time in reveal order (point0 → point1 → point2), with the set named up front and the goal moved to a closing line after the third point appears.",
+   "linearizedVO": "In this course, we'll cover three things about team ground rules. First, what ground rules actually are. Next, where they fit in a team's development. And finally, how to facilitate, document, and sustain them. By the end, you'll be able to design and lead a ground rule-setting process for a real project team, and adapt it for hybrid or virtual contexts.",
+   "slots": [
+    {
+     "target": "point0",
+     "text": "What they are",
+     "icon": "info-circle"
+    },
+    {
+     "target": "point1",
+     "text": "Where they fit",
+     "icon": "puzzle-piece"
+    },
+    {
+     "target": "point2",
+     "text": "Facilitate & sustain",
+     "icon": "users"
+    }
+   ],
+   "revealOrder": [
+    "point0",
+    "point1",
+    "point2"
+   ],
+   "warnings": [
+    "The third theme combines three verbs (facilitate, document, sustain); the 20-char label 'Facilitate & sustain' compresses this, with the full trio carried in the voiceover.",
+    "The goal sentence (design/lead a process, adapt for hybrid/virtual) is not mapped to a point; it is retained as closing voiceover after point2 reveals. If the director wants it surfaced visually, a 4th point or a different template would be needed.",
+    "Point count is 3 of a possible 4; the circle row auto-centres for this count."
+   ]
+  },
+  {
+   "id": "scene-10",
+   "segment": "In this lesson, we first distinguished team ground rules from project policies, establishing that ground rules are behavioral norms set by the team for the team. We then explored why they matter, covering their role in building psychological safety, reducing ambiguity, and enabling collective accountability. Finally, we introduced the distinction between ground rules as norms and working agreements as the documents that capture them. In the next lesson, we'll map ground rule-setting to the right moment in a team's development, using Tuckman's model as our guide.",
+   "template": "LessonSummary",
+   "rationale": "The explicit closing recap ('In this lesson, we first... we then... finally...') of the lesson's three key takeaways, plus a forward link. LessonSummary is the dedicated end-of-lesson recap template (1-5 lines under a 'Lesson Summary' headline), the precise fit. Chosen over CourseSummary because this recaps a single lesson, not the whole course.",
+   "fitConfidence": "high",
+   "fitOk": true,
+   "fitNote": "Strong fit. This is a closing lesson recap of key takeaways delivered as a flat list of three points read top-to-bottom, each reducible to a short line. It is not an ordered process and not a two-way contrast, and it needs no custom headline. LessonSummary is the correct template. The only content that does not map is the \"next lesson\" forward preview, which is not a recap line and is intentionally left out of the pills (per the guidance, only the lesson's own takeaways become pills).",
+   "wasReordered": false,
+   "reorderNote": "Already linear. The source narration introduces the takeaways in taught order (\"we first... we then... finally...\"), which maps straight onto pill0, pill1, pill2 top-to-bottom. No re-sequencing needed; wording preserved.",
+   "linearizedVO": "Here's what we covered in this lesson. First, we distinguished team ground rules from project policies, establishing that ground rules are behavioral norms set by the team for the team. Then, we explored why they matter: building psychological safety, reducing ambiguity, and enabling collective accountability. And finally, we introduced the distinction between ground rules as norms and working agreements as the documents that capture them.",
+   "slots": [
+    {
+     "target": "title",
+     "text": "Lesson Summary"
+    },
+    {
+     "target": "pill0",
+     "text": "Ground rules vs. policies"
+    },
+    {
+     "target": "pill1",
+     "text": "Why ground rules matter"
+    },
+    {
+     "target": "pill2",
+     "text": "Norms vs. working agreements"
+    }
+   ],
+   "revealOrder": [
+    "setup",
+    "title",
+    "pill0",
+    "pill1",
+    "pill2"
+   ],
+   "warnings": [
+    "The headline is locked to 'Lesson Summary' and is not authorable; the title slot text reflects that fixed value.",
+    "The closing 'next lesson' preview (mapping ground-rule-setting to Tuckman's model) is not a recap takeaway and is deliberately omitted from the pills; if it must appear, it belongs in a separate next-lesson/teaser scene, not this recap.",
+    "Captions are phrased as parallel noun phrases (all 'X vs. Y' / topic phrases) and each is within the 32-char limit; the full explanation stays in the voiceover."
+   ]
+  }
+ ],
+ "unmapped": []
+}

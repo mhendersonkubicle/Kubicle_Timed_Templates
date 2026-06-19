@@ -1,0 +1,336 @@
+1
+00:00:00,000 --> 00:00:02,879
+Lesson 1: A Different Way of Thinking.
+
+2
+00:00:03,879 --> 00:00:08,388
+In this course, we'll explore systems
+thinking, a discipline that helps us see
+
+3
+00:00:08,388 --> 00:00:11,960
+complexity more clearly and make better
+decisions as a result.
+
+4
+00:00:12,960 --> 00:00:17,354
+In this first lesson, we'll explain what
+systems thinking is and contrast it with
+
+5
+00:00:17,354 --> 00:00:19,276
+linear, cause-and-effect reasoning.
+
+6
+00:00:20,276 --> 00:00:22,180
+Let's begin with an example.
+
+7
+00:00:23,180 --> 00:00:25,177
+A customer service team is under
+pressure.
+
+8
+00:00:25,177 --> 00:00:28,196
+Complaints are piling up and response
+times are slipping.
+
+9
+00:00:28,196 --> 00:00:33,302
+The obvious solution seems clear: hire
+more staff. For a few weeks, things
+
+10
+00:00:33,302 --> 00:00:33,862
+improve.
+
+11
+00:00:33,862 --> 00:00:38,317
+Six months later however, the complaint
+backlog is back, and this time it's
+
+12
+00:00:38,317 --> 00:00:38,738
+larger.
+
+13
+00:00:38,738 --> 00:00:40,503
+So, what went wrong?
+
+14
+00:00:41,503 --> 00:00:47,049
+The problem is linear thinking. Linear
+thinking follows a simple chain: problem
+
+15
+00:00:47,049 --> 00:00:49,537
+leads to cause, cause leads to fix.
+
+16
+00:00:49,537 --> 00:00:53,868
+It works well for problems that are
+genuinely simple and isolated, like a
+
+17
+00:00:53,868 --> 00:00:57,478
+broken piece of equipment, or a single
+missing piece of data.
+
+18
+00:00:57,478 --> 00:01:02,036
+However, most professional problems
+aren't like this. They involve multiple
+
+19
+00:01:02,036 --> 00:01:06,162
+actors, competing pressures, and outcomes
+that take time to surface.
+
+20
+00:01:06,162 --> 00:01:10,717
+When we apply linear thinking to those
+kinds of problems, we often get answers
+
+21
+00:01:10,717 --> 00:01:15,035
+that are partially right in the short
+term but wrong over time, in ways we
+
+22
+00:01:15,035 --> 00:01:16,100
+didn't anticipate.
+
+23
+00:01:16,100 --> 00:01:20,698
+In our customer service example, adding
+staff reduced visible pressure, and that
+
+24
+00:01:20,698 --> 00:01:25,063
+reduced pressure changed how leadership
+prioritised the underlying problems.
+
+25
+00:01:25,063 --> 00:01:30,471
+With urgency removed, the root causes of
+complaints, that is: unclear processes
+
+26
+00:01:30,471 --> 00:01:34,769
+and poor handoffs between teams, were
+never properly addressed.
+
+27
+00:01:34,769 --> 00:01:38,624
+The system adapted around the fix, and
+the problem returned.
+
+28
+00:01:40,624 --> 00:01:44,061
+So, how do we know when a problem is
+systemic rather than isolated?
+
+29
+00:01:44,061 --> 00:01:46,383
+There are a few reliable signals.
+
+30
+00:01:47,383 --> 00:01:51,852
+The first is that the same problem keeps
+returning, even after it appears to have
+
+31
+00:01:51,852 --> 00:01:56,154
+been fixed. If a solution that worked
+last year isn't working now, the problem
+
+32
+00:01:56,154 --> 00:01:58,947
+likely has structural roots that weren't
+addressed.
+
+33
+00:01:59,947 --> 00:02:04,063
+The second signal is that different parts
+of the organisation experience the
+
+34
+00:02:04,063 --> 00:02:06,588
+problem differently, and each blames the
+other.
+
+35
+00:02:06,588 --> 00:02:11,127
+When every team has a reasonable account
+of what's going wrong and each account is
+
+36
+00:02:11,127 --> 00:02:15,218
+at odds with the others, the issue is
+almost certainly in the interactions
+
+37
+00:02:15,218 --> 00:02:18,244
+between those teams, not within any
+single one of them.
+
+38
+00:02:19,244 --> 00:02:23,006
+The third is that well-intentioned
+interventions make things worse.
+
+39
+00:02:23,006 --> 00:02:27,269
+If every fix creates a new problem, the
+system is pushing back against the
+
+40
+00:02:27,269 --> 00:02:31,940
+intervention. That's a strong signal that
+the fix isn't addressing the right part
+
+41
+00:02:31,940 --> 00:02:32,758
+of the system.
+
+42
+00:02:33,758 --> 00:02:38,263
+Systemic problems are structural, and
+can't be resolved with simple fixes.
+
+43
+00:02:40,263 --> 00:02:44,303
+To tackle systemic problems, we'll use
+'systems thinking'.
+
+44
+00:02:44,303 --> 00:02:49,306
+Systems thinking is a discipline that
+focuses on structures, relationships, and
+
+45
+00:02:49,306 --> 00:02:54,117
+patterns of behaviour over time, rather
+than on individual events and single
+
+46
+00:02:54,117 --> 00:02:54,566
+causes.
+
+47
+00:02:55,566 --> 00:02:59,281
+'Systems thinking' is an extension of
+'analytical thinking'.
+
+48
+00:02:59,281 --> 00:03:04,063
+Where analytical thinking asks "what
+happened?", systems thinking asks "what
+
+49
+00:03:04,063 --> 00:03:08,910
+keeps producing this?" Where analytical
+thinking isolates a variable, systems
+
+50
+00:03:08,910 --> 00:03:12,098
+thinking looks at the web of connections
+around it.
+
+51
+00:03:12,098 --> 00:03:16,461
+It's worth being clear about what systems
+thinking is not. It isn't a method for
+
+52
+00:03:16,461 --> 00:03:20,658
+analysing every possible variable in a
+situation. And it isn't about building
+
+53
+00:03:20,658 --> 00:03:23,198
+elaborate diagrams before we're allowed
+to act.
+
+54
+00:03:23,198 --> 00:03:27,641
+It's a practical discipline, and the
+vocabulary it uses is accessible to any
+
+55
+00:03:27,641 --> 00:03:30,721
+professional willing to look at problems
+differently.
+
+56
+00:03:32,721 --> 00:03:37,364
+In this course, we'll define what a
+system is and examine its structural
+
+57
+00:03:37,364 --> 00:03:40,569
+building blocks: stocks, flows and
+feedback loops.
+
+58
+00:03:41,569 --> 00:03:46,462
+We'll then explore the characteristic
+behaviours that complex systems produce
+
+59
+00:03:46,462 --> 00:03:50,068
+including delays, emergence, and
+unintended consequences.
+
+60
+00:03:51,068 --> 00:03:55,310
+Finally, we'll discuss how to apply a
+systems lens to real decisions at work
+
+61
+00:03:55,310 --> 00:03:58,591
+through mental models, leverage points
+and informed action.
+
+62
+00:03:59,591 --> 00:04:04,203
+By the end, we'll be able to identify
+systemic patterns, avoid common
+
+63
+00:04:04,203 --> 00:04:09,223
+decision-making traps, and frame problems
+in ways that lead to more durable
+
+64
+00:04:09,223 --> 00:04:09,901
+solutions.
+
+65
+00:04:11,901 --> 00:04:14,037
+Let's stop the lesson here.
+
+66
+00:04:14,037 --> 00:04:18,443
+In this lesson, we first examined why
+linear, cause-and-effect reasoning
+
+67
+00:04:18,443 --> 00:04:21,049
+struggles when applied to complex
+problems.
+
+68
+00:04:21,049 --> 00:04:25,030
+We then looked at the signals that tell
+us a problem is systemic rather than
+
+69
+00:04:25,030 --> 00:04:25,879
+straightforward.
+
+70
+00:04:25,879 --> 00:04:29,316
+Finally, we clarified what systems
+thinking is and what it isn't.
+

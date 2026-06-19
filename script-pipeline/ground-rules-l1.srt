@@ -1,0 +1,401 @@
+1
+00:00:00,000 --> 00:00:04,340
+Most project teams know what they need to
+deliver. Far fewer have agreed on how
+
+2
+00:00:04,340 --> 00:00:06,455
+they will work together to deliver it.
+
+3
+00:00:06,455 --> 00:00:11,988
+That gap, between task clarity and
+behavioral clarity, is where friction,
+
+4
+00:00:11,988 --> 00:00:15,139
+confusion, and conflict tend to take
+root.
+
+5
+00:00:15,139 --> 00:00:19,922
+In this course, we'll explore how team
+ground rules close that gap, and how to
+
+6
+00:00:19,922 --> 00:00:24,891
+define, facilitate, document, and sustain
+them across a project's full lifecycle.
+
+7
+00:00:25,891 --> 00:00:30,084
+In this first lesson, we'll distinguish
+team ground rules from general project
+
+8
+00:00:30,084 --> 00:00:33,786
+policies and explain their role in
+enabling productive collaboration.
+
+9
+00:00:34,786 --> 00:00:37,665
+Let's begin with a distinction that's
+easy to blur.
+
+10
+00:00:37,665 --> 00:00:42,516
+A project policy is a formal rule or
+procedure: how change requests are
+
+11
+00:00:42,516 --> 00:00:46,674
+submitted, how risks are escalated, how
+budgets are approved.
+
+12
+00:00:46,674 --> 00:00:51,032
+These exist at the organizational or
+project-governance level, and they apply
+
+13
+00:00:51,032 --> 00:00:53,268
+whether a team agrees with them or not.
+
+14
+00:00:55,268 --> 00:01:00,904
+Ground rules are different. They are the
+behavioral norms a team sets for itself:
+
+15
+00:01:00,904 --> 00:01:06,118
+how members communicate with one another,
+how disagreements are raised, how
+
+16
+00:01:06,118 --> 00:01:09,711
+decisions get made when there's no single
+authority.
+
+17
+00:01:09,711 --> 00:01:13,922
+They describe how the team will work
+together day to day, not just what the
+
+18
+00:01:13,922 --> 00:01:15,516
+team is expected to produce.
+
+19
+00:01:15,516 --> 00:01:19,628
+Ground rules are agreed behavioral norms
+that govern how a team works together,
+
+20
+00:01:19,628 --> 00:01:22,528
+distinct from project policies or
+governance procedures.
+
+21
+00:01:22,528 --> 00:01:25,965
+Ground rules are set by the team, for the
+team.
+
+22
+00:01:25,965 --> 00:01:30,028
+Because members participate in creating
+them, they carry a sense of shared
+
+23
+00:01:30,028 --> 00:01:32,699
+ownership that a policy document rarely
+achieves.
+
+24
+00:01:32,699 --> 00:01:36,895
+It's tempting to treat ground rules as a
+soft formality, something that gets
+
+25
+00:01:36,895 --> 00:01:41,315
+mentioned in a kick-off meeting and then
+forgotten. But that underestimates what
+
+26
+00:01:41,315 --> 00:01:42,266
+they actually do.
+
+27
+00:01:42,266 --> 00:01:45,192
+The first thing they create is
+psychological safety.
+
+28
+00:01:45,192 --> 00:01:49,853
+When a team has agreed norms around how
+disagreement is handled, or how quieter
+
+29
+00:01:49,853 --> 00:01:53,319
+voices get heard, people feel safer
+raising problems early.
+
+30
+00:01:53,319 --> 00:01:57,251
+Research consistently shows that
+psychological safety, the belief that
+
+31
+00:01:57,251 --> 00:02:01,809
+it's safe to speak up without penalty, is
+one of the strongest predictors of team
+
+32
+00:02:01,809 --> 00:02:02,607
+effectiveness.
+
+33
+00:02:02,607 --> 00:02:06,924
+Ground rules are a practical mechanism
+for building that safety into the team's
+
+34
+00:02:06,924 --> 00:02:09,248
+structure rather than leaving it to
+chance.
+
+35
+00:02:09,248 --> 00:02:12,359
+The second thing they do is reduce
+ambiguity.
+
+36
+00:02:12,359 --> 00:02:17,490
+Without agreed norms, every interaction
+carries an implicit question: what are
+
+37
+00:02:17,490 --> 00:02:18,489
+the rules here?
+
+38
+00:02:18,489 --> 00:02:22,986
+Is it acceptable to challenge a senior
+colleague's estimate in a team meeting?
+
+39
+00:02:22,986 --> 00:02:26,198
+How quickly is someone expected to
+respond to a message?
+
+40
+00:02:26,198 --> 00:02:30,634
+These questions get answered one way or
+another, but without ground rules they're
+
+41
+00:02:30,634 --> 00:02:34,849
+answered inconsistently, by whoever
+happens to have the most social authority
+
+42
+00:02:34,849 --> 00:02:35,625
+in the moment.
+
+43
+00:02:35,625 --> 00:02:39,806
+The third thing ground rules do is
+support accountability without requiring
+
+44
+00:02:39,806 --> 00:02:40,315
+conflict.
+
+45
+00:02:40,315 --> 00:02:45,241
+When a norm has been agreed collectively,
+calling it out when it's violated is not
+
+46
+00:02:45,241 --> 00:02:49,742
+a personal criticism, it's a reference to
+a commitment the whole team made.
+
+47
+00:02:49,742 --> 00:02:53,985
+That shift from personal to collective
+accountability changes how difficult
+
+48
+00:02:53,985 --> 00:02:56,336
+conversations feel for everyone involved.
+
+49
+00:02:56,336 --> 00:03:01,090
+Teams that skip ground rules don't avoid
+the need for norms. They just allow them
+
+50
+00:03:01,090 --> 00:03:04,417
+to develop informally, which means they
+develop unevenly.
+
+51
+00:03:04,417 --> 00:03:09,219
+Some members assume behaviors that others
+find frustrating. Dominant personalities
+
+52
+00:03:09,219 --> 00:03:12,776
+set precedents that quieter members feel
+unable to challenge.
+
+53
+00:03:12,776 --> 00:03:17,487
+Ambiguity about decision-making authority
+gets resolved through whoever escalates
+
+54
+00:03:17,487 --> 00:03:20,903
+fastest, not through a shared
+understanding of the process.
+
+55
+00:03:20,903 --> 00:03:25,500
+The pattern that tends to follow is a
+slow accumulation of small frustrations
+
+56
+00:03:25,500 --> 00:03:28,101
+that eventually surface as larger
+conflicts.
+
+57
+00:03:28,101 --> 00:03:32,145
+By the time the conflict is visible, it's
+carrying the weight of everything that
+
+58
+00:03:32,145 --> 00:03:33,117
+wasn't said before.
+
+59
+00:03:33,117 --> 00:03:37,304
+That's a much harder conversation to have
+than the one you could have had at the
+
+60
+00:03:37,304 --> 00:03:37,622
+start.
+
+61
+00:03:37,622 --> 00:03:42,166
+One last distinction worth making in this
+opening lesson: "ground rules" and
+
+62
+00:03:42,166 --> 00:03:46,710
+"working agreements" are often used
+interchangeably, and for our purposes in
+
+63
+00:03:46,710 --> 00:03:48,164
+this course that's fine.
+
+64
+00:03:48,164 --> 00:03:52,869
+If there's a nuance, it's this: "ground
+rules" tends to emphasize the behavioral
+
+65
+00:03:52,869 --> 00:03:57,216
+norms themselves, while "working
+agreement" tends to refer to the document
+
+66
+00:03:57,216 --> 00:04:01,027
+that captures those norms in a format the
+team can refer back to.
+
+67
+00:04:01,027 --> 00:04:03,535
+We'll use both terms throughout this
+course.
+
+68
+00:04:03,535 --> 00:04:07,470
+When we talk about the process of
+facilitating and defining norms, we'll
+
+69
+00:04:07,470 --> 00:04:11,515
+generally say "ground rules." When we
+talk about the artifact that records
+
+70
+00:04:11,515 --> 00:04:13,566
+them, we'll say "working agreement.".
+
+71
+00:04:13,566 --> 00:04:17,786
+In this course, we'll cover what ground
+rules are, where they fit in a team's
+
+72
+00:04:17,786 --> 00:04:21,229
+development, and how to facilitate,
+document, and sustain them.
+
+73
+00:04:22,229 --> 00:04:27,129
+By the end, we'll be able to design and
+lead a ground rule-setting process for a
+
+74
+00:04:27,129 --> 00:04:30,913
+real project team and adapt it for hybrid
+or virtual contexts.
+
+75
+00:04:31,913 --> 00:04:36,574
+In this lesson, we first distinguished
+team ground rules from project policies,
+
+76
+00:04:36,574 --> 00:04:40,995
+establishing that ground rules are
+behavioral norms set by the team for the
+
+77
+00:04:40,995 --> 00:04:41,294
+team.
+
+78
+00:04:41,294 --> 00:04:45,174
+We then explored why they matter,
+covering their role in building
+
+79
+00:04:45,174 --> 00:04:50,025
+psychological safety, reducing ambiguity,
+and enabling collective accountability.
+
+80
+00:04:50,025 --> 00:04:54,078
+Finally, we introduced the distinction
+between ground rules as norms and working
+
+81
+00:04:54,078 --> 00:04:56,387
+agreements as the documents that capture
+them.
+
+82
+00:04:57,387 --> 00:05:01,391
+In the next lesson, we'll map ground
+rule-setting to the right moment in a
+
+83
+00:05:01,391 --> 00:05:04,353
+team's development, using Tuckman's model
+as our guide.
+

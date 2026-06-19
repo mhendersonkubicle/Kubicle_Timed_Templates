@@ -1,0 +1,216 @@
+1
+00:00:00,000 --> 00:00:02,647
+Lesson 8 – Monitoring Vendor Performance.
+
+2
+00:00:02,647 --> 00:00:06,107
+In this lesson, we’ll monitor vendor
+performance and contract compliance
+
+3
+00:00:06,107 --> 00:00:08,348
+during project execution. <break
+time="0.5s" />
+
+4
+00:00:08,348 --> 00:00:12,392
+Once vendor work is underway, the project
+needs to make sure it’s delivered as
+
+5
+00:00:12,392 --> 00:00:12,760
+agreed.
+
+6
+00:00:12,760 --> 00:00:17,121
+Monitoring vendor performance helps the
+project confirm that work meets contract
+
+7
+00:00:17,121 --> 00:00:19,494
+requirements and supports the approved
+plan.
+
+8
+00:00:19,494 --> 00:00:24,102
+It also allows issues to be identified
+early, before they become bigger
+
+9
+00:00:24,102 --> 00:00:24,695
+problems.
+
+10
+00:00:24,695 --> 00:00:28,224
+This is a core part of maintaining
+control in predictive projects. <break
+
+11
+00:00:28,224 --> 00:00:28,910
+time="0.5s" />
+
+12
+00:00:28,910 --> 00:00:32,852
+Vendor performance is monitored by
+comparing actual work against what was
+
+13
+00:00:32,852 --> 00:00:34,111
+agreed in the contract.
+
+14
+00:00:34,111 --> 00:00:38,128
+This includes checking whether
+deliverables meet quality standards, are
+
+15
+00:00:38,128 --> 00:00:41,170
+completed on time, and stay within agreed
+cost limits.
+
+16
+00:00:41,170 --> 00:00:45,810
+Reviews may take place at key milestones
+or at regular intervals, depending on the
+
+17
+00:00:45,810 --> 00:00:46,325
+contract.
+
+18
+00:00:46,325 --> 00:00:49,344
+The goal is not to manage how the vendor
+does the work.
+
+19
+00:00:49,344 --> 00:00:53,745
+The goal is to confirm that outcomes meet
+expectations. <break time="0.5s" />
+
+20
+00:00:53,745 --> 00:00:57,878
+Monitoring performance also means
+monitoring contract compliance.
+
+21
+00:00:57,878 --> 00:01:02,508
+The project checks that the vendor is
+following agreed terms, such as reporting
+
+22
+00:01:02,508 --> 00:01:05,773
+requirements, approval processes, and
+change procedures.
+
+23
+00:01:05,773 --> 00:01:09,581
+Any work outside the contract must be
+formally approved before it begins.
+
+24
+00:01:09,581 --> 00:01:13,162
+This protects the project from scope
+creep and unplanned costs. <break
+
+25
+00:01:13,162 --> 00:01:13,889
+time="0.5s" />
+
+26
+00:01:13,889 --> 00:01:18,232
+In some projects, performance
+expectations are also supported by
+
+27
+00:01:18,232 --> 00:01:20,576
+service level agreements, or SLAs.
+
+28
+00:01:20,576 --> 00:01:24,739
+These define specific performance
+measures, such as response times or
+
+29
+00:01:24,739 --> 00:01:25,963
+availability levels.
+
+30
+00:01:25,963 --> 00:01:29,172
+They provide another way to monitor
+whether vendor services are being
+
+31
+00:01:29,172 --> 00:01:31,107
+delivered as agreed. <break time="0.5s"
+/>
+
+32
+00:01:31,107 --> 00:01:36,161
+Projects may use inspections, audits, or
+performance reviews to assess vendor
+
+33
+00:01:36,161 --> 00:01:36,494
+work.
+
+34
+00:01:36,494 --> 00:01:40,583
+These activities help verify that
+deliverables meet acceptance criteria and
+
+35
+00:01:40,583 --> 00:01:42,903
+that contractual obligations are being
+met.
+
+36
+00:01:42,903 --> 00:01:47,569
+Findings from reviews may result in
+corrective actions, approved changes, or
+
+37
+00:01:47,569 --> 00:01:49,497
+formal updates to the contract.
+
+38
+00:01:49,497 --> 00:01:53,756
+For example, during a system rollout, the
+project reviews a vendor’s deliverable
+
+39
+00:01:53,756 --> 00:01:55,859
+against the agreed acceptance criteria.
+
+40
+00:01:55,859 --> 00:01:59,872
+The work meets the technical requirements
+but is delivered late, prompting the
+
+41
+00:01:59,872 --> 00:02:03,988
+project to address schedule performance
+while still accepting the output. <break
+
+42
+00:02:03,988 --> 00:02:04,718
+time="0.5s" />
+
+43
+00:02:04,718 --> 00:02:05,740
+Let’s stop here.
+
+44
+00:02:05,740 --> 00:02:10,848
+In this lesson, we focused on how vendor
+work is monitored during execution.
+
+45
+00:02:10,848 --> 00:02:15,067
+We also looked at how projects track
+vendor performance, check contract
+
+46
+00:02:15,067 --> 00:02:18,743
+compliance, and use inspections and
+reviews to verify outputs.
+

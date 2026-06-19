@@ -1,0 +1,23 @@
+Lesson 1: From Map to Connection
+<course_intro_narration> Welcome to this course, Connecting AI Agents to Systems. So far, most of us have used AI to answer questions and generate content. In this course, we'll learn how AI can act on our systems for us — and how to connect it safely. </course_intro_narration>
+[ON-SCREEN] Lesson Goal: Explain what connecting an AI agent to a system means, and why it's more than just adding a feature.
+<lesson_goal_narration> In this first lesson, we'll explain what it means to connect an AI agent to a system, and why it's more than just adding a feature. </lesson_goal_narration>
+From Answering to Acting
+<content_narration> Up to now, most of us have used AI in one mode: we ask, and it answers. We type a question or paste a document, and we read the response. In that mode, the AI sits outside our systems. It has no hands. A person still has to take whatever it produces and carry it into the real workflow.
+ An AI agent is different. 
+[ON-SCREEN] Word Definition | AI Agent: An AI model given tools to act on our systems, not just answer. 
+An agent doesn't just produce text for a person to act on. It acts. Given access, it can read a record, update a field, or trigger the next step in a process. 
+The AI model is still at the centre, deciding what to do. What's new is that it's given tools, connections that let it reach into our live systems and change them. That, in a sentence, is what connecting means: giving an AI the tools to act, not just answer.
+[ON-SCREEN] Connecting = Giving an AI the tools to act, not just answer. 
+That difference, between answering and acting, is what this course is about. Once an AI can act, and not just describe, it matters a great deal where we let it act, where we don't, and who stays in control. </content_narration>
+More Than a Faster Worker
+<content_narration> It's tempting to treat connecting an agent as a technical detail that comes after the real decisions are made. Connecting an agent doesn't just make one step faster. It changes who does the work, what the process can do on its own, and how information moves through it. A step that used to wait for a person can now run by itself. A check that used to happen in someone's head now happens in code. An action that used to need a signature can now happen automatically.Those are real changes to how the process behaves, and they affect the steps before and after, not just the one we touched. 
+So the worst way to connect an agent is to put it into whatever step seems convenient, without a plan, and see what happens. The better way is to decide, in advance, exactly where the agent acts, what it's allowed to touch, and where a person stays in control.
+That's why we start not from the technology but from a map of the work — even a rough one. A map is just a clear picture of how a process runs, with a few points marked: where an agent could add value, where it must not be allowed to decide, and where a person stays in control. This course is about taking one of those points and turning it into a real, working, governed connection. </content_narration>
+[ON-SCREEN] Course Overview:
+How agents connect: tools, APIs, and the Model Context Protocol
+Where a connection is safe, and where it carries risk
+Building oversight and resilience, then going live
+<course_overview_narration> In this course, we'll cover three things. First, how an agent actually connects to a system, through tools, APIs, and the Model Context Protocol. Second, how to judge where a connection is safe and where it carries real risk, by separating what an agent reads from what it can change, and limiting its access carefully. Third, how to build oversight and resilience into the connection, and then take it safely into live operation. By the end, we'll be able to take a single candidate point on a process map and produce a complete connection design: the tools it needs, the access it's allowed, the checkpoints around it, and the way it fails safely. </course_overview_narration>
+[ON-SCREEN] Lesson Summary: You learned: 1. What connecting an AI agent means 2. Why connecting changes how a process works, not just how fast. 3. What this course will produce.
+<lesson_summary_narration> Let's stop the lesson here. In this lesson, we first explained what connecting an AI agent actually means: giving it the tools to act on our systems, not just answer questions. We then saw why that changes how a process works, not just how fast it runs, which is why we plan a connection from a map rather than improvising it. Finally, we outlined what we'll build together: a complete, governed connection design for one part of a process map. </lesson_summary_narration>

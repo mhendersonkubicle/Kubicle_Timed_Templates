@@ -1,0 +1,12 @@
+{ "scenes": [
+  { "id":"scene-4", "span":[34.09,71.849], "objects":[
+    {"target":"leftTitle","anchor":"policy","revealAt":2.8},
+    {"target":"rightTitle","anchor":"ground rules","revealAt":20.3} ] },
+  { "id":"scene-6", "span":[89.404,173.646], "objects":[
+    {"target":"title0","anchor":"psychological safety","revealAt":9.9},
+    {"target":"title1","anchor":"ambiguity","revealAt":36.9},
+    {"target":"title2","anchor":"accountability","revealAt":64.0} ] },
+  { "id":"scene-8", "span":[216.231,253.337], "objects":[
+    {"target":"leftTitle","anchor":"ground rules","revealAt":2.0},
+    {"target":"rightTitle","anchor":"working agreement","revealAt":16.0} ] }
+] }

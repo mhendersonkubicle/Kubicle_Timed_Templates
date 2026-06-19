@@ -1,0 +1,18 @@
+{ "scenes": [
+  { "id":"scene-3", "span":[8.348,28.91], "objects":[
+    {"target":"row0","anchor":"contract","revealAt":4.41},
+    {"target":"row1","anchor":"issues","revealAt":11.15},
+    {"target":"row2","anchor":"control","revealAt":16.35} ] },
+  { "id":"scene-4", "span":[28.91,53.745], "objects":[
+    {"target":"item0","anchor":"quality","revealAt":5.2},
+    {"target":"item1","anchor":"time","revealAt":9.2},
+    {"target":"item2","anchor":"cost","revealAt":10.8} ] },
+  { "id":"scene-5", "span":[53.745,73.889], "objects":[
+    {"target":"pill0","anchor":"reporting","revealAt":4.13},
+    {"target":"pill1","anchor":"approval","revealAt":8.76},
+    {"target":"pill2","anchor":"change","revealAt":11.0} ] },
+  { "id":"scene-7", "span":[91.107,109.497], "objects":[
+    {"target":"point0","anchor":"inspections","revealAt":0.8},
+    {"target":"point1","anchor":"audits","revealAt":2.0},
+    {"target":"point2","anchor":"reviews","revealAt":3.4} ] }
+] }

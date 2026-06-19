@@ -1,0 +1,490 @@
+{
+  "scenes": [
+    {
+      "id": "scene-1",
+      "segment": "Lesson 1: A Different Way of Thinking. In this course, we'll explore systems thinking, a discipline that helps us see complexity more clearly and make better decisions as a result. In this first lesson, we'll explain what systems thinking is and contrast it with linear, cause-and-effect reasoning.",
+      "template": "LessonTitle",
+      "rationale": "The lesson opener: it names the course (systems thinking), the lesson number and headline (Lesson 1: A Different Way of Thinking), and frames what the lesson covers. This is the cemented first-lesson opener beat, which maps to LessonTitle by the catalogue's fixed-role rule.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Strong fit. This is the first scene of Lesson 1, a lesson opener that names the course (systems thinking), the lesson number (1), and a short lesson headline (\"A Different Way of Thinking\"). The voiceover is a single welcome/framing beat over the whole card build, exactly what LessonTitle expects. It is not stating a discrete learning objective (which would route to LessonGoal) nor defining a term (WordDefinition), so LessonTitle is correct.",
+      "wasReordered": false,
+      "reorderNote": "Already linear. LessonTitle uses single-beat narration (one framing line over the whole build), so no per-element re-sequencing is required. The narration stays in its natural delivery order: name the lesson, frame the course, then state what this lesson covers. The visual reveal sequence (setup, logo, label, title, badge) is fixed by the template and assembles as one beat under this single line.",
+      "linearizedVO": "Lesson 1: A Different Way of Thinking. In this course, we'll explore systems thinking, a discipline that helps us see complexity more clearly and make better decisions as a result. In this first lesson, we'll explain what systems thinking is and contrast it with linear, cause-and-effect reasoning.",
+      "slots": [
+        {
+          "target": "setup",
+          "text": ""
+        },
+        {
+          "target": "logo",
+          "text": "Systems Thinking",
+          "icon": "network"
+        },
+        {
+          "target": "label",
+          "text": "Lesson One"
+        },
+        {
+          "target": "title",
+          "text": "A Different Way of Thinking"
+        },
+        {
+          "target": "badge",
+          "text": ""
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "logo",
+        "label",
+        "title",
+        "badge"
+      ],
+      "warnings": [
+        "Course title \"Systems Thinking\" was inferred from the narration (\"we'll explore systems thinking\"); the segment does not state an explicit course name, so confirm the canonical course title with the course owner.",
+        "\"label\" renders as \"Lesson One\" per the template's number-to-word rule (lessonNumber=1); the raw script writes it as \"Lesson 1\".",
+        "\"setup\" (full-bleed background) and \"badge\" (brand badge) carry no text; they pull from Template-Specific-Assets and the brand badge respectively."
+      ]
+    },
+    {
+      "id": "scene-2",
+      "segment": "Let's begin with an example. A customer service team is under pressure. Complaints are piling up and response times are slipping. The obvious solution seems clear: hire more staff. For a few weeks, things improve. Six months later however, the complaint backlog is back, and this time it's larger. So, what went wrong?",
+      "template": "Timeline5Tiles",
+      "rationale": "The narration walks through an ordered sequence of events in time (pressure builds, hire more staff, things improve, six months later the backlog returns larger), a short sequential workflow of what happened. Process5Steps stages a pipeline and reveals each ordered step with a label, covering the 'Let's begin with an example' lead-in, and the event order is the point. Reserved comparison templates for the cleaner two-state beats later in the lesson.",
+      "fitConfidence": "medium",
+      "fitOk": true,
+      "fitNote": "Re-mapped from Process5Steps: a chronological cautionary STORY (under pressure -> hire staff -> brief relief -> backlog worse) fits a timeline, not a parallel workflow. The why (the loop) is scene 4 (Flywheel).",
+      "wasReordered": false,
+      "reorderNote": "The narration is already chronological (pressure builds, then the staffing decision, then the short-term improvement, then the worse relapse, then the closing question), which matches a left-to-right build, so no re-sequencing was needed. The only adjustment is that the closing rhetorical question is not a process step; it is mapped onto the final chevron as the outcome beat.",
+      "linearizedVO": "Let's begin with an example. A customer service team is under pressure. Complaints are piling up and response times are slipping. The obvious solution seems clear: hire more staff. For a few weeks, things improve. Six months later however, the complaint backlog is back, and this time it's larger. So, what went wrong?",
+      "slots": [
+        {
+          "target": "setup",
+          "text": ""
+        },
+        {
+          "target": "step0",
+          "text": "Under pressure"
+        },
+        {
+          "target": "step1",
+          "text": "Hire more staff"
+        },
+        {
+          "target": "step2",
+          "text": "Brief relief"
+        },
+        {
+          "target": "step3",
+          "text": "Backlog returns worse"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "step0",
+        "step1",
+        "step2",
+        "step3"
+      ],
+      "warnings": [
+        "Template does not truly fit: this is a story arc, not a 2-5 step workflow. Recommend a timeline/narrative or cause-and-effect template instead.",
+        "Slot labels are NOT parallel grammar (mix of states and an action and a question), violating Process5Steps Rule 2; forcing parallel verbs/nouns would distort the story's meaning.",
+        "'What went wrong?' (step4) is a rhetorical question, not a process step, and exceeds the 14-char limit (16 chars); it cannot be tightened further without dropping the question that gives the segment its hook.",
+        "Chevron progression visually implies these are deliberate forward steps, but the narrative point is that the 'fix' backfired, the visual reads as endorsement rather than caution.",
+        "Icon ids omitted: meaningful concrete icons for narrative beats (pressure, relapse, a question) are not reliably available in the shared Small-Icons line-icon set; suggested concepts would be alert/warning for step0, person-plus for step1, check for step2, up-trend/warning for step3, question-mark for step4."
+      ]
+    },
+    {
+      "id": "scene-3",
+      "segment": "The problem is linear thinking. Linear thinking follows a simple chain: problem leads to cause, cause leads to fix. It works well for problems that are genuinely simple and isolated, like a broken piece of equipment, or a single missing piece of data. However, most professional problems aren't like this. They involve multiple actors, competing pressures, and outcomes that take time to surface. When we apply linear thinking to those kinds of problems, we often get answers that are partially right in the short term but wrong over time, in ways we didn't anticipate.",
+      "template": "YinYang2Points",
+      "rationale": "A stark two-state contrast: simple, isolated problems where linear thinking works (broken equipment, missing data) versus complex professional problems where it fails (multiple actors, competing pressures, wrong over time). Each side has 1-2 reinforcing sub-points, exactly the YinYang shape. The framing lead-in 'The problem is linear thinking' is covered by YinYang's staging animation.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "The segment is a genuine two-sided, parallel contrast: the kinds of problems where linear thinking WORKS (simple, isolated) versus the kinds where it FAILS (complex, professional). Each side reduces to two short, icon-able sub-points, which is exactly what YinYang2Points is for (a do-vs-dont / works-vs-fails dichotomy). The one caveat is that the opening \"the problem is linear thinking\" and the definition of the linear chain (problem to cause to fix) are framing context, not part of the two-sided opposition, so they live in the spoken intro line and do not occupy slots. With that framing handled in the lead-in, the core of the segment maps cleanly. No better template needed; a process/timeline template would misread the relationship as causal rather than oppositional.",
+      "wasReordered": true,
+      "reorderNote": "The source is mostly linear already (it describes where linear thinking works, then where it fails), but the two sides were not cleanly split into a title-then-two-subpoints rhythm and the \"works\" side's two examples (broken equipment, missing data) were bundled in one breath. Re-sequenced to side-complete order: frame the comparison, deliver the full WORKS side (title + both sub-points), then the full FAILS side (title + both sub-points). No facts added or removed.",
+      "linearizedVO": "The problem is linear thinking: it runs problem, to cause, to fix. So where does that hold up, and where does it break? First, where it works. It's reliable for problems that are simple and isolated, like a broken piece of equipment. Or a single missing piece of data. Now, where it fails. Most professional problems involve multiple actors and competing pressures, with outcomes that surface only over time. Apply linear thinking there and you get answers that look right in the short term but turn out wrong later, in ways you never anticipated.",
+      "slots": [
+        {
+          "target": "leftTitle",
+          "text": "Where it works"
+        },
+        {
+          "target": "leftBox0",
+          "text": "Equipment",
+          "icon": "construction-wrench-light"
+        },
+        {
+          "target": "leftBox1",
+          "text": "Missing data",
+          "icon": "database-and-servers-api-light"
+        },
+        {
+          "target": "rightTitle",
+          "text": "Where it fails"
+        },
+        {
+          "target": "rightBox0",
+          "text": "Many actors",
+          "icon": "business-strategy-team-light"
+        },
+        {
+          "target": "rightBox1",
+          "text": "Wrong over time",
+          "icon": "finance-hourglass-light"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "leftTitle",
+        "leftBox0",
+        "leftBox1",
+        "rightTitle",
+        "rightBox0",
+        "rightBox1"
+      ],
+      "warnings": [
+        "leftTitle 'Where linear thinking works' is 27 chars (under 40, OK); rightTitle 'Where it fails' is short but kept parallel as the opposing counterpart.",
+        "The opening framing (linear thinking and the problem-to-cause-to-fix chain) is not a slot; it is carried in the spoken intro before leftTitle reveals. Ensure the SRT line for leftTitle starts at 'First, where it works.'",
+        "Icon ids are best-guess concepts from a generic shared library; confirm exact ids exist in Icons/ (wrench, database, users, hourglass, check-circle, x-circle).",
+        "rightBox1 'Slow, wrong outcomes' compresses two ideas (delayed surfacing + being wrong over time) into one caption to stay under 22 chars; acceptable but slightly dense.",
+        "Slots tightened to the YinYang char limits (title <=18, caption <=16): single word or short 2-4 word phrase so nothing overflows the frames."
+      ]
+    },
+    {
+      "id": "scene-4",
+      "segment": "In our customer service example, adding staff reduced visible pressure, and that reduced pressure changed how leadership prioritised the underlying problems. With urgency removed, the root causes of complaints, that is: unclear processes and poor handoffs between teams, were never properly addressed. The system adapted around the fix, and the problem returned.",
+      "template": "Process5Steps",
+      "rationale": "The 'fix that failed' is a ONE-TIME causal chain (add staff -> pressure eases -> urgency gone -> problem returns), not an ongoing self-reinforcing system, so it uses a linear chevron process rather than the Flywheel cycle. It would not keep going round on its own without intervention, which is the test for a flywheel.",
+      "fitConfidence": "medium",
+      "fitOk": true,
+      "fitNote": "Reasonable fit. The segment is a self-reinforcing causal loop with a clear \"the problem returned\" close, which feeds back to the start (the recurring problem prompts adding staff again), so it satisfies Flywheel4Petals' core test: an iterative cycle of 2-6 short stages that comes back on itself, order matters, reads clockwise. Caveat: it is a vicious/dysfunctional cycle rather than a positive growth flywheel, and the source narrates it as a cause-and-effect chain rather than explicitly saying \"and it begins again.\" It still maps cleanly to 4 stages with a loop-back pulse on petal0. If the director prefers to stress the linear cause-effect chain that ends in failure (rather than an ongoing loop), Process5Steps would be the alternative; but given the system \"adapted around the fix and the problem returned\" (implying recurrence), the flywheel framing is defensible. Each stage reduces to a short label + one supporting line + an icon, within count and char limits.",
+      "wasReordered": true,
+      "reorderNote": "The source is mostly causal-linear but interrupts the chain with a mid-sentence definition aside (\"the root causes of complaints, that is: unclear processes and poor handoffs between teams\"). Linearization keeps the four stages in their natural clockwise cause-effect order (add staff -> pressure drops -> priorities shift -> root causes unaddressed/problem returns) and folds the parenthetical definition into stage 3/4 supporting context rather than letting it break the sequence. The closing \"the problem returned\" is treated as the loop-back to petal0.",
+      "linearizedVO": "In our customer service example, the system fell into a self-defeating loop. First, the team added staff to ease the strain. Then, with more hands on deck, the visible pressure dropped. Next, with the urgency gone, leadership stopped prioritising the underlying problems. Finally, the root causes, unclear processes and poor handoffs between teams, were never properly addressed, so the system adapted around the fix and the same problem returned, pulling them right back to adding staff again.",
+      "slots": [
+        {
+          "target": "step0",
+          "text": "Add staff",
+          "icon": "business-strategy-team-dark"
+        },
+        {
+          "target": "step1",
+          "text": "Pressure eases",
+          "icon": "check-mark-computer-dark"
+        },
+        {
+          "target": "step2",
+          "text": "Urgency gone",
+          "icon": "signal-cancel-dark"
+        },
+        {
+          "target": "step3",
+          "text": "Problem back",
+          "icon": "arrows-refresh-dark"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "step0",
+        "step1",
+        "step2",
+        "step3"
+      ],
+      "warnings": [
+        "This is a vicious cycle, not a positive flywheel; the template's light-to-dark petals and 'flywheel' connotation read as momentum/growth, which may visually undercut the 'fix that failed' message. Confirm the director is comfortable with that tone.",
+        "Subtitle slot not populated from source (no natural one-line subtitle in the segment); a hub subtitle should be authored, e.g. 'Why the same complaints keep coming back' (<=40 chars).",
+        "Petal bodies were authored to fit the <=48-char limit and are not verbatim from the script; the full definition of root causes ('unclear processes and poor handoffs between teams') exceeds 48 chars and was condensed into petal3's body and the voiceover.",
+        "Loop-back: 'the same problem returned, pulling them back to adding staff again' is the re-mention of petal0 and should become a pulses entry on petal0 at that line's SRT time; no pulse time assigned here (filled later from the SRT).",
+        "Icon ids are best-guess from the shared Small-Icons set (users, trending-down, target, refresh) and centre 'refresh-dark' from Icons/; verify these ids exist in the asset sets and that the centre icon is a valid -dark variant.",
+        "Re-assigned Flywheel4Petals -> Process5Steps: the beat is a one-time chain that ends where it began, not a recurring system cycle."
+      ]
+    },
+    {
+      "id": "scene-5",
+      "segment": "So, how do we know when a problem is systemic rather than isolated? There are a few reliable signals. The first is that the same problem keeps returning, even after it appears to have been fixed. If a solution that worked last year isn't working now, the problem likely has structural roots that weren't addressed. The second signal is that different parts of the organisation experience the problem differently, and each blames the other. When every team has a reasonable account of what's going wrong and each account is at odds with the others, the issue is almost certainly in the interactions between those teams, not within any single one of them. The third is that well-intentioned interventions make things worse. If every fix creates a new problem, the system is pushing back against the intervention. That's a strong signal that the fix isn't addressing the right part of the system. Systemic problems are structural, and can't be resolved with simple fixes.",
+      "template": "Points3Subtopics2",
+      "rationale": "Exactly three parallel signals (problem keeps returning; teams experience it differently and blame each other; well-intentioned interventions make things worse), and each signal carries two supporting detail lines of explanation. Points3Subtopics2 is purpose-built for three main ideas each with two supporting lines, and its left-anchor setup covers the 'how do we know... there are a few reliable signals' lead-in.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Strong fit. The segment presents exactly three parallel diagnostic signals for distinguishing a systemic problem from an isolated one, and each signal carries exactly two reducible supporting points (the signal itself plus its structural interpretation). The ideas are parallel and hierarchical at the same level of abstraction, with no sequential/causal, oppositional, or branching relationship, which is exactly what Points3Subtopics2 wants. The narration is already delivered band-complete and top-to-bottom (signal one in full, then two, then three), matching the canonical reveal order. The closing line (\"Systemic problems are structural, and can't be resolved with simple fixes\") is a wrap-up and is not mapped to a slot.",
+      "wasReordered": false,
+      "reorderNote": "Already linear. The source delivers each signal fully (the signal, then its explanation/interpretation) before moving to the next, matching title0 to detail0a to detail0b, then title1 group, then title2 group. No re-sequencing needed; the only change is compression into slot-length phrases.",
+      "linearizedVO": "So, how do we know when a problem is systemic rather than isolated? There are a few reliable signals. The first is that the same problem keeps returning, even after it appears to have been fixed. If a solution that worked last year isn't working now, the problem likely has structural roots that weren't addressed. The second signal is that different parts of the organisation experience the problem differently, and each blames the other. When every team has a reasonable account of what's going wrong and each is at odds with the others, the issue is almost certainly in the interactions between those teams, not within any single one of them. The third is that well-intentioned interventions make things worse. If every fix creates a new problem, the system is pushing back against the intervention, a strong signal that the fix isn't addressing the right part of the system. Systemic problems are structural, and can't be resolved with simple fixes.",
+      "slots": [
+        {
+          "target": "setup",
+          "text": "",
+          "icon": "problem-analysis-search-dark"
+        },
+        {
+          "target": "title0",
+          "text": "Problem returns"
+        },
+        {
+          "target": "detail0a",
+          "text": "Same issue recurs after being fixed"
+        },
+        {
+          "target": "detail0b",
+          "text": "Old solutions no longer work"
+        },
+        {
+          "target": "title1",
+          "text": "Teams blame each other"
+        },
+        {
+          "target": "detail1a",
+          "text": "Each part sees the problem differently"
+        },
+        {
+          "target": "detail1b",
+          "text": "Fault lies between teams, not within"
+        },
+        {
+          "target": "title2",
+          "text": "Fixes backfire"
+        },
+        {
+          "target": "detail2a",
+          "text": "Each fix creates a new problem"
+        },
+        {
+          "target": "detail2b",
+          "text": "The system pushes back on changes"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "title0",
+        "detail0a",
+        "detail0b",
+        "title1",
+        "detail1a",
+        "detail1b",
+        "title2",
+        "detail2a",
+        "detail2b"
+      ],
+      "warnings": [
+        "Title slots are tight: 'Teams blame each other' is 22 chars / 3 words (within limits); 'Problem returns' and 'Fixes backfire' read as parallel short noun/verb phrases but the three are not perfectly grammatically parallel (one verb-object, one clause, one verb). Acceptable but a reviewer may want them harmonised.",
+        "detail1b 'Fault lies between teams, not within' (36 chars) compresses the source nuance that the problem is in the interactions between teams; verify it still reads clearly on one line.",
+        "Anchor icon id 'problem-analysis-search-dark' is a best guess and must be confirmed against the shared Icons/ catalogue; it needs the -dark suffix to read on the Oxford-Blue panel.",
+        "The closing sentence about systemic problems being structural is intentionally unmapped (no slot for a summary); confirm the director is fine dropping it from on-screen text."
+      ]
+    },
+    {
+      "id": "scene-6",
+      "segment": "To tackle systemic problems, we'll use 'systems thinking'. Systems thinking is a discipline that focuses on structures, relationships, and patterns of behaviour over time, rather than on individual events and single causes.",
+      "template": "WordDefinition",
+      "rationale": "A single term is named ('systems thinking') and given its definition (a discipline focusing on structures, relationships and patterns of behaviour over time). This is the canonical one-word-plus-definition glossary beat, and WordDefinition's setup staging covers the 'To tackle systemic problems' lead-in.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Strong fit. The segment names and defines exactly one term (\"systems thinking\") and follows the natural name-then-define shape the template requires. It is not a comparison, process, or list, so it satisfies \"Use it when\" and avoids all \"Do NOT use it when\" cases. The only caution: the source definition exceeds the ideal 120-char target, so it was compressed.",
+      "wasReordered": false,
+      "reorderNote": "Already linear. The source names the term (\"we'll use 'systems thinking'\") before delivering its meaning (\"Systems thinking is a discipline that focuses on...\"), matching the canonical name-then-define reveal order. Wording preserved; only tightened to slot limits.",
+      "linearizedVO": "Systems thinking. It's a discipline that focuses on structures, relationships, and patterns of behaviour over time, rather than on individual events and single causes.",
+      "slots": [
+        {
+          "target": "setup",
+          "text": ""
+        },
+        {
+          "target": "title",
+          "text": "Systems thinking"
+        },
+        {
+          "target": "description",
+          "text": "A discipline focused on structures, relationships, and patterns of behaviour over time, rather than individual events and single causes."
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "title",
+        "description"
+      ],
+      "warnings": [
+        "Definition is ~133 chars, under the 200 hard limit but above the ideal 120 for 2-3 lines; it was already compressed from the source. If it crowds the icon pill, drop 'individual events and' to shorten further.",
+        "setup is the silent decorative chrome step and carries no narration; its 'at' precedes the title in timing.",
+        "Single quotes around 'systems thinking' in the source were dropped from the title per the single-term rule; the title types out as plain text."
+      ]
+    },
+    {
+      "id": "scene-7",
+      "segment": "'Systems thinking' is an extension of 'analytical thinking'. Where analytical thinking asks \"what happened?\", systems thinking asks \"what keeps producing this?\" Where analytical thinking isolates a variable, systems thinking looks at the web of connections around it.",
+      "template": "ComparativePoints2",
+      "rationale": "A clean pairing of exactly two parallel concepts joined by a relationship (systems thinking as an extension of analytical thinking), each reducible to a short caption: analytical asks 'what happened?' / isolates a variable, versus systems asks 'what keeps producing this?' / looks at the web of connections. ComparativePoints2's centre-connector two-point layout fits this linkage better than a bulleted splitscreen, and it keeps the comparison templates spread across the lesson.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Good fit. The segment pairs exactly two parallel, icon-able concepts (analytical thinking and systems thinking) joined by a relationship of linkage/association: systems thinking is framed as \"an extension of\" analytical thinking, i.e. two complementary modes of one larger thinking discipline. That is precisely the chain-link \"these belong together\" relationship ComparativePoints2 is built for, and each side reduces to one short caption plus a single icon. Note: the framing is mildly contrastive (the two \"where X... Y...\" lines distinguish the modes), but it is connection-not-opposition (an extension, not a stark either/or), so YinYang2Points is not warranted and there are no per-side sub-points. If the editor wanted to foreground the contrast of the two questions as opposing halves, YinYang2Points would be the alternative, but linkage is the dominant reading here.",
+      "wasReordered": true,
+      "reorderNote": "The source narration is interleaved/ping-pong: it states the link, then alternates \"Where analytical thinking asks X, systems thinking asks Y. Where analytical thinking does A, systems thinking does B.\" That blends both points across each breath, which the template forbids (the right shell is not on screen while the right point is first described). Re-sequenced to side-complete order: name the link once during setup, deliver analytical thinking fully (its question and its isolate-a-variable behaviour) as the left point, then deliver systems thinking fully (its question and its web-of-connections behaviour) as the right point. Meaning and tone preserved; no facts invented.",
+      "linearizedVO": "Systems thinking is an extension of analytical thinking; the two go hand in hand. First, analytical thinking. It asks \"what happened?\", isolating a single variable to examine on its own. And it links directly to systems thinking, which asks \"what keeps producing this?\", looking instead at the whole web of connections around that variable.",
+      "slots": [
+        {
+          "target": "setup",
+          "text": "Systems thinking extends analytical thinking",
+          "icon": "blockchain-link-dark"
+        },
+        {
+          "target": "leftPoint",
+          "text": "Analytical thinking",
+          "icon": "critical-thinking-analysis-dark"
+        },
+        {
+          "target": "rightPoint",
+          "text": "Systems thinking",
+          "icon": "network-system-dark"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "leftPoint",
+        "rightPoint"
+      ],
+      "warnings": [
+        "The setup slot is the link-naming narration line, not an on-pill caption; only leftPoint and rightPoint carry pill captions. Both captions are well under the 30-char limit ('Analytical thinking' = 19, 'Systems thinking' = 16).",
+        "Icon ids are best guesses from the shared -dark library and should be eyeballed against the actual SVG artwork: 'critical-thinking-analysis-dark' for the isolate-a-variable left point, 'network-system-dark' for the web-of-connections right point. 'blockchain-link-dark' is suggested only if a side icon is wanted for the link; the centre chain-link connector is baked into the template and needs no icon.",
+        "Source narration was interleaved and had to be re-sequenced; confirm the rewritten left-then-right order still reads naturally in the recorded voiceover before locking SRT timings."
+      ]
+    },
+    {
+      "id": "scene-8",
+      "segment": "It's worth being clear about what systems thinking is not. It isn't a method for analysing every possible variable in a situation. And it isn't about building elaborate diagrams before we're allowed to act. It's a practical discipline, and the vocabulary it uses is accessible to any professional willing to look at problems differently.",
+      "template": "SplitscreenPointsV1",
+      "rationale": "A two-column 'is not' versus 'is' contrast: what systems thinking is NOT (analysing every variable; building elaborate diagrams before acting) versus what it IS (a practical discipline; accessible vocabulary for any professional). Each side carries a short bulleted list, the SplitscreenPointsV1 shape. Using this rather than another comparison template keeps comparison variety across ComparativePoints2, YinYang2Points and SplitscreenPointsV1.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Good fit. The segment is a genuine two-sided, parallel dichotomy: what systems thinking is NOT versus what it IS. This maps cleanly to the \"do-this vs not-that\" / \"myth vs reality\" comparison this template is built for. Each side reduces to a short list of <=22-char points (NOT: analyse every variable, build elaborate diagrams; IS: a practical discipline, accessible vocabulary). Both sides answer the same question (what is systems thinking?) from opposite positions, satisfying the parallelism requirement, and neither side exceeds four points. The only minor stretch is that the IS side leans slightly more conceptual than itemised, but it still reduces to two concrete captions, so the template holds.",
+      "wasReordered": true,
+      "reorderNote": "The source was already broadly side-complete (it states what systems thinking is NOT, then what it IS), so the macro order matched the template. Light linearization was applied: the original opening line (\"It's worth being clear about what systems thinking is not\") was kept as the framing line, then the two NOT-points were delivered top-to-bottom under the left title, and the two IS-points top-to-bottom under the right title. No cross-side ping-pong existed in the source, so no de-interleaving was required.",
+      "linearizedVO": "It's worth being clear about what systems thinking is, and what it is not. First, what it is not. It isn't a method for analysing every possible variable in a situation. And it isn't about building elaborate diagrams before we're allowed to act. Now, what it is. It's a practical discipline. And its vocabulary is accessible to any professional willing to look at problems differently.",
+      "slots": [
+        {
+          "target": "leftTitle",
+          "text": "What it is not"
+        },
+        {
+          "target": "leftPill0",
+          "text": "Not every variable",
+          "icon": "search"
+        },
+        {
+          "target": "leftPill1",
+          "text": "Not big diagrams",
+          "icon": "flow-chart"
+        },
+        {
+          "target": "rightTitle",
+          "text": "What it is"
+        },
+        {
+          "target": "rightPill0",
+          "text": "Practical discipline",
+          "icon": "tools"
+        },
+        {
+          "target": "rightPill1",
+          "text": "Accessible vocabulary",
+          "icon": "chat"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "leftTitle",
+        "leftPill0",
+        "leftPill1",
+        "rightTitle",
+        "rightPill0",
+        "rightPill1"
+      ],
+      "warnings": [
+        "Left title 'What it is not' (13 chars) and right title 'What it is' (10 chars) are close paraphrases; if the renderer needs stronger visual contrast, consider 'Common myths' / 'The reality'.",
+        "Icon ids are best-guesses against the shared Small-Icons set; 'flow-chart', 'tools', and 'chat' should be verified to exist in Small-Icons/ before render, with fallbacks of 'document', 'check', and 'ai-assistant' respectively.",
+        "The IS side is slightly less list-like than the NOT side; both pills stay within the 22-char limit ('Practical discipline' = 20, 'Accessible vocabulary' = 21) but read as descriptors rather than parallel actions, so the cross-side parallelism is conceptual rather than strict."
+      ]
+    },
+    {
+      "id": "scene-9",
+      "segment": "In this course, we'll define what a system is and examine its structural building blocks: stocks, flows and feedback loops. We'll then explore the characteristic behaviours that complex systems produce including delays, emergence, and unintended consequences. Finally, we'll discuss how to apply a systems lens to real decisions at work through mental models, leverage points and informed action. By the end, we'll be able to identify systemic patterns, avoid common decision-making traps, and frame problems in ways that lead to more durable solutions.",
+      "template": "BulletList6Pills",
+      "rationale": "This is the course-outline / course-intro agenda beat ('In this course, we'll...'), naming the course's stages: define a system and its building blocks (stocks, flows, feedback loops); characteristic behaviours (delays, emergence, unintended consequences); applying a systems lens (mental models, leverage points, informed action); the end-state capabilities. By the cemented fixed-role rule, the course-outline agenda always uses BulletList6Pills.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Strong fit for the cemented course-outline use; see above.",
+      "wasReordered": false,
+      "reorderNote": "Already linear. The source narration introduces the three areas in straight top-to-bottom order (\"define what a system is... we'll then explore... finally, we'll discuss\"), which maps directly onto pill0 -> pill1 -> pill2. No re-sequencing needed; wording preserved.",
+      "linearizedVO": "In this course, we'll define what a system is and examine its structural building blocks: stocks, flows and feedback loops. We'll then explore the characteristic behaviours that complex systems produce including delays, emergence, and unintended consequences. Finally, we'll discuss how to apply a systems lens to real decisions at work through mental models, leverage points and informed action. By the end, we'll be able to identify systemic patterns, avoid common decision-making traps, and frame problems in ways that lead to more durable solutions.",
+      "slots": [
+        {
+          "target": "pill0",
+          "text": "The building blocks of a system"
+        },
+        {
+          "target": "pill1",
+          "text": "The behaviours systems produce"
+        },
+        {
+          "target": "pill2",
+          "text": "Applying a systems lens at work"
+        }
+      ],
+      "revealOrder": [
+        "pill0",
+        "pill1",
+        "pill2"
+      ],
+      "warnings": [
+        "The optional 'setup' step is omitted; the recommended default is each pill (body + chevron + typed label) revealing wholesale at its own cue. Add a 'setup' step before pill0 only if you want all three empty pills scaffolded in first.",
+        "Labels are parallel noun phrases (all 'The...' / gerund-style topic phrases) per Rule 2; all are well under the 40-char limit (max 31 chars).",
+        "Sub-items (stocks/flows/feedback loops; delays/emergence/unintended consequences; mental models/leverage points/informed action) and the closing 'by the end' outcomes are intentionally left in the voiceover only, since this template carries one short label per pill and no sub-points (Rule 3).",
+        "Template uses an inline chevron glyph only; no per-row icons are supported, so no icon ids are supplied."
+      ]
+    },
+    {
+      "id": "scene-10",
+      "segment": "Let's stop the lesson here. In this lesson, we first examined why linear, cause-and-effect reasoning struggles when applied to complex problems. We then looked at the signals that tell us a problem is systemic rather than straightforward. Finally, we clarified what systems thinking is and what it isn't.",
+      "template": "LessonSummary",
+      "rationale": "An explicit end-of-lesson recap ('Let's stop the lesson here. In this lesson, we first... then... finally...') with three short ordered takeaways stacked under the lesson-summary headline. This is the canonical closing-recap beat, mapping to LessonSummary.",
+      "fitConfidence": "high",
+      "fitOk": true,
+      "fitNote": "Strong fit. The segment is an explicit closing recap of one lesson's key takeaways (\"Let's stop the lesson here. In this lesson, we...\") expressed as a flat list of three short points that reinforce a single lesson. It is not an ordered process (no execution-order dependency) and not a two-way contrast, and the recap does not need a custom headline, so the locked \"Lesson Summary\" title is appropriate. Three points sits comfortably inside the 1-5 range.",
+      "wasReordered": false,
+      "reorderNote": "Already linear. The source narration introduces the three takeaways in the exact order they were taught and in the order they will stack top-to-bottom (\"first... then... finally...\"), which maps directly onto pill0, pill1, pill2. No re-sequencing needed; wording preserved.",
+      "linearizedVO": "Let's stop the lesson here. In this lesson, we first examined why linear, cause-and-effect reasoning struggles when applied to complex problems. We then looked at the signals that tell us a problem is systemic rather than straightforward. Finally, we clarified what systems thinking is and what it isn't.",
+      "slots": [
+        {
+          "target": "title",
+          "text": "Lesson Summary"
+        },
+        {
+          "target": "pill0",
+          "text": "Limits of linear thinking"
+        },
+        {
+          "target": "pill1",
+          "text": "Signals of a systemic problem"
+        },
+        {
+          "target": "pill2",
+          "text": "What systems thinking is"
+        }
+      ],
+      "revealOrder": [
+        "setup",
+        "title",
+        "pill0",
+        "pill1",
+        "pill2"
+      ],
+      "warnings": [
+        "Title is locked to \"Lesson Summary\" and is not authorable; it is listed in slots only to mark the reveal frame.",
+        "Captions reworded into parallel noun phrases to meet the 32-char limit; the full explanation stays in the voiceover. \"What systems thinking is\" drops the \"...and what it isn't\" nuance to fit 32 chars, but the voiceover retains it.",
+        "No icons: LessonSummary pills carry text only, so no icon ids are supplied."
+      ]
+    }
+  ],
+  "unmapped": []
+}
