@@ -152,7 +152,15 @@ jobs:
             echo "No project changes to commit."
           else
             git commit -m "Build ${COURSE_ID} lesson ${LESSON_NUMBER} (${LESSON_TITLE})"
-            git push
+            # Explicit refspec (works in detached-HEAD push runs) + rebase onto
+            # latest main + retry, so a concurrent push can't fail the build.
+            for i in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main || git rebase --abort || true
+              git push origin HEAD:main && break
+              echo "Push attempt $i failed (likely a concurrent update); retrying..."
+              sleep 3
+            done
           fi
 
       - name: Summary
