@@ -27,6 +27,8 @@ export default async (req) => {
     lessonTitle: b.lessonTitle,
     requirements: b.requirements || '',
     model: b.model || 'claude-sonnet-4-6',
+    submitter: b.submitter || '',
+    submittedAt: new Date().toISOString(),
     srtUrl: b.srtUrl,
     mp3Url: b.mp3Url,
   };

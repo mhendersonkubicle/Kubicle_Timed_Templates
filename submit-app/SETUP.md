@@ -46,10 +46,26 @@ repo, with **Contents: Read and write**. Copy it.
 4. (Recommended) Once you have the Netlify URL, tighten the R2 CORS `AllowedOrigins`
    from `*` to just that URL.
 
-## Using it
-Open the URL, enter the access code, fill the lesson fields, attach the SRT + MP3,
-and submit. The build starts on its own; the finished project appears under
-`projects/<courseId>-l<n>/` in the repo. Pull and render locally.
+## Using it (two tabs)
+- **Submit:** enter the access code, fill the lesson fields, attach the SRT + MP3,
+  submit. The build starts on its own.
+- **Requests:** lists every request with status, **Building** -> **Ready to render**
+  (the project landed in the repo) -> **Delivered** (a Download button appears).
+  Your team checks here instead of waiting for a notification.
+
+## Delivering a finished lesson
+When a request shows **Ready to render**, pull the repo and render it locally in
+Remotion Studio (your quality step). Then publish the MP4 so it shows a Download
+button in the Requests tab, using the helper:
+
+```
+APP_URL=https://YOUR-SITE.netlify.app ACCESS_CODE=your-code \
+  node submit-app/deliver-cli.mjs path/to/video.mp4 <courseId>-l<n>
+```
+
+That uploads the video to storage and flips the request to **Delivered**. No new
+secrets, it reuses the same access code and storage. The download links shown in
+the tab are minted fresh each load, so they never expire.
 
 ## Notes
 - Secrets live only in Netlify (server-side) and never reach the browser.
