@@ -36,7 +36,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30   # fail cleanly instead of hanging if a build runs away
+    timeout-minutes: 40   # fail cleanly instead of hanging if a build runs away
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
