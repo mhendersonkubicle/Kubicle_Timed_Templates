@@ -142,3 +142,13 @@ Compositions are delivered to **local Remotion Studio** (`npx remotion studio`) 
 ## Migration status
 
 **Complete: all 41 templates are migrated** to the reveal-sequence model and carry the identical standard (reveal-sequence timing, count variation where applicable, the re-mention pulse mechanism, a `GUIDANCE.md`, and an example). See `SELECTION_INDEX.md` for the catalogue. **YinYang2Points** was the first reference implementation for the model and guidance standard; **ComparativePoints2** is the reference for the re-mention pulse.
+
+## The keep-moving principle
+
+A scene must not sit still. The no-dead-air rule only guards a scene's opening; this rule governs the *whole* scene. Reveals are distributed so it stays dynamic throughout:
+- The first content reveal lands by ~2.5s (something real happens from the outset, not just a setup frame then a long hold).
+- No static stretch , before the first reveal, between reveals, or after the last , exceeds ~5s.
+
+`fit-timing.py` enforces this: if the narration-anchored reveals would cluster or leave a long hang, it spreads them evenly across the scene (revealing slightly ahead of the voiceover is acceptable for dynamism).
+
+If even an even spread leaves gaps > ~5s, the scene is **too sparse for its length** , split the beat into two scenes or pick a denser/continuous-motion template. Do NOT put a fixed-low-reveal template on a long span: `ComparativePoints2` (exactly 2 reveals) or `YinYang2Points` (few) over a 20s+ beat will hang. Match a template's reveal count to the scene duration (roughly one motion beat per <= 5s). `fit-timing.py` emits a "too sparse" warning when this is violated; treat it as a defect.

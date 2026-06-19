@@ -29,6 +29,17 @@ FRONTLOAD_TEMPLATES = {'LessonTitle', 'LessonGoal'}
 FRONTLOAD_START = 0.7    # first reveal after setup
 FRONTLOAD_STEP = 0.6     # spacing between subsequent reveals
 
+# Keep-moving rule: a scene must not sit still for long. The first content reveal
+# lands by FIRST_CONTENT_CAP, and no static stretch (before the first reveal,
+# between reveals, or after the last reveal) exceeds MAX_STATIC_GAP. If the
+# narration-anchored timing would hang longer than that, the reveals are spread
+# evenly across the scene (revealing slightly ahead of narration is acceptable for
+# dynamism). If even an even spread can't get gaps under MAX_STATIC_GAP, the scene
+# is too sparse for its length and a warning says to split it / use a denser template.
+FIRST_CONTENT_CAP = 2.5
+MAX_STATIC_GAP = 5.0
+END_TAIL_PAD = 2.5
+
 def to_s(t):
     h, m, rest = t.split(':'); s, ms = rest.split(',')
     return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
@@ -111,6 +122,36 @@ def main():
             rem_objs.append({'target': sl['target'], 'anchor': sl.get('anchor', ''), 'revealAt': at})
         # keep reveal order monotonic by `at` (stable) after setup
         head, tail = seq[0], sorted(seq[1:], key=lambda s: s['at'])
+
+        # Keep-moving: openers are already front-loaded; for other scenes, if the
+        # anchored reveals cluster or leave a static gap > MAX_STATIC_GAP, spread
+        # them evenly so something keeps happening across the whole scene.
+        if not frontload and tail:
+            n = len(tail)
+            spans_gaps = ([tail[0]['at']]
+                          + [tail[i]['at'] - tail[i - 1]['at'] for i in range(1, n)]
+                          + [dur - tail[-1]['at']])
+            if tail[0]['at'] > FIRST_CONTENT_CAP or max(spans_gaps) > MAX_STATIC_GAP:
+                end = max(FIRST_CONTENT_CAP + 0.1, dur - END_TAIL_PAD)
+                if n == 1:
+                    tail[0]['at'] = round(min(FIRST_CONTENT_CAP, end), 2)
+                else:
+                    step = (end - FIRST_CONTENT_CAP) / (n - 1)
+                    for i, c in enumerate(tail):
+                        c['at'] = round(FIRST_CONTENT_CAP + i * step, 2)
+                    if step > MAX_STATIC_GAP:
+                        warnings.append(
+                            f"{sc['id']}: {n} reveals over {dur:.0f}s still leave ~{step:.0f}s gaps when spread; "
+                            f"too sparse, split this beat or use a denser/continuous-motion template")
+                if n == 1 and dur > FIRST_CONTENT_CAP + MAX_STATIC_GAP:
+                    warnings.append(
+                        f"{sc['id']}: single reveal over {dur:.0f}s; split this beat or use a continuous-motion template")
+                # re-sync re-mention reveal times to the redistributed reveals
+                newat = {c['target']: c['at'] for c in tail}
+                for r in rem_objs:
+                    if r['target'] in newat:
+                        r['revealAt'] = newat[r['target']]
+
         out_scenes.append({
             'id': sc['id'],
             'span': [round(span_start, 3), round(span_end, 3)],

@@ -86,3 +86,7 @@ projects/<courseId>-l<n>`. It copies every referenced icon, the case-study logo,
 each used template's assets, and narration.mp3 into the project's `public/`, so
 the lesson renders anywhere with no missing-file errors. It exits non-zero if the
 build referenced an asset that is not in the libraries (catch this, never ship it).
+
+## Keep scenes moving (no mid-scene hangs)
+
+`fit-timing.py` now front-loads the first content reveal (~2.5s) and spreads reveals so no static gap exceeds ~5s. When choosing templates, match reveal count to scene length: a long beat (20s+) needs a template with enough reveal beats, or split it. Never assign a 2-reveal template (`ComparativePoints2`) or a sparse one to a 25s+ span , fit-timing warns "too sparse"; heed it by splitting the beat or picking a denser template.
