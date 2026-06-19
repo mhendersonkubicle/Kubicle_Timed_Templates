@@ -38,6 +38,8 @@
     .b-building { background:#fff3cd; color:#856404; }
     .b-ready { background:#dbeafe; color:#1e40af; }
     .b-delivered { background:#d4f7dd; color:#1a7f37; }
+    .b-error { background:#fde2e1; color:#c0392b; }
+    .collect.err { color:#c0392b; }
     .dl { display:inline-block; margin-top:8px; padding:7px 12px; background:var(--ok); color:#fff; border-radius:8px; text-decoration:none; font-weight:700; font-size:.85rem; }
     .collect { margin-top:8px; font-size:.8rem; color:var(--muted); line-height:1.7; }
     .collect code { background:#f0f4f8; border:1px solid var(--line); border-radius:5px; padding:2px 6px; font-size:.82em; }
@@ -169,6 +171,7 @@
       building: '<span class="badge b-building">Building</span>',
       ready: '<span class="badge b-ready">Ready to render</span>',
       delivered: '<span class="badge b-delivered">Delivered</span>',
+      error: '<span class="badge b-error">Error</span>',
     }[s] || s);
 
     async function loadRequests() {
@@ -184,6 +187,7 @@
           <div class="m">${r.course} · Lesson ${r.lessonNumber}${r.submitter ? ' · ' + r.submitter : ''}${r.submittedAt ? ' · ' + new Date(r.submittedAt).toLocaleString() : ''}</div>
           ${r.status === 'building' ? `<div class="collect muted">Building, check back in a few minutes.</div>` : ''}
           ${r.status === 'ready' ? `<div class="collect">Ready to collect locally:<br><code>git pull</code><br><code>python script-pipeline/open-in-studio.py ${r.id}</code><br>Then preview &amp; export in your browser.</div>` : ''}
+          ${r.status === 'error' ? `<div class="collect err">Build failed.${r.runUrl ? ` <a href="${r.runUrl}" target="_blank">View the log</a>.` : ''} Fix and re-submit.</div>` : ''}
           ${r.downloadUrl ? `<a class="dl" href="${r.downloadUrl}">Download video</a>` : ''}
         </div>`).join('');
     }

@@ -57,5 +57,21 @@ export default async (req) => {
   });
   if (!put.ok) return json({ error: 'GitHub commit failed', detail: await put.text() }, 500);
 
+  // Reset any prior status/delivery for this lesson, so a re-submit shows
+  // "Building" again instead of a stale Error/Delivered from the last attempt.
+  const deleteIfExists = async (p) => {
+    const u = `https://api.github.com/repos/${repo}/contents/${p}`;
+    const h = await fetch(u, { headers: ghHeaders });
+    if (!h.ok) return;
+    const sha = (await h.json()).sha;
+    await fetch(u, {
+      method: 'DELETE',
+      headers: { ...ghHeaders, 'content-type': 'application/json' },
+      body: JSON.stringify({ message: `reset ${p} (re-submit)`, sha }),
+    });
+  };
+  await deleteIfExists(`inputs/${courseId}-l${b.lessonNumber}/status.json`);
+  await deleteIfExists(`inputs/${courseId}-l${b.lessonNumber}/delivered.json`);
+
   return json({ ok: true, courseId, path });
 };

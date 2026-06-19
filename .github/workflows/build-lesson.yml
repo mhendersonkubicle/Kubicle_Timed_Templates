@@ -155,11 +155,16 @@ jobs:
           cp -r "$PROJ/src/." harness/src/
           cd harness && npx remotion bundle
 
+      - name: Record success status
+        run: |
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          printf '{ "state": "built", "at": "%s", "run": "%s" }\n' "$(date -u +%FT%TZ)" "$RUN_URL" > "$INPUTS_DIR/status.json"
+
       - name: Commit the built project
         run: |
           git config user.name "lesson-bot"
           git config user.email "lesson-bot@users.noreply.github.com"
-          git add "projects/${COURSE_ID}-l${LESSON_NUMBER}" "projects/${COURSE_ID}/course.json" 2>/dev/null || git add projects/
+          git add "projects/${COURSE_ID}-l${LESSON_NUMBER}" "projects/${COURSE_ID}/course.json" "$INPUTS_DIR/status.json" 2>/dev/null || git add projects/ inputs/
           if git diff --cached --quiet; then
             echo "No project changes to commit."
           else
@@ -178,3 +183,22 @@ jobs:
       - name: Summary
         run: |
           echo "Built projects/${COURSE_ID}-l${LESSON_NUMBER}. Pull the repo, stage assets, and render locally in Remotion Studio." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record error status (on failure or cancellation)
+        if: ${{ failure() || cancelled() }}
+        run: |
+          # Only possible once we know which lesson this is.
+          [ -n "$INPUTS_DIR" ] || { echo "No INPUTS_DIR; cannot record status."; exit 0; }
+          mkdir -p "$INPUTS_DIR"
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          printf '{ "state": "error", "at": "%s", "run": "%s" }\n' "$(date -u +%FT%TZ)" "$RUN_URL" > "$INPUTS_DIR/status.json"
+          git config user.name "lesson-bot"
+          git config user.email "lesson-bot@users.noreply.github.com"
+          git add "$INPUTS_DIR/status.json"
+          git commit -m "Build error: ${COURSE_ID}-l${LESSON_NUMBER}" || exit 0
+          for i in 1 2 3; do
+            git fetch origin main
+            git rebase origin/main || git rebase --abort || true
+            git push origin HEAD:main && break
+            sleep 3
+          done

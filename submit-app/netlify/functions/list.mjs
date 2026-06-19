@@ -51,9 +51,13 @@ export default async (req) => {
     const reqj = await ghFile(`inputs/${dir.name}/request.json`);
     if (!reqj) continue;
     const built = builtSet.has(dir.name);
+    const statusFile = await ghFile(`inputs/${dir.name}/status.json`);
     const delivered = await ghFile(`inputs/${dir.name}/delivered.json`);
 
+    // Building -> Ready (built) -> Delivered; Error if the build reported failure.
     let status = built ? 'ready' : 'building';
+    let runUrl = null;
+    if (statusFile && statusFile.state === 'error') { status = 'error'; runUrl = statusFile.run || null; }
     let downloadUrl = null;
     if (delivered && delivered.videoKey) {
       status = 'delivered';
@@ -71,6 +75,7 @@ export default async (req) => {
       submitter: reqj.submitter || '',
       submittedAt: reqj.submittedAt || '',
       status,
+      runUrl,
       downloadUrl,
     });
   }
