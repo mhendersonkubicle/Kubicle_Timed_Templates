@@ -4,5 +4,6 @@
   "lessonNumber": "4",
   "lessonTitle": "Core Principles of Marketing",
   "requirements": "case study is FinSage",
-  "model": "claude-sonnet-4-6"
+  "model": "claude-sonnet-4-6",
+  "_retrigger": "after commit-step fix"
 }
