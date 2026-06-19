@@ -1,0 +1,295 @@
+1
+00:00:00,000 --> 00:00:03,390
+Welcome to this course on connecting AI
+agents to systems
+
+2
+00:00:03,390 --> 00:00:08,371
+So far most of us have used AI to answer
+questions and generate content. In this
+
+3
+00:00:08,371 --> 00:00:13,352
+course, we'll learn how AI can act on our
+systems for us — and how to connect it
+
+4
+00:00:13,352 --> 00:00:13,793
+safely.
+
+5
+00:00:14,293 --> 00:00:14,293
+<break time="0.5s" />
+
+6
+00:00:14,293 --> 00:00:18,319
+In this first lesson, we'll explain what
+it means to connect an AI agent to a
+
+7
+00:00:18,319 --> 00:00:21,073
+system, and why it's more than just
+adding a feature.
+
+8
+00:00:21,073 --> 00:00:21,573
+<break time="0.5s" />
+
+9
+00:00:21,573 --> 00:00:26,702
+Up to now, most of us have used AI in one
+mode: we ask, and it answers. We type a
+
+10
+00:00:26,702 --> 00:00:30,164
+question or paste a document, and we read
+the response.
+
+11
+00:00:30,164 --> 00:00:35,343
+In that mode, the AI sits outside our
+systems. It has no hands. A person still
+
+12
+00:00:35,343 --> 00:00:39,916
+has to take whatever it produces and
+carry it into the real workflow.
+
+13
+00:00:39,916 --> 00:00:45,198
+An AI agent is different. An agent
+doesn't just produce text for a person to
+
+14
+00:00:45,198 --> 00:00:46,325
+act on. It acts.
+
+15
+00:00:46,325 --> 00:00:51,105
+Given access, it can read a record,
+update a field, or trigger the next step
+
+16
+00:00:51,105 --> 00:00:55,567
+in a process. The AI model is still at
+the centre, deciding what to do.
+
+17
+00:00:55,567 --> 00:00:59,278
+What's new is that it's given tools and
+connections that let it reach into our
+
+18
+00:00:59,278 --> 00:01:00,675
+live systems and change them.
+
+19
+00:01:00,675 --> 00:01:07,217
+That, in a sentence, is what connecting
+means: giving an AI the tools to act, not
+
+20
+00:01:07,217 --> 00:01:08,198
+just answer.
+
+21
+00:01:08,198 --> 00:01:12,517
+That difference, between answering and
+acting, is what this course is about.
+
+22
+00:01:12,517 --> 00:01:16,990
+Once an AI can act, and not just
+describe, it matters a great deal where
+
+23
+00:01:16,990 --> 00:01:21,841
+we let it act, where we don't, and who
+stays in control. <break time="0.5s" />
+
+24
+00:01:21,841 --> 00:01:25,691
+It's tempting to treat connecting an
+agent as a technical detail that comes
+
+25
+00:01:25,691 --> 00:01:27,460
+after the real decisions are made.
+
+26
+00:01:27,460 --> 00:01:32,282
+Connecting an agent doesn't just make one
+step faster. It changes who does the
+
+27
+00:01:32,282 --> 00:01:37,166
+work, what the process can do on its own,
+and how information moves through it.
+
+28
+00:01:37,166 --> 00:01:41,921
+A step that used to wait for a person can
+now run by itself. A check that used to
+
+29
+00:01:41,921 --> 00:01:46,319
+happen in someone's head now happens in
+code. An action that used to need a
+
+30
+00:01:46,319 --> 00:01:48,637
+signature can now happen automatically.
+
+31
+00:01:48,637 --> 00:01:53,295
+Those are real changes to how the process
+behaves, and they affect the steps before
+
+32
+00:01:53,295 --> 00:01:55,510
+and after, not just the one we touched.
+
+33
+00:01:55,510 --> 00:02:00,133
+So the worst way to connect an agent is
+to put it into whatever step seems
+
+34
+00:02:00,133 --> 00:02:03,173
+convenient, without a plan, and see what
+happens.
+
+35
+00:02:03,173 --> 00:02:08,676
+The better way is to decide, in advance,
+exactly where the agent acts, what it's
+
+36
+00:02:08,676 --> 00:02:12,368
+allowed to touch, and where a person
+stays in control.
+
+37
+00:02:12,368 --> 00:02:17,076
+That's why we start not from the
+technology but from a map of the work,
+
+38
+00:02:17,076 --> 00:02:18,219
+even a rough one.
+
+39
+00:02:18,219 --> 00:02:22,987
+A map is just a clear picture of how a
+process runs, with a few points marked:
+
+40
+00:02:22,987 --> 00:02:27,940
+where an agent could add value, where it
+must not be allowed to decide, and where
+
+41
+00:02:27,940 --> 00:02:29,550
+a person stays in control.
+
+42
+00:02:29,550 --> 00:02:34,021
+This course is about taking one of those
+points and turning it into a real,
+
+43
+00:02:34,021 --> 00:02:35,773
+working, governed connection.
+
+44
+00:02:35,773 --> 00:02:36,273
+<break time="0.5s" />
+
+45
+00:02:36,273 --> 00:02:39,245
+In this course, we'll cover three things.
+
+46
+00:02:39,245 --> 00:02:44,309
+First, how an agent actually connects to
+a system, through tools, A.P.I's, and the
+
+47
+00:02:44,309 --> 00:02:45,747
+Model Context Protocol.
+
+48
+00:02:45,747 --> 00:02:50,913
+Second, how to judge where a connection
+is safe and where it carries real risk,
+
+49
+00:02:50,913 --> 00:02:55,813
+by separating what an agent reads from
+what it can change, and limiting its
+
+50
+00:02:55,813 --> 00:02:56,939
+access carefully.
+
+51
+00:02:56,939 --> 00:03:01,271
+Third, how to build oversight and
+resilience into the connection, and then
+
+52
+00:03:01,271 --> 00:03:03,348
+take it safely into live operation.
+
+53
+00:03:03,348 --> 00:03:08,011
+By the end, we'll be able to take a
+single candidate point on a process map
+
+54
+00:03:08,011 --> 00:03:12,799
+and produce a complete connection design:
+the tools it needs, the access it's
+
+55
+00:03:12,799 --> 00:03:16,769
+allowed, the checkpoints around it, and
+the way it fails safely.
+
+56
+00:03:16,769 --> 00:03:17,269
+<break time="0.5s" />
+
+57
+00:03:17,269 --> 00:03:19,498
+Let's stop the lesson here.
+
+58
+00:03:19,498 --> 00:03:24,184
+In this lesson, we first explained what
+connecting an AI agent actually means:
+
+59
+00:03:24,184 --> 00:03:28,322
+giving it the tools to act on our
+systems, not just answer questions.
+
+60
+00:03:28,322 --> 00:03:32,950
+We then saw why that changes how a
+process works, not just how fast it runs,
+
+61
+00:03:32,950 --> 00:03:37,331
+which is why we plan a connection from a
+map rather than improvising it.
+
+62
+00:03:37,331 --> 00:03:41,835
+Finally, we outlined what we'll build
+together: a complete, governed connection
+
+63
+00:03:41,835 --> 00:03:43,972
+design for one part of a process map.
+
