@@ -10,9 +10,9 @@ pull it and render locally.
 
 - **GitHub tools in the Toolbox:**
   - read a file / list contents (to read course memory in `projects/`)
-  - create or update file (to commit the Slack attachments)
-  - a "dispatch" / "trigger workflow" tool (to start the Action). If your GitHub
-    connector lacks one, see "If Fleet can't dispatch" below.
+  - create or update file (to commit the attachments AND the request.json)
+  - **No dispatch tool is required.** Committing `request.json` auto-starts the
+    build (the Action triggers on a push that adds `inputs/**/request.json`).
 - **Slack tool** (already added) for intake and the status reply.
 - A Slack channel (the intake), with the request template pinned.
 
@@ -32,33 +32,34 @@ plus the lesson's `.srt` and `.mp3` as attachments.
 1. Parse course name, lesson number, lesson title, requirements.
 2. Derive `courseId` = course name lowercased, spaces to hyphens
    (e.g. "Marketing in Professional Services" -> `marketing-in-professional-services`).
-3. Save the two attachments into the repo at
-   `inputs/<courseId>-l<n>/lesson.srt` and `inputs/<courseId>-l<n>/narration.mp3`
-   (using the GitHub create-or-update-file tool, committed to `main`).
-4. Trigger the Build Lesson Action via a **repository_dispatch** event:
-   - event type: `build-lesson`
-   - client_payload:
+3. Commit the two attachments into the repo (to `main`), using the GitHub
+   create-or-update-file tool:
+   - `inputs/<courseId>-l<n>/lesson.srt`
+   - `inputs/<courseId>-l<n>/narration.mp3`
+4. Commit a `request.json` into the SAME folder, **last** (it is the "go" signal
+   that auto-starts the build):
+   `inputs/<courseId>-l<n>/request.json`
      ```json
      {
        "course": "<exact course name>",
        "courseId": "<courseId>",
        "lessonNumber": "<n>",
        "lessonTitle": "<title>",
-       "inputsDir": "inputs/<courseId>-l<n>",
        "requirements": "<notes>",
        "model": "claude-sonnet-4-6"
      }
      ```
-   (POST `https://api.github.com/repos/mhendersonkubicle/Kubicle_Timed_Templates/dispatches`.)
+   The Action triggers on this file landing under `inputs/`, reads it, and builds.
 5. Report back in Slack when the Action finishes: the lesson title, scene count,
    and "pull the repo and render locally in Remotion Studio".
 
-## If Fleet can't dispatch
+## Trigger summary
 
-If your GitHub connector has no "dispatch / run workflow" tool, fall back to either:
-- Fleet posts "inputs committed, ready to build" in Slack, and a human clicks
-  **Run workflow** in the GitHub Actions tab (filling the same fields), or
-- add a small generic HTTP tool to Fleet so it can POST the dispatch call above.
+- **Primary (no dispatch tool needed):** commit `request.json` -> push event ->
+  build runs. This is what Fleet uses.
+- **Alternative:** a `repository_dispatch` of type `build-lesson`, if Fleet has a
+  dispatch/HTTP tool.
+- **Manual:** GitHub Actions tab -> Build Lesson -> Run workflow (fill the fields).
 
 ## Model / cost
 

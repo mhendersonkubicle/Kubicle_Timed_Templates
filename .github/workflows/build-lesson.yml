@@ -16,16 +16,21 @@ on:
       inputsDir:    { description: 'Repo path holding lesson.srt + narration.mp3 (e.g. inputs/marketing-in-professional-services-l5)', required: true }
       requirements: { description: 'Optional notes (case study company, emphasis)', required: false, default: '' }
       model:        { description: 'Claude model', required: false, default: 'claude-opus-4-8' }
-  # Programmatic trigger (this is how Fleet kicks a build via the GitHub API).
+  # Programmatic trigger (Fleet can use this if it has a dispatch tool).
   repository_dispatch:
     types: [build-lesson]
+  # Auto-trigger: when a request.json lands under inputs/, the build starts itself.
+  # This is the simplest path for Fleet, it only needs to commit files, not call an API.
+  push:
+    paths:
+      - 'inputs/**/request.json'
 
 permissions:
   contents: write   # so the built project can be pushed back
 
-# One build at a time per lesson, so concurrent triggers don't clobber.
+# One build at a time per trigger, so concurrent triggers don't clobber.
 concurrency:
-  group: build-${{ github.event.inputs.courseId || github.event.client_payload.courseId }}-l${{ github.event.inputs.lessonNumber || github.event.client_payload.lessonNumber }}
+  group: build-${{ github.event.inputs.courseId || github.event.client_payload.courseId || github.run_id }}
   cancel-in-progress: false
 
 jobs:
@@ -34,6 +39,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need the previous commit to see which request.json changed
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -51,15 +58,28 @@ jobs:
       - name: Install harness dependencies
         run: cd harness && npm ci
 
-      - name: Normalise inputs (works for both trigger types)
+      - name: Determine build inputs (push reads request.json; dispatch reads its payload)
         run: |
-          echo "COURSE=${{ github.event.inputs.course || github.event.client_payload.course }}"             >> "$GITHUB_ENV"
-          echo "COURSE_ID=${{ github.event.inputs.courseId || github.event.client_payload.courseId }}"       >> "$GITHUB_ENV"
-          echo "LESSON_NUMBER=${{ github.event.inputs.lessonNumber || github.event.client_payload.lessonNumber }}" >> "$GITHUB_ENV"
-          echo "LESSON_TITLE=${{ github.event.inputs.lessonTitle || github.event.client_payload.lessonTitle }}"    >> "$GITHUB_ENV"
-          echo "INPUTS_DIR=${{ github.event.inputs.inputsDir || github.event.client_payload.inputsDir }}"     >> "$GITHUB_ENV"
-          echo "REQUIREMENTS=${{ github.event.inputs.requirements || github.event.client_payload.requirements }}" >> "$GITHUB_ENV"
-          echo "MODEL=${{ github.event.inputs.model || github.event.client_payload.model || 'claude-opus-4-8' }}"  >> "$GITHUB_ENV"
+          if [ "${{ github.event_name }}" = "push" ]; then
+            REQ=$(git diff --name-only HEAD~1 HEAD | grep -E '^inputs/.+/request\.json$' | head -1)
+            test -n "$REQ" || { echo "Push did not change an inputs/**/request.json"; exit 1; }
+            echo "Using request file: $REQ"
+            echo "COURSE=$(jq -r .course "$REQ")"                     >> "$GITHUB_ENV"
+            echo "COURSE_ID=$(jq -r .courseId "$REQ")"                >> "$GITHUB_ENV"
+            echo "LESSON_NUMBER=$(jq -r .lessonNumber "$REQ")"        >> "$GITHUB_ENV"
+            echo "LESSON_TITLE=$(jq -r .lessonTitle "$REQ")"          >> "$GITHUB_ENV"
+            echo "INPUTS_DIR=$(dirname "$REQ")"                       >> "$GITHUB_ENV"
+            echo "REQUIREMENTS=$(jq -r '.requirements // ""' "$REQ")" >> "$GITHUB_ENV"
+            echo "MODEL=$(jq -r '.model // "claude-opus-4-8"' "$REQ")">> "$GITHUB_ENV"
+          else
+            echo "COURSE=${{ github.event.inputs.course || github.event.client_payload.course }}"             >> "$GITHUB_ENV"
+            echo "COURSE_ID=${{ github.event.inputs.courseId || github.event.client_payload.courseId }}"       >> "$GITHUB_ENV"
+            echo "LESSON_NUMBER=${{ github.event.inputs.lessonNumber || github.event.client_payload.lessonNumber }}" >> "$GITHUB_ENV"
+            echo "LESSON_TITLE=${{ github.event.inputs.lessonTitle || github.event.client_payload.lessonTitle }}"    >> "$GITHUB_ENV"
+            echo "INPUTS_DIR=${{ github.event.inputs.inputsDir || github.event.client_payload.inputsDir }}"     >> "$GITHUB_ENV"
+            echo "REQUIREMENTS=${{ github.event.inputs.requirements || github.event.client_payload.requirements }}" >> "$GITHUB_ENV"
+            echo "MODEL=${{ github.event.inputs.model || github.event.client_payload.model || 'claude-opus-4-8' }}"  >> "$GITHUB_ENV"
+          fi
 
       - name: Sanity-check the input files exist
         run: |
