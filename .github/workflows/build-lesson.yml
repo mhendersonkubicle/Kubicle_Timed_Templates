@@ -71,6 +71,8 @@ jobs:
             echo "INPUTS_DIR=$(dirname "$REQ")"                       >> "$GITHUB_ENV"
             echo "REQUIREMENTS=$(jq -r '.requirements // ""' "$REQ")" >> "$GITHUB_ENV"
             echo "MODEL=$(jq -r '.model // "claude-opus-4-8"' "$REQ")">> "$GITHUB_ENV"
+            echo "SRT_URL=$(jq -r '.srtUrl // ""' "$REQ")"            >> "$GITHUB_ENV"
+            echo "MP3_URL=$(jq -r '.mp3Url // ""' "$REQ")"            >> "$GITHUB_ENV"
           else
             echo "COURSE=${{ github.event.inputs.course || github.event.client_payload.course }}"             >> "$GITHUB_ENV"
             echo "COURSE_ID=${{ github.event.inputs.courseId || github.event.client_payload.courseId }}"       >> "$GITHUB_ENV"
@@ -81,10 +83,31 @@ jobs:
             echo "MODEL=${{ github.event.inputs.model || github.event.client_payload.model || 'claude-opus-4-8' }}"  >> "$GITHUB_ENV"
           fi
 
+      - name: Fetch input files from Slack if URLs were provided
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          mkdir -p "$INPUTS_DIR"
+          if [ ! -f "$INPUTS_DIR/lesson.srt" ] && [ -n "$SRT_URL" ]; then
+            echo "Downloading SRT from Slack..."
+            curl -sSL -H "Authorization: Bearer $SLACK_BOT_TOKEN" "$SRT_URL" -o "$INPUTS_DIR/lesson.srt"
+          fi
+          if [ ! -f "$INPUTS_DIR/narration.mp3" ] && [ -n "$MP3_URL" ]; then
+            echo "Downloading MP3 from Slack..."
+            curl -sSL -H "Authorization: Bearer $SLACK_BOT_TOKEN" "$MP3_URL" -o "$INPUTS_DIR/narration.mp3"
+          fi
+          # If Slack rejected the token/scope it returns an HTML page, not the file. Catch that.
+          for F in "$INPUTS_DIR/lesson.srt" "$INPUTS_DIR/narration.mp3"; do
+            if [ -f "$F" ] && head -c 64 "$F" | grep -qi "<!DOCTYPE\|<html\|\"ok\":false"; then
+              echo "Download of $F returned an error page, not the file. Check files:read scope, the SLACK_BOT_TOKEN secret, and that the bot is in the channel."
+              exit 1
+            fi
+          done
+
       - name: Sanity-check the input files exist
         run: |
-          test -f "$INPUTS_DIR/lesson.srt" || { echo "Missing $INPUTS_DIR/lesson.srt"; exit 1; }
-          test -f "$INPUTS_DIR/narration.mp3" || { echo "Missing $INPUTS_DIR/narration.mp3"; exit 1; }
+          test -f "$INPUTS_DIR/lesson.srt" || { echo "Missing $INPUTS_DIR/lesson.srt (no committed file and no working srtUrl)"; exit 1; }
+          test -f "$INPUTS_DIR/narration.mp3" || { echo "Missing $INPUTS_DIR/narration.mp3 (no committed file and no working mp3Url)"; exit 1; }
 
       - name: Build the lesson with Claude Code
         env:

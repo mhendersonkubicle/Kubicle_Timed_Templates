@@ -6,13 +6,23 @@ It takes a request from Slack, drops the files into the repo, and triggers the
 the real pipeline. The build commits the finished project back to the repo; you
 pull it and render locally.
 
+The audio file is too large to pass through a chat agent, so Fleet does NOT carry
+the files. Instead Fleet writes the Slack download LINKS into `request.json`
+(small text), and the CI downloads the actual files from Slack using a bot token.
+
 ## What Fleet needs (one-time)
 
+- **Slack app scope `files:read`** (so the bot can see attachment links). Adding a
+  scope requires reinstalling the app.
+- **GitHub secret `SLACK_BOT_TOKEN`** = the Lesson Bot's "Bot User OAuth Token"
+  (`xoxb-...`, from api.slack.com/apps -> Lesson Bot -> OAuth & Permissions). The
+  CI uses it to download the attachments. (The user adds this secret; never paste
+  a token into chat.)
 - **GitHub tools in the Toolbox:**
   - read a file / list contents (to read course memory in `projects/`)
-  - create or update file (to commit the attachments AND the request.json)
-  - **No dispatch tool is required.** Committing `request.json` auto-starts the
-    build (the Action triggers on a push that adds `inputs/**/request.json`).
+  - create or update file (to write `request.json`)
+  - **No dispatch tool is required.** Writing `request.json` auto-starts the build
+    (the Action triggers on a push that adds `inputs/**/request.json`).
 - **Slack tool** (already added) for intake and the status reply.
 - A Slack channel (the intake), with the request template pinned.
 
@@ -32,13 +42,10 @@ plus the lesson's `.srt` and `.mp3` as attachments.
 1. Parse course name, lesson number, lesson title, requirements.
 2. Derive `courseId` = course name lowercased, spaces to hyphens
    (e.g. "Marketing in Professional Services" -> `marketing-in-professional-services`).
-3. Commit the two attachments into the repo (to `main`), using the GitHub
-   create-or-update-file tool:
-   - `inputs/<courseId>-l<n>/lesson.srt`
-   - `inputs/<courseId>-l<n>/narration.mp3`
-4. Commit a `request.json` into the SAME folder, **last** (it is the "go" signal
-   that auto-starts the build):
-   `inputs/<courseId>-l<n>/request.json`
+3. Get the download link of each attachment (the Slack `url_private_download` of
+   the `.srt` and the `.mp3`). Do NOT try to commit the files themselves.
+4. Write `request.json` to `inputs/<courseId>-l<n>/request.json` (this is the "go"
+   signal that auto-starts the build), using the GitHub create-or-update-file tool:
      ```json
      {
        "course": "<exact course name>",
@@ -46,10 +53,13 @@ plus the lesson's `.srt` and `.mp3` as attachments.
        "lessonNumber": "<n>",
        "lessonTitle": "<title>",
        "requirements": "<notes>",
-       "model": "claude-sonnet-4-6"
+       "model": "claude-sonnet-4-6",
+       "srtUrl": "<url_private_download of the .srt>",
+       "mp3Url": "<url_private_download of the .mp3>"
      }
      ```
-   The Action triggers on this file landing under `inputs/`, reads it, and builds.
+   The Action triggers on this file, downloads the SRT and MP3 from those URLs
+   using `SLACK_BOT_TOKEN`, then builds.
 5. Report back in Slack when the Action finishes: the lesson title, scene count,
    and "pull the repo and render locally in Remotion Studio".
 
