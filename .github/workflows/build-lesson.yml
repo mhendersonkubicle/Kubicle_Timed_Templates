@@ -1,0 +1,117 @@
+name: Build Lesson
+
+# Runs the SAME Claude Code + lesson-video-pipeline skill + tools that build
+# lessons locally, just on a CI runner. It BUILDS and compile-checks the lesson
+# and commits the project back to the repo. It does NOT render video; rendering
+# stays local in Remotion Studio.
+
+on:
+  # Manual trigger from the GitHub Actions tab.
+  workflow_dispatch:
+    inputs:
+      course:       { description: 'Course name (verbatim, e.g. Marketing in Professional Services)', required: true }
+      courseId:     { description: 'Course slug (keys the memory, e.g. marketing-in-professional-services)', required: true }
+      lessonNumber: { description: 'Lesson number', required: true }
+      lessonTitle:  { description: 'Lesson title', required: true }
+      inputsDir:    { description: 'Repo path holding lesson.srt + narration.mp3 (e.g. inputs/marketing-in-professional-services-l5)', required: true }
+      requirements: { description: 'Optional notes (case study company, emphasis)', required: false, default: '' }
+      model:        { description: 'Claude model', required: false, default: 'claude-opus-4-8' }
+  # Programmatic trigger (this is how Fleet kicks a build via the GitHub API).
+  repository_dispatch:
+    types: [build-lesson]
+
+permissions:
+  contents: write   # so the built project can be pushed back
+
+# One build at a time per lesson, so concurrent triggers don't clobber.
+concurrency:
+  group: build-${{ github.event.inputs.courseId || github.event.client_payload.courseId }}-l${{ github.event.inputs.lessonNumber || github.event.client_payload.lessonNumber }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Install harness dependencies
+        run: cd harness && npm ci
+
+      - name: Normalise inputs (works for both trigger types)
+        run: |
+          echo "COURSE=${{ github.event.inputs.course || github.event.client_payload.course }}"             >> "$GITHUB_ENV"
+          echo "COURSE_ID=${{ github.event.inputs.courseId || github.event.client_payload.courseId }}"       >> "$GITHUB_ENV"
+          echo "LESSON_NUMBER=${{ github.event.inputs.lessonNumber || github.event.client_payload.lessonNumber }}" >> "$GITHUB_ENV"
+          echo "LESSON_TITLE=${{ github.event.inputs.lessonTitle || github.event.client_payload.lessonTitle }}"    >> "$GITHUB_ENV"
+          echo "INPUTS_DIR=${{ github.event.inputs.inputsDir || github.event.client_payload.inputsDir }}"     >> "$GITHUB_ENV"
+          echo "REQUIREMENTS=${{ github.event.inputs.requirements || github.event.client_payload.requirements }}" >> "$GITHUB_ENV"
+          echo "MODEL=${{ github.event.inputs.model || github.event.client_payload.model || 'claude-opus-4-8' }}"  >> "$GITHUB_ENV"
+
+      - name: Sanity-check the input files exist
+        run: |
+          test -f "$INPUTS_DIR/lesson.srt" || { echo "Missing $INPUTS_DIR/lesson.srt"; exit 1; }
+          test -f "$INPUTS_DIR/narration.mp3" || { echo "Missing $INPUTS_DIR/narration.mp3"; exit 1; }
+
+      - name: Build the lesson with Claude Code
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude -p "$(cat <<EOF
+          You are building ONE Kubicle lesson video composition in this repository.
+          Follow the skill at .claude/skills/lesson-video-pipeline/SKILL.md exactly.
+
+          Inputs:
+          - Course (use verbatim as courseTitle): ${COURSE}
+          - courseId: ${COURSE_ID}
+          - Lesson number: ${LESSON_NUMBER}
+          - Lesson title: ${LESSON_TITLE}
+          - SRT and MP3 are at: ${INPUTS_DIR}/lesson.srt and ${INPUTS_DIR}/narration.mp3
+          - Requirements: ${REQUIREMENTS}
+
+          Steps:
+          1. Read templates/SELECTION_INDEX.md, templates/README.md, and the GUIDANCE.md of any template you use.
+          2. Read course memory: projects/${COURSE_ID}/course.json (identity) and prior projects/${COURSE_ID}-l*/ (template variety). If course.json is missing this is lesson 1: choose and freeze the course icon, then create course.json.
+          3. Build into projects/${COURSE_ID}-l${LESSON_NUMBER}/src/ : write lessonScenes.ts and Root.tsx, copy the used template .tsx files in, derive all timing from the SRT using the script-pipeline python tools (fit-timing.py, detect-rementions.py), and resolve every icon with script-pipeline/icons (never guess an id). Write a README documenting the scene plan and rule applications.
+          4. Honor every rule: course identity verbatim, mandatory pulsing on long/preview-then-expand scenes, no dead air, icon contrast, template variety across the course, case-study logos (not icons).
+          5. Do NOT render video. Do NOT run git. The workflow compile-checks and commits.
+
+          Work directly and efficiently. Do not spawn large multi-agent fan-outs; a single focused pass is expected.
+          EOF
+          )" --model "$MODEL" --dangerously-skip-permissions --max-turns 150
+
+      - name: Compile-check (bundle, no render)
+        run: |
+          PROJ="projects/${COURSE_ID}-l${LESSON_NUMBER}"
+          test -d "$PROJ/src" || { echo "Build produced no $PROJ/src"; exit 1; }
+          cp -r "$PROJ/src/." harness/src/
+          cd harness && npx remotion bundle
+
+      - name: Commit the built project
+        run: |
+          git config user.name "lesson-bot"
+          git config user.email "lesson-bot@users.noreply.github.com"
+          git add "projects/${COURSE_ID}-l${LESSON_NUMBER}" "projects/${COURSE_ID}/course.json" 2>/dev/null || git add projects/
+          if git diff --cached --quiet; then
+            echo "No project changes to commit."
+          else
+            git commit -m "Build ${COURSE_ID} lesson ${LESSON_NUMBER} (${LESSON_TITLE})"
+            git push
+          fi
+
+      - name: Summary
+        run: |
+          echo "Built projects/${COURSE_ID}-l${LESSON_NUMBER}. Pull the repo, stage assets, and render locally in Remotion Studio." >> "$GITHUB_STEP_SUMMARY"
