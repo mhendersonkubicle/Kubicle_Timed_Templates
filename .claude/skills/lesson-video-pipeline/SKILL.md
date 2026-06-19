@@ -71,3 +71,18 @@ The render bench can be STALE compared to the durable project copy after the ver
 ## Deliver
 
 Rendering is heavy and local. Default behaviour: build and validate the lesson, save the project, and report that the lesson is ready to open in Remotion Studio and export. If asked to render to a file, render the MP4 and report the path. Post a short status back to the requester (Slack channel or chat) with the lesson title, scene count, total length, and the templates used.
+
+## Openers front-load (LessonTitle, LessonGoal)
+
+When you feed scenes to `fit-timing.py`, include each scene's `template`. For
+`LessonTitle` and `LessonGoal`, fit-timing front-loads the reveals into the first
+few seconds automatically (ignoring the narration), so the opener animation plays
+early. Do not hand-anchor opener reveals to SRT cues.
+
+## Make the project self-contained
+
+After writing the project, run `python script-pipeline/bundle-project.py
+projects/<courseId>-l<n>`. It copies every referenced icon, the case-study logo,
+each used template's assets, and narration.mp3 into the project's `public/`, so
+the lesson renders anywhere with no missing-file errors. It exits non-zero if the
+build referenced an asset that is not in the libraries (catch this, never ship it).

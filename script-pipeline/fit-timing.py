@@ -20,6 +20,15 @@
 
 import sys, re, json
 
+# Opener templates animate in EARLY over the first few seconds, ignoring the
+# narration. Their reveals are front-loaded with fixed offsets (setup at 0.2,
+# then each slot in order), never anchored to the SRT. This keeps the lesson
+# intro and lesson goal from waiting on the voiceover. Requires the scene plan
+# to carry `template` (or `frontload: true`).
+FRONTLOAD_TEMPLATES = {'LessonTitle', 'LessonGoal'}
+FRONTLOAD_START = 0.7    # first reveal after setup
+FRONTLOAD_STEP = 0.6     # spacing between subsequent reveals
+
 def to_s(t):
     h, m, rest = t.split(':'); s, ms = rest.split(',')
     return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
@@ -85,14 +94,19 @@ def main():
         rem_objs = []
         slots = sc.get('slots', [])
         unmatched = []
+        frontload = sc.get('template') in FRONTLOAD_TEMPLATES or sc.get('frontload') is True
         for j, sl in enumerate(slots):
-            t = anchor_time(cues, order, cs, ce, sl.get('anchor'))
-            if t is None:
-                unmatched.append((sl['target'], sl.get('anchor')))
-                # evenly space unmatched slots across the scene as a safe fallback
-                at = round(min(dur - 0.5, 0.5 + (j + 1) * (dur / (len(slots) + 1))), 2)
+            if frontload:
+                # Opener: front-load into the first few seconds, ignore the SRT anchor.
+                at = round(FRONTLOAD_START + j * FRONTLOAD_STEP, 2)
             else:
-                at = round(max(0.0, t - span_start), 2)
+                t = anchor_time(cues, order, cs, ce, sl.get('anchor'))
+                if t is None:
+                    unmatched.append((sl['target'], sl.get('anchor')))
+                    # evenly space unmatched slots across the scene as a safe fallback
+                    at = round(min(dur - 0.5, 0.5 + (j + 1) * (dur / (len(slots) + 1))), 2)
+                else:
+                    at = round(max(0.0, t - span_start), 2)
             seq.append({'target': sl['target'], 'at': at})
             rem_objs.append({'target': sl['target'], 'anchor': sl.get('anchor', ''), 'revealAt': at})
         # keep reveal order monotonic by `at` (stable) after setup

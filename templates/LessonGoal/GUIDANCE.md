@@ -144,3 +144,11 @@ When fitting a script segment to LessonGoal:
 - `goal`: `string` (1-160 chars; aim <120)
 - `heading`: optional `string` (1-40 chars; defaults to "Lesson Goal")
 - `timings.sequence`: array of `{ target, at, in? }`; `target` ∈ the slot list above (`setup`, `heading`, `goal`); `at`/`in` in seconds; `in` defaults to 0.7
+
+## Timing: front-loaded opener (do NOT anchor to narration)
+
+This is a lesson opener. Its reveals MUST animate in over the first few seconds,
+not wait for the voiceover. `fit-timing.py` front-loads this automatically when
+the scene plan carries `template: LessonGoal`: setup at 0.2, the bold heading at
+~0.7, and the goal statement / subtext immediately after at ~1.3. The detail
+follows the bold heading right away, never delayed to a later narration cue.

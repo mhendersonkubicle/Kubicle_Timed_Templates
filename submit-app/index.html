@@ -39,6 +39,8 @@
     .b-ready { background:#dbeafe; color:#1e40af; }
     .b-delivered { background:#d4f7dd; color:#1a7f37; }
     .dl { display:inline-block; margin-top:8px; padding:7px 12px; background:var(--ok); color:#fff; border-radius:8px; text-decoration:none; font-weight:700; font-size:.85rem; }
+    .collect { margin-top:8px; font-size:.8rem; color:var(--muted); line-height:1.7; }
+    .collect code { background:#f0f4f8; border:1px solid var(--line); border-radius:5px; padding:2px 6px; font-size:.82em; }
     .hidden { display:none; }
   </style>
 </head>
@@ -180,6 +182,8 @@
         <div class="req">
           <div class="t">${r.lessonTitle || r.id} ${badge(r.status)}</div>
           <div class="m">${r.course} · Lesson ${r.lessonNumber}${r.submitter ? ' · ' + r.submitter : ''}${r.submittedAt ? ' · ' + new Date(r.submittedAt).toLocaleString() : ''}</div>
+          ${r.status === 'building' ? `<div class="collect muted">Building, check back in a few minutes.</div>` : ''}
+          ${r.status === 'ready' ? `<div class="collect">Ready to collect locally:<br><code>git pull</code><br><code>python script-pipeline/open-in-studio.py ${r.id}</code><br>Then preview &amp; export in your browser.</div>` : ''}
           ${r.downloadUrl ? `<a class="dl" href="${r.downloadUrl}">Download video</a>` : ''}
         </div>`).join('');
     }

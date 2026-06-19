@@ -142,10 +142,15 @@ jobs:
           EOF
           )" --model "$MODEL" --dangerously-skip-permissions --max-turns 150
 
-      - name: Compile-check (bundle, no render)
+      - name: Bundle assets into the project (make it self-contained)
         run: |
           PROJ="projects/${COURSE_ID}-l${LESSON_NUMBER}"
           test -d "$PROJ/src" || { echo "Build produced no $PROJ/src"; exit 1; }
+          python script-pipeline/bundle-project.py "$PROJ"
+
+      - name: Compile-check (bundle, no render)
+        run: |
+          PROJ="projects/${COURSE_ID}-l${LESSON_NUMBER}"
           cp -r "$PROJ/src/." harness/src/
           cd harness && npx remotion bundle
 
