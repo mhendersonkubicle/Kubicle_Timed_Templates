@@ -1,0 +1,9 @@
+# Netlify config for the internal "submit a lesson" form.
+# Deploy this folder as its own Netlify site (set Base directory = submit-app).
+[build]
+  base = "submit-app"
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"

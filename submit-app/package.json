@@ -1,0 +1,11 @@
+{
+  "name": "lesson-submit-app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Internal form that uploads a lesson's SRT + MP3 to storage and starts a build.",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@aws-sdk/s3-request-presigner": "^3.637.0"
+  }
+}

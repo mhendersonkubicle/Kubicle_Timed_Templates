@@ -83,23 +83,29 @@ jobs:
             echo "MODEL=${{ github.event.inputs.model || github.event.client_payload.model || 'claude-opus-4-8' }}"  >> "$GITHUB_ENV"
           fi
 
-      - name: Fetch input files from Slack if URLs were provided
+      - name: Fetch input files if URLs were provided (Slack or presigned storage)
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: |
           mkdir -p "$INPUTS_DIR"
+          # Slack file URLs need a bearer token; presigned storage URLs (R2/S3) carry
+          # their auth in the query string, so they must be fetched WITHOUT a header.
+          dl() {
+            case "$1" in
+              *slack.com*) curl -sSL -H "Authorization: Bearer $SLACK_BOT_TOKEN" "$1" -o "$2" ;;
+              *)           curl -sSL "$1" -o "$2" ;;
+            esac
+          }
           if [ ! -f "$INPUTS_DIR/lesson.srt" ] && [ -n "$SRT_URL" ]; then
-            echo "Downloading SRT from Slack..."
-            curl -sSL -H "Authorization: Bearer $SLACK_BOT_TOKEN" "$SRT_URL" -o "$INPUTS_DIR/lesson.srt"
+            echo "Downloading SRT..."; dl "$SRT_URL" "$INPUTS_DIR/lesson.srt"
           fi
           if [ ! -f "$INPUTS_DIR/narration.mp3" ] && [ -n "$MP3_URL" ]; then
-            echo "Downloading MP3 from Slack..."
-            curl -sSL -H "Authorization: Bearer $SLACK_BOT_TOKEN" "$MP3_URL" -o "$INPUTS_DIR/narration.mp3"
+            echo "Downloading audio..."; dl "$MP3_URL" "$INPUTS_DIR/narration.mp3"
           fi
-          # If Slack rejected the token/scope it returns an HTML page, not the file. Catch that.
+          # A rejected download returns an error page, not the file. Catch that early.
           for F in "$INPUTS_DIR/lesson.srt" "$INPUTS_DIR/narration.mp3"; do
-            if [ -f "$F" ] && head -c 64 "$F" | grep -qi "<!DOCTYPE\|<html\|\"ok\":false"; then
-              echo "Download of $F returned an error page, not the file. Check files:read scope, the SLACK_BOT_TOKEN secret, and that the bot is in the channel."
+            if [ -f "$F" ] && head -c 64 "$F" | grep -qi "<!DOCTYPE\|<html\|\"ok\":false\|<Error>"; then
+              echo "Download of $F returned an error page, not the file. Check the URL is still valid (presigned URLs expire) and the token/permissions."
               exit 1
             fi
           done
