@@ -1,0 +1,82 @@
+{
+  "scenes": [
+    {
+      "id": "scene1-LessonTitle",
+      "cueStart": 1, "cueEnd": 4,
+      "slots": [
+        { "target": "logo",  "anchor": "in this lesson" },
+        { "target": "label", "anchor": "we'll explain" },
+        { "target": "title", "anchor": "core principles" },
+        { "target": "badge", "anchor": "advisory firms" }
+      ]
+    },
+    {
+      "id": "scene2-WordDefinition",
+      "cueStart": 5, "cueEnd": 8,
+      "slots": [
+        { "target": "title",       "anchor": "at the centre" },
+        { "target": "description", "anchor": "the value of the outcome to exceed" }
+      ]
+    },
+    {
+      "id": "scene3-Cards5Falling",
+      "cueStart": 9, "cueEnd": 11,
+      "slots": [
+        { "target": "card0", "anchor": "the decision the client" },
+        { "target": "card1", "anchor": "the risk they avoid" },
+        { "target": "card2", "anchor": "result they achieve" }
+      ]
+    },
+    {
+      "id": "scene4-YinYang2Points",
+      "cueStart": 12, "cueEnd": 16, "setupIn": 2.5,
+      "slots": [
+        { "target": "leftTitle",  "anchor": "a weak value proposition" },
+        { "target": "leftBox0",   "anchor": "lists services" },
+        { "target": "rightTitle", "anchor": "a strong one" },
+        { "target": "rightBox0",  "anchor": "names the client's problem" },
+        { "target": "rightBox1",  "anchor": "the outcome the firm delivers" }
+      ]
+    },
+    {
+      "id": "scene5-Topic1Subtopics6",
+      "cueStart": 17, "cueEnd": 24,
+      "slots": [
+        { "target": "header",  "anchor": "marketing also" },
+        { "target": "detail0", "anchor": "beyond a single sale" },
+        { "target": "detail1", "anchor": "returns again and again is worth far more" },
+        { "target": "detail2", "anchor": "reframes the economics" },
+        { "target": "detail3", "anchor": "winning a new client is expensive" },
+        { "target": "detail4", "anchor": "can generate work" },
+        { "target": "detail5", "anchor": "retaining and growing" }
+      ]
+    },
+    {
+      "id": "scene6-CaseStudyIntro",
+      "cueStart": 25, "cueEnd": 25,
+      "slots": [
+        { "target": "eyebrow", "anchor": "finsage" },
+        { "target": "logo",    "anchor": "measured success" }
+      ]
+    },
+    {
+      "id": "scene7-Checklist5Pills",
+      "cueStart": 26, "cueEnd": 28,
+      "slots": [
+        { "target": "item0", "anchor": "viewed through" },
+        { "target": "item1", "anchor": "a handful of long-standing clients" },
+        { "target": "item2", "anchor": "where its marketing effort is best spent" }
+      ]
+    },
+    {
+      "id": "scene8-LessonSummary",
+      "cueStart": 29, "cueEnd": 34,
+      "slots": [
+        { "target": "title", "anchor": "let's stop the lesson" },
+        { "target": "pill0", "anchor": "value and exchange" },
+        { "target": "pill1", "anchor": "defined the value proposition" },
+        { "target": "pill2", "anchor": "client lifetime value matters" }
+      ]
+    }
+  ]
+}

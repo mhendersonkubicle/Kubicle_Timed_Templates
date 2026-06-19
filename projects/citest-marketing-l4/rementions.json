@@ -1,0 +1,28 @@
+{
+  "scenes": [
+    { "id": "scene2-WordDefinition", "span": [13.935, 29.798], "objects": [
+      { "target": "title", "anchor": "value", "revealAt": 0.0 }
+    ]},
+    { "id": "scene4-YinYang2Points", "span": [41.944, 66.006], "objects": [
+      { "target": "leftTitle",  "anchor": "weak",     "revealAt": 9.87 },
+      { "target": "leftBox0",   "anchor": "services", "revealAt": 11.58 },
+      { "target": "rightTitle", "anchor": "strong",   "revealAt": 13.61 },
+      { "target": "rightBox0",  "anchor": "problem",  "revealAt": 14.39 },
+      { "target": "rightBox1",  "anchor": "outcome",  "revealAt": 16.23 }
+    ]},
+    { "id": "scene5-Topic1Subtopics6", "span": [66.006, 95.27], "objects": [
+      { "target": "header",  "anchor": "lifetime value", "revealAt": 0.0 },
+      { "target": "detail1", "anchor": "returns",        "revealAt": 5.01 },
+      { "target": "detail3", "anchor": "new client",     "revealAt": 17.03 },
+      { "target": "detail5", "anchor": "relationship",   "revealAt": 23.36 }
+    ]},
+    { "id": "scene7-Checklist5Pills", "span": [100.032, 112.317], "objects": [
+      { "target": "item1", "anchor": "revenue",   "revealAt": 3.86 },
+      { "target": "item2", "anchor": "marketing", "revealAt": 8.91 }
+    ]},
+    { "id": "scene8-LessonSummary", "span": [112.317, 133.361], "objects": [
+      { "target": "pill0", "anchor": "value and exchange", "revealAt": 5.22 },
+      { "target": "pill2", "anchor": "lifetime value",     "revealAt": 12.69 }
+    ]}
+  ]
+}
