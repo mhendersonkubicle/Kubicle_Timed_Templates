@@ -1,0 +1,12 @@
+{
+  "course": "Foundations of System Thinking",
+  "courseId": "foundations-of-system-thinking",
+  "lessonNumber": "6",
+  "lessonTitle": "Emergence",
+  "requirements": "",
+  "model": "claude-opus-4-8",
+  "submitter": "mhenderson@kubicle.com",
+  "submittedAt": "2026-06-19T16:50:56.241Z",
+  "srtUrl": "https://ciad.2e9d0174b07058d2f25693ff4904172c.r2.cloudflarestorage.com/uploads/64e17f2d-0ba8-44bd-a05e-c30d9736c531/lesson.srt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=1e6934ce4f708d774604307d973a9c42%2F20260619%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260619T165054Z&X-Amz-Expires=86400&X-Amz-Signature=e0db93025f8e4ccd428b65d9e5d974cd5304f15f3b3f95bc5719d68ee7de47e7&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+  "mp3Url": "https://ciad.2e9d0174b07058d2f25693ff4904172c.r2.cloudflarestorage.com/uploads/64e17f2d-0ba8-44bd-a05e-c30d9736c531/narration.mp3?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=1e6934ce4f708d774604307d973a9c42%2F20260619%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260619T165054Z&X-Amz-Expires=86400&X-Amz-Signature=b8884944934e831a3b67007ca22773d71ba44b65f6a631fc8e8cf373fe28763c&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+}
