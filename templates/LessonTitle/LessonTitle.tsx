@@ -116,9 +116,9 @@ export const lessonTitleMeta = {
 
 const BG_SRC   = staticFile('Template-Specific-Assets/LessonTitle/lesson_title_background.png');
 const LOGO_SRC = staticFile('Template-Specific-Assets/LessonTitle/logo.png');
-const INTER_SEMIBOLD_SRC = staticFile('fonts/Inter-SemiBold.woff2');
-const INTER_BOLD_SRC     = staticFile('fonts/Inter-Bold.woff2');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
+const INTER_SEMIBOLD_SRC = staticFile('fonts/ClashGrotesk-Semibold.woff2');
+const INTER_BOLD_SRC     = staticFile('fonts/ClashGrotesk-Bold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
 
 // ─── Layout constants (lifted from the prototype's TWEAK_DEFAULTS) ────────────
 
@@ -209,9 +209,9 @@ let fontsPromise: Promise<void> | null = null;
 function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const semi  = new FontFace('Inter', `url(${INTER_SEMIBOLD_SRC}) format('woff2')`,  { weight: '600', display: 'block' });
-    const bold  = new FontFace('Inter', `url(${INTER_BOLD_SRC}) format('woff2')`,      { weight: '700', display: 'block' });
-    const x     = new FontFace('Inter', `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const semi  = new FontFace('ClashGrotesk', `url(${INTER_SEMIBOLD_SRC}) format('woff2')`,  { weight: '600', display: 'block' });
+    const bold  = new FontFace('ClashGrotesk', `url(${INTER_BOLD_SRC}) format('woff2')`,      { weight: '700', display: 'block' });
+    const x     = new FontFace('ClashGrotesk', `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const [s, b, e] = await Promise.all([semi.load(), bold.load(), x.load()]);
     const fonts = document.fonts as FontFaceSet & { add(fc: FontFace): void };
     fonts.add(s);
@@ -360,7 +360,7 @@ export const LessonTitle: React.FC<LessonTitleProps> = ({
         ) : null}
         <span
           style={{
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: "'ClashGrotesk', system-ui, sans-serif",
             fontSize: COURSE_TITLE_SIZE,
             fontWeight: 600,
             letterSpacing: '-0.01em',
@@ -387,7 +387,7 @@ export const LessonTitle: React.FC<LessonTitleProps> = ({
       >
         <span
           style={{
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: "'ClashGrotesk', system-ui, sans-serif",
             fontSize: LABEL_SIZE,
             fontWeight: 700,
             color: accent,
@@ -414,7 +414,7 @@ export const LessonTitle: React.FC<LessonTitleProps> = ({
       >
         <span
           style={{
-            fontFamily: "'Inter', system-ui, sans-serif",
+            fontFamily: "'ClashGrotesk', system-ui, sans-serif",
             fontSize: TITLE_SIZE,
             fontWeight: 800,
             color: TITLE_COLOUR,

@@ -141,7 +141,7 @@ const BASE_1_BOXES_SRC    = staticFile('Template-Specific-Assets/YinYang2Points/
 const BASE_2_BOXES_SRC    = staticFile('Template-Specific-Assets/YinYang2Points/base_2_two_boxes.png');
 const TITLE1_BOX_SRC      = staticFile('Template-Specific-Assets/YinYang2Points/title1_box.png');
 const TITLE2_BOX_SRC      = staticFile('Template-Specific-Assets/YinYang2Points/title2_box.png');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
 const SATOSHI_BOLD_SRC    = staticFile('fonts/Satoshi-Bold.woff2');
 
 // ─── Layout constants (lifted directly from the prototype) ────────────────────
@@ -213,7 +213,7 @@ let fontsPromise: Promise<void> | null = null;
 function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const inter   = new FontFace('Inter',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const inter   = new FontFace('ClashGrotesk',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const satoshi = new FontFace('Satoshi', `url(${SATOSHI_BOLD_SRC}) format('woff2')`,   { weight: '700', display: 'block' });
     const [i, s]  = await Promise.all([inter.load(), satoshi.load()]);
     const fonts   = document.fonts as FontFaceSet & { add(fc: FontFace): void };
@@ -500,8 +500,8 @@ export const YinYang2Points: React.FC<YinYang2PointsProps> = ({
   const leftCXs  = leftSingle  ? [SINGLE_BOX_CX_L] : [ICON_POS_L_CXS[0], ICON_POS_L_CXS[1]];
   const rightCXs = rightSingle ? [SINGLE_BOX_CX_R] : [ICON_POS_R_CXS[0], ICON_POS_R_CXS[1]];
 
-  const titleFont = "'Inter', system-ui, sans-serif";
-  const boxFont   = "'Satoshi', 'Inter', system-ui, sans-serif";
+  const titleFont = "'ClashGrotesk', system-ui, sans-serif";
+  const boxFont   = "'Satoshi', 'ClashGrotesk', system-ui, sans-serif";
 
   // Render one icon+caption object, gated on its reveal step.
   const renderBox = (

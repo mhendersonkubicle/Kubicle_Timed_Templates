@@ -120,7 +120,7 @@ export const cards5FallingMeta = {
 // ─── Assets ──────────────────────────────────────────────────────────────────
 
 const CARD_HEADER_SRC = staticFile('Template-Specific-Assets/Cards5Falling/card_header.png');
-const INTER_BOLD_SRC  = staticFile('fonts/Inter-Bold.woff2');
+const INTER_BOLD_SRC  = staticFile('fonts/ClashGrotesk-Bold.woff2');
 
 // ─── Layout constants (measured directly from the supplied PNGs) ─────────────
 
@@ -190,7 +190,7 @@ let fontsPromise: Promise<void> | null = null;
 function loadBrandFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const bold = new FontFace('Inter', `url(${INTER_BOLD_SRC}) format('woff2')`, {
+    const bold = new FontFace('ClashGrotesk', `url(${INTER_BOLD_SRC}) format('woff2')`, {
       weight: '700',
       display: 'block',
     });
@@ -315,7 +315,7 @@ function Card({
           top:  HEADER_CY,
           transform: 'translateY(-50%)',
           color: '#FFFFFF',
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: "'ClashGrotesk', system-ui, sans-serif",
           fontWeight: 700,
           fontSize: 55,
           letterSpacing: '-0.01em',

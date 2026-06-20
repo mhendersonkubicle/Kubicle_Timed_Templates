@@ -134,7 +134,7 @@ const DOTTED_LINE_SRC      = staticFile('Template-Specific-Assets/FivePoints1Sub
 const BLUE_DOTTED_LINE_SRC = staticFile('Template-Specific-Assets/FivePoints1SubtopicV2/blue_dotted_line_base.png');
 const TICK_BASE_SRC        = staticFile('Template-Specific-Assets/FivePoints1SubtopicV2/tick_base.png');
 const TICK_SRC             = staticFile('Template-Specific-Assets/FivePoints1SubtopicV2/tick.png');
-const INTER_BOLD_SRC       = staticFile('fonts/Inter-Bold.woff2');
+const INTER_BOLD_SRC       = staticFile('fonts/ClashGrotesk-Bold.woff2');
 const SATOSHI_REG_SRC      = staticFile('fonts/Satoshi-Regular.woff2');
 
 // ─── Layout constants ─────────────────────────────────────────────────────────
@@ -237,7 +237,7 @@ let fontsPromise: Promise<void> | null = null;
 function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const inter   = new FontFace('Inter',  `url(${INTER_BOLD_SRC}) format('woff2')`, { weight: '700', display: 'block' });
+    const inter   = new FontFace('ClashGrotesk',  `url(${INTER_BOLD_SRC}) format('woff2')`, { weight: '700', display: 'block' });
     const satoshi = new FontFace('Satoshi', `url(${SATOSHI_REG_SRC}) format('woff2')`, { weight: '400', display: 'block' });
     const [i, s]  = await Promise.all([inter.load(), satoshi.load()]);
     const fonts   = document.fonts as FontFaceSet & { add(fc: FontFace): void };
@@ -466,7 +466,7 @@ function Card({
           top:  CARD_TITLE_TOP,
           right: CARD_TEXT_RIGHT_PAD,
           color: '#000000',
-          fontFamily: "'Inter', system-ui, sans-serif",
+          fontFamily: "'ClashGrotesk', system-ui, sans-serif",
           fontWeight: 700,
           fontSize: 37,
           letterSpacing: '-0.005em',

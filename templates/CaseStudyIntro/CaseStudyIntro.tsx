@@ -134,7 +134,7 @@ export const CaseStudyIntro: React.FC<CaseStudyIntroProps> = ({ eyebrow, logo, t
           style={{
             position: 'absolute', left: 0, top: EYEBROW_CY, width: W, textAlign: 'center',
             opacity: prog(cEyebrow),
-            fontFamily: "'Inter', system-ui, sans-serif", fontWeight: 800,
+            fontFamily: "'ClashGrotesk', system-ui, sans-serif", fontWeight: 800,
             fontSize: 34, letterSpacing: '0.18em', color: DODGER, textTransform: 'uppercase',
           }}
         >

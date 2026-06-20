@@ -112,7 +112,7 @@ export const bigPoints3V1Meta = {
 
 const PILL_SRC            = staticFile('Template-Specific-Assets/BigPoints3V1/pill_box.png');
 const SATOSHI_BLACK_SRC   = staticFile('fonts/Satoshi-Black.woff2');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
 
 // ─── Layout constants ─────────────────────────────────────────────────────────
 // The Oxford-blue panel and the loading bar used to be fixed 1920×1080 PNGs, so
@@ -200,7 +200,7 @@ function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
     const satoshi = new FontFace('Satoshi', `url(${SATOSHI_BLACK_SRC}) format('woff2')`,  { weight: '900', display: 'block' });
-    const inter   = new FontFace('Inter',   `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const inter   = new FontFace('ClashGrotesk',   `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const [s, i]  = await Promise.all([satoshi.load(), inter.load()]);
     const fonts   = document.fonts as FontFaceSet & { add(fc: FontFace): void };
     fonts.add(s);
@@ -328,7 +328,7 @@ function AnimPill({
         <span
           style={{
             color: '#fff',
-            fontFamily: "'Satoshi', 'Inter', system-ui, sans-serif",
+            fontFamily: "'Satoshi', 'ClashGrotesk', system-ui, sans-serif",
             fontWeight: 900,
             fontSize: 34,
             letterSpacing: '-0.01em',

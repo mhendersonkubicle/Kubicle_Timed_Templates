@@ -54,6 +54,13 @@ root_mp3 = os.path.join(proj, 'narration.mp3')
 if os.path.isfile(root_mp3):
     shutil.copy(root_mp3, os.path.join(pub, 'narration.mp3'))
 
+# Brand fonts (ClashGrotesk headings + Satoshi body) so the lesson renders in the
+# font standard on any machine, not a system fallback.
+if os.path.isdir('fonts'):
+    os.makedirs(os.path.join(pub, 'fonts'), exist_ok=True)
+    for fp in glob.glob(os.path.join('fonts', '*.woff2')):
+        shutil.copy(fp, os.path.join(pub, 'fonts', os.path.basename(fp)))
+
 print(f"bundled {len(icon_ids)} icons, {len(logo_ids)} logos, {tmpl_count} template asset sets into {pub}")
 if missing:
     print('MISSING from libraries (build referenced an asset that does not exist): ' + ', '.join(missing))
