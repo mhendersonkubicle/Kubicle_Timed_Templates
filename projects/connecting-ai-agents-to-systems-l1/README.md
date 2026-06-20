@@ -5,73 +5,81 @@ Project record for the assembled lesson. Timing is SRT-derived, pulses are SRT-d
 ## Files
 
 - `lesson.srt`, the narration cue file (copied from the source SRT). Drives all scene-relative timing.
-- `narration.mp3`, the voiceover (copied from the produced audio). Wired into `Root.tsx` as the composition `Audio`.
+- `narration.mp3`, the voiceover (copied from the produced audio). Wired into `Root.tsx` as the composition `Audio`, and also staged at `public/narration.mp3` so a local Remotion Studio render picks it up.
 - `src/`, the Remotion sources: `Root.tsx`, `lessonScenes.ts`, and the eleven template `.tsx` files actually used by this lesson (no unused templates copied).
+- `public/`, staged render assets: `icons/` (the 15 SVG ids referenced by the scenes), `Template-Specific-Assets/<Template>/` (the baked PNGs for each used template), and `narration.mp3`. `public/logos/` is intentionally empty (no case study, so no company logo).
 
-Total runtime: 223.972s (from `lessonScenes.ts`), 11 scenes, FPS 30.
+Total runtime: 223.972s (from `lessonScenes.ts`), 11 scenes, FPS 30, 1920x1080.
+
+Authoritative source of truth for the scene plan is the current bench `src/` (`Root.tsx` + `lessonScenes.ts`); this record was reconciled to it during assembly (see QA fixes).
 
 ## Scene plan (scene -> template -> beat)
 
 | # | Span (s) | Template | Beat |
 |---|----------|----------|------|
-| 1 | 0.000 - 14.293 | LessonTitle | Opening title card: course identity + lesson number/title |
-| 2 | 14.293 - 21.073 | LessonGoal | The lesson goal: define connecting an agent and why it is more than a feature |
-| 3 | 21.073 - 39.916 | Topic1Subtopics6 | "Ask and answer": today's AI sits outside our systems, has no hands |
-| 4 | 39.916 - 68.198 | WordDefinition | Defining "Connecting": giving an AI the tools to act, not just answer |
-| 5 | 68.198 - 81.841 | ComparativePoints2 | Answering vs Acting, the core distinction the course is about |
-| 6 | 81.841 - 115.510 | BigPoints3V1 | The three things connecting changes: who does the work, what runs alone, how information moves |
-| 7 | 115.510 - 132.368 | YinYang2Points | Worst way (any step, no plan) vs better way (decide first, keep control) |
-| 8 | 132.368 - 155.773 | CirclePoints4 | The points marked on a process map: add value / must not decide / stays in control |
+| 1 | 0.000 - 14.293 | LessonTitle | Opening title card: course identity + lesson number and title |
+| 2 | 14.293 - 21.073 | LessonGoal | The lesson goal: define connecting an AI agent and why it is more than adding a feature |
+| 3 | 21.073 - 39.916 | Topic1Subtopics6 | "Ask and answer" mode: today's AI sits outside our systems, has no hands, a person carries the output |
+| 4 | 39.916 - 60.675 | BigPoints3V1 | An agent acts: it can read a record, update a field, or trigger the next step |
+| 5 | 60.675 - 68.198 | WordDefinition | Defining "Connecting": giving an AI the tools to act, not just answer |
+| 6 | 68.198 - 115.510 | Points3Subtopics2 | The three things connecting changes: who does the work, what runs alone, how info flows |
+| 7 | 115.510 - 132.368 | YinYang2Points | Worst way (no plan, just guess) vs better way (plan ahead, stay in control) |
+| 8 | 132.368 - 155.773 | IconPointsV1 | The points marked on a process map: add value / do not decide / stay in control |
 | 9 | 155.773 - 183.348 | BulletList6Pills | Course outline: the three things this course will cover (first-lesson role) |
-| 10 | 183.348 - 199.498 | Checklist5Pills | The deliverable: a complete connection design (tools, access, checkpoints, fails safely) |
-| 11 | 199.498 - 223.972 | LessonSummary | Closing recap of the three lesson beats |
+| 10 | 183.348 - 197.269 | Checklist5Pills | The deliverable: a connection design (tools it needs, access allowed, checkpoints, fails safely) |
+| 11 | 197.269 - 223.972 | LessonSummary | Closing recap of the three lesson beats |
 
 ## How each rule was applied
 
 ### SRT timing
-Scene spans in `SCENE_SPANS` are cut at SRT cue boundaries. Within each scene, every reveal `at` is the introducing cue's start time converted to scene-relative seconds (cue start minus scene start). Examples: scene 3 `header` at +2.5 lands as the "we ask, and it answers" line begins (cue 9, 21.573s absolute); scene 6 `point1` at +16.83 (abs 98.67s) lands on "what the process can do on its own". Reveals stay anchored to the voiceover and were never sped up to mask gaps.
+Scene spans in `SCENE_SPANS` are cut at SRT cue boundaries. Within each scene, every reveal `at` is the introducing cue's start time converted to scene-relative seconds (cue start minus scene start). For example, scene 4's three reveals at +7.29 / +8.67 / +9.87 land as cue 15 ("read a record, update a field, or trigger the next step", absolute 51.105s) is spoken; scene 6's titles at +23.34 / +24.45 / +26.93 land on the "who does the work, what the process can do on its own, how information moves" lines (cue 27, absolute ~91s). Reveals stay anchored to the voiceover and were never sped up to mask gaps.
 
 ### Variety (one template per lesson)
-All eleven scenes use distinct templates. No content template repeats. The three structural cards (LessonTitle, LessonGoal, LessonSummary) are the standard openers/closer and are exempt from the variety rule.
+All eleven scenes use distinct templates; no content template repeats. The three structural cards (LessonTitle, LessonGoal, LessonSummary) and the first-lesson outline (BulletList6Pills) are standard recurring roles and are exempt from the variety rule. The two split-screen "topic into sub-points" beats were deliberately split across two different templates (Topic1Subtopics6 for the simple waterfall in scene 3, Points3Subtopics2 for the three-band title-plus-detail structure in scene 6) rather than reusing one.
 
 ### Semantic fit
-Each template matches the structure of its beat: a two-way contrast (Answering vs Acting) goes to ComparativePoints2; an explicit set of three changes goes to BigPoints3V1; a worst-way/better-way opposition goes to YinYang2Points; the three map points go to CirclePoints4; a single defined term goes to WordDefinition; the course's three-part promise goes to BulletList6Pills. No cycle/flywheel template was used, as nothing in the content is a repeating system.
+Each template matches the structure of its beat: a single core topic fanning into a flat list of supporting points goes to Topic1Subtopics6; an explicit set of three concrete agent actions goes to BigPoints3V1; a single defined term goes to WordDefinition; three parallel ideas each with a supporting line go to Points3Subtopics2; a worst-way/better-way opposition goes to YinYang2Points; a walkthrough of map points filed one at a time goes to IconPointsV1; the course's three-part promise goes to BulletList6Pills; a list of deliverables ticked off goes to Checklist5Pills. No cycle/flywheel template was used, as nothing in the content is an ongoing repeating system.
 
 ### No dead air
-A LessonTitle card opens the lesson, and every scene leads with a `setup` step at +0.2s so the stage animates within the first second before the first spoken content reveal (which is anchored to its cue). Scene 8 (CirclePoints4) has no `setup` target by design, but its first content reveal lands at +2.5s, within the no-dead-air window, and the template's own circle pop-in carries the motion. No beat was split, and no content was front-loaded ahead of its narration.
+A LessonTitle card opens the lesson. Every scene leads with a `setup` step at +0.2s so the stage scaffolding animates within the first second before the first spoken content reveal (which stays anchored to its cue). No staging-capable template was passed over for a no-op-setup one, no beat was split for pacing, and no content was front-loaded ahead of its narration.
 
 ### Frame-fit character limits
-Labels and items are kept to the short, frame-fit forms each template's schema expects: CirclePoints4 / BigPoints3V1 / ComparativePoints2 / YinYang2Points use 2-to-4-word labels ("Who does the work", "Must not decide", "Answering"); Checklist5Pills items are short phrases ("Tools it needs", "Fails safely"); WordDefinition uses a single headword ("Connecting") plus a one-sentence description.
+Labels and items are kept to the short, frame-fit forms each template's schema expects: Topic1Subtopics6 detail lines are short noun phrases (<=38 chars: "The AI sits outside systems"); BigPoints3V1 / IconPointsV1 labels are 2-to-4-word phrases ("Read a record", "Stay in control"); YinYang2Points captions are <=16 chars ("No plan", "Plan ahead"); Checklist5Pills items are short single lines ("The tools it needs", "The way it fails safely"); WordDefinition uses a single headword ("Connecting") plus a one-sentence description.
 
 ### Icon resolution (no guessed ids)
-Every icon id in `lessonScenes.ts` was verified to be a real file in the master `Icons/` library (all 16 referenced ids resolved; none invented). Variants follow the icon-contrast rule:
-- Templates that force icons to solid white (CirclePoints4, scene 8) take any variant; `-dark` here is cosmetic.
-- Topic1Subtopics6 (scene 3) places its large anchor on a light platinum-blue left panel and its schema requires a `-light` id; it uses `ai-agent-chatbot-light`.
-- Checklist5Pills (scene 10) hero sits on a light platinum background and uses `design-thinking-planning-light`.
-- The remaining icon slots sit on dark/coloured surfaces (header pills, dark cards) and correctly use `-dark` ids.
+Every icon id in `lessonScenes.ts` was verified to be a real file in the master `Icons/` library (all 15 referenced ids resolved; none invented). Variants follow the icon-contrast rule:
+- Topic1Subtopics6 (scene 3): `titleIcon` is a `-dark` id pre-coloured white (`speech-bubbles-questiontalk-dark`); the large left-panel `anchor` sits on the light platinum-blue panel and correctly uses a `-light` id (`ai-agent-virtualassistant-light`).
+- BigPoints3V1 (scene 4) and YinYang2Points (scene 7) force icons to a white body with Dodger-Blue accents (Pattern B), so the suffix is cosmetic; `-dark` ids are used.
+- Points3Subtopics2 (scene 6): the anchor icon sits on the Oxford-Blue left panel and is locked to a `-dark` id (`business-strategy-automation-dark`).
+- IconPointsV1 (scene 8): pill icons must end `-light` and do (`arrows-infographics-elements-growth-light`, `hands-stop-light`, `teacher-during-an-exam-supervising-light`).
+- Checklist5Pills (scene 10): the hero renders in native colours on the light hero area and uses `project-management-processflow-light`.
+- The LessonTitle course icon is `network-system-dark` (the course identity icon).
 
 ### Re-mention pulses (SRT-detected)
 Pulses were populated where an already-revealed item is named again later in the narration:
-- Scene 4 (WordDefinition): `title` pulses at +22.46s when "connecting means" is re-stated before the definition expands.
-- Scene 6 (BigPoints3V1): `point0` pulses at +9.7s on the re-mention of who does the work.
-- Scene 8 (CirclePoints4): `point0` pulses at +10.62s.
-- Scene 10 (Checklist5Pills): `item0` pulses at +7.27s.
-Scenes with no later re-mention of a revealed item correctly carry empty `pulses` arrays.
+- Scene 3 (Topic1Subtopics6): `header` pulses at +9.62s when "ask and answer" is re-mentioned after the header was revealed earlier.
+- Scene 6 (Points3Subtopics2): `title1` pulses at +42.35s and `detail0a` pulses at +44.42s, on the closing re-statement of the three changes near the end of the long scene.
+Scenes with no later re-mention of a revealed item correctly carry empty `pulses` arrays. The two longest scenes (3 and 6, the most likely to feel static) both carry pulses.
 
 ### First-lesson roles
-This is Lesson 1, so the course-outline beat uses BulletList6Pills (scene 9), the standard for that beat and used in the first lesson only. Course identity (title "Connecting AI Agents to Systems" + the `network-system-dark` course icon, lesson number 1) is set on the LessonTitle card in scene 1, to be reused exactly across later lessons.
+This is Lesson 1, so the course-outline beat uses BulletList6Pills (scene 9), the standard for that beat and used in the first lesson only. Course identity on the LessonTitle card (scene 1: course title "Connecting AI Agents to Systems" + the `network-system-dark` course icon, lesson number 1) is set here to be reused verbatim across later lessons, never re-derived.
 
 ### Case study
-This lesson contains no case study about a specific company, so no CaseStudyIntro template and no `Logos/` logo were used. The references to AI agents and systems are general concepts, correctly shown as icons.
+This lesson contains no case study about a specific company, so no CaseStudyIntro template and no `Logos/` logo were used (`public/logos/` is empty). References to AI agents and systems are general concepts, correctly shown as icons.
 
 ### Presenter / character variants
-The lesson is abstract conceptual content with no named real people, so no profile/duo/trio character cards were used. The plain (non-character) variants of Topic1Subtopics6 and Checklist5Pills were selected.
+The lesson is abstract conceptual content with no named real people, so no profile/duo/trio character cards were used. The plain (non-character) variants of Topic1Subtopics6, Points3Subtopics2, and Checklist5Pills were selected.
 
 ## QA fixes made
 
-No defects required correction. Verified during assembly:
-- All 16 referenced icon ids resolve to real files in `Icons/` (no 404 risk).
-- Icon variants match their surface mode per the icon-contrast rule.
-- All relative imports in `src/` resolve within the copied file set (Root, lessonScenes, and each template reference only files present); the folder is self-contained.
-- Timing reveals and pulse timestamps line up with SRT cue starts; no static stretch exceeds the no-dead-air / keep-moving thresholds.
+The project folder pre-existed with a stale README and stale staged assets that described an earlier scene plan; these were reconciled to the current authoritative bench `src/`:
+- The stale README listed ComparativePoints2 (scene 5) and CirclePoints4 (scene 8) and omitted Topic1Subtopics6, Points3Subtopics2, and IconPointsV1, and used incorrect spans. The README was rewritten to match the actual `Root.tsx` / `lessonScenes.ts` (Topic1Subtopics6, BigPoints3V1, WordDefinition, Points3Subtopics2, YinYang2Points, IconPointsV1).
+- Three stale unused template files (`CirclePoints4.tsx`, `ComparativePoints2.tsx`, `KubicleAIChat.tsx`) were removed from `src/` so the record holds only the eleven templates the lesson actually imports.
+- `public/icons/` was re-staged from the master `Icons/` library to exactly the 15 ids the current scenes reference (stale ids such as `ai-agent-chatbot-light`, `design-thinking-planning-light`, and the unused `hands-stop-dark` were dropped; missing ids were added).
+- `public/Template-Specific-Assets/` was rebuilt to cover exactly the used templates (added Topic1Subtopics6 and Points3Subtopics2; removed the stale CirclePoints4, ComparativePoints2, and KubicleAIChat asset folders).
+
+Verified during assembly:
+- All 15 referenced icon ids resolve to real files in `Icons/` (no 404 risk), and every icon variant matches its surface mode per the icon-contrast rule.
+- All relative imports in `src/` (Root, lessonScenes, and each template) resolve within the copied file set; the folder is self-contained.
+- Timing reveals and pulse timestamps line up with SRT cue starts; the long scenes carry pulses, so no scene reads as static.
 - No em dashes or en dashes appear in any scene text or in this record.
