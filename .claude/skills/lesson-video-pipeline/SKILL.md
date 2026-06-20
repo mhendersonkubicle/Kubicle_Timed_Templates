@@ -87,6 +87,7 @@ each used template's assets, and narration.mp3 into the project's `public/`, so
 the lesson renders anywhere with no missing-file errors. It exits non-zero if the
 build referenced an asset that is not in the libraries (catch this, never ship it).
 
-## Keep scenes moving (no mid-scene hangs)
+## Reveals are on-beat; fix sparsity structurally
 
-`fit-timing.py` now front-loads the first content reveal (~2.5s) and spreads reveals so no static gap exceeds ~5s. When choosing templates, match reveal count to scene length: a long beat (20s+) needs a template with enough reveal beats, or split it. Never assign a 2-reveal template (`ComparativePoints2`) or a sparse one to a 25s+ span , fit-timing warns "too sparse"; heed it by splitting the beat or picking a denser template.
+`fit-timing.py` anchors every reveal to the moment its phrase is spoken , elements appear exactly on their narration beat. Never move a reveal off its cue to fill a gap. If a scene is too sparse for its length (fit-timing warns of a long static stretch), fix it in the scene PLAN: split that beat into its own scene, or pick a denser template, so the content is being named throughout the scene. Match a template's reveal count to the span; do not stretch a 2-3 reveal template over 25s+.
+

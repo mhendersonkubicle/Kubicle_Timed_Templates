@@ -123,34 +123,22 @@ def main():
         # keep reveal order monotonic by `at` (stable) after setup
         head, tail = seq[0], sorted(seq[1:], key=lambda s: s['at'])
 
-        # Keep-moving: openers are already front-loaded; for other scenes, if the
-        # anchored reveals cluster or leave a static gap > MAX_STATIC_GAP, spread
-        # them evenly so something keeps happening across the whole scene.
+        # Reveals stay ANCHORED TO THE NARRATION: an element appears exactly when
+        # its statement is spoken (that on-beat sync is the whole point). We do NOT
+        # move reveals off their cue to fill gaps. If a scene is so sparse it leaves
+        # a long static stretch, that is a STRUCTURAL signal (split the beat into its
+        # own scene, or use a denser template) , flagged here, never "fixed" by
+        # sliding reveals away from the words they belong to.
         if not frontload and tail:
             n = len(tail)
-            spans_gaps = ([tail[0]['at']]
-                          + [tail[i]['at'] - tail[i - 1]['at'] for i in range(1, n)]
-                          + [dur - tail[-1]['at']])
-            if tail[0]['at'] > FIRST_CONTENT_CAP or max(spans_gaps) > MAX_STATIC_GAP:
-                end = max(FIRST_CONTENT_CAP + 0.1, dur - END_TAIL_PAD)
-                if n == 1:
-                    tail[0]['at'] = round(min(FIRST_CONTENT_CAP, end), 2)
-                else:
-                    step = (end - FIRST_CONTENT_CAP) / (n - 1)
-                    for i, c in enumerate(tail):
-                        c['at'] = round(FIRST_CONTENT_CAP + i * step, 2)
-                    if step > MAX_STATIC_GAP:
-                        warnings.append(
-                            f"{sc['id']}: {n} reveals over {dur:.0f}s still leave ~{step:.0f}s gaps when spread; "
-                            f"too sparse, split this beat or use a denser/continuous-motion template")
-                if n == 1 and dur > FIRST_CONTENT_CAP + MAX_STATIC_GAP:
-                    warnings.append(
-                        f"{sc['id']}: single reveal over {dur:.0f}s; split this beat or use a continuous-motion template")
-                # re-sync re-mention reveal times to the redistributed reveals
-                newat = {c['target']: c['at'] for c in tail}
-                for r in rem_objs:
-                    if r['target'] in newat:
-                        r['revealAt'] = newat[r['target']]
+            gaps = ([tail[0]['at']]
+                    + [tail[i]['at'] - tail[i - 1]['at'] for i in range(1, n)]
+                    + [dur - tail[-1]['at']])
+            if max(gaps) > MAX_STATIC_GAP:
+                warnings.append(
+                    f"{sc['id']}: {n} reveal(s) over {dur:.0f}s leaves a {max(gaps):.0f}s static stretch; "
+                    f"split this beat into its own scene or use a denser template "
+                    f"(do NOT move reveals off their narration beat to hide it)")
 
         out_scenes.append({
             'id': sc['id'],
