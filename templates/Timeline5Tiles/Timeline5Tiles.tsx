@@ -159,7 +159,7 @@ export const timeline5TilesMeta = {
 // ─── Assets ──────────────────────────────────────────────────────────────────
 
 const ICON_BASE_SRC       = staticFile('Template-Specific-Assets/Timeline5Tiles/icon_base.png');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
 const SATOSHI_BOLD_SRC     = staticFile('fonts/Satoshi-Bold.woff2');
 
 // ─── Layout constants (1920×1080 canvas) ─────────────────────────────────────
@@ -271,7 +271,7 @@ let fontsPromise: Promise<void> | null = null;
 function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const inter   = new FontFace('ClashGrotesk',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const inter   = new FontFace('Inter',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const satoshi = new FontFace('Satoshi', `url(${SATOSHI_BOLD_SRC}) format('woff2')`,   { weight: '700', display: 'block' });
     const [i, s]  = await Promise.all([inter.load(), satoshi.load()]);
     const fonts   = document.fonts as FontFaceSet & { add(fc: FontFace): void };
@@ -538,7 +538,7 @@ function Step({
         <span
           style={{
             color: '#FFFFFF',
-            fontFamily: "'ClashGrotesk', system-ui, sans-serif",
+            fontFamily: "'Inter', system-ui, sans-serif",
             fontWeight: 800,
             fontSize: 60,
             lineHeight: 1,

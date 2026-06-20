@@ -138,7 +138,7 @@ export const bigPoints3V2CharacterMeta = {
 
 const BASE_CONTAINER_SRC  = staticFile('Template-Specific-Assets/BigPoints3V2Character/base_container.png');
 const PILL_AND_SPHERE_SRC = staticFile('Template-Specific-Assets/BigPoints3V2Character/pill_and_sphere.png');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
 const SATOSHI_MEDIUM_SRC  = staticFile('fonts/Satoshi-Medium.woff2');
 
 // ─── Layout constants (lifted directly from BigPoints3V2) ─────────────────────
@@ -233,7 +233,7 @@ let fontsPromise: Promise<void> | null = null;
 function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const inter   = new FontFace('ClashGrotesk',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const inter   = new FontFace('Inter',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const satoshi = new FontFace('Satoshi', `url(${SATOSHI_MEDIUM_SRC}) format('woff2')`,  { weight: '500', display: 'block' });
     const [i, s]  = await Promise.all([inter.load(), satoshi.load()]);
     const fonts   = document.fonts as FontFaceSet & { add(fc: FontFace): void };
@@ -377,7 +377,7 @@ function Card({
           width: TITLE_WIDTH,
           textAlign: 'center',
           color: '#FFFFFF',
-          fontFamily: "'ClashGrotesk', system-ui, sans-serif",
+          fontFamily: "'Inter', system-ui, sans-serif",
           fontWeight: 800,
           fontSize: 55,
           lineHeight: 1.05,
@@ -416,7 +416,7 @@ function Card({
           alignItems:     'center',
           justifyContent: 'center',
           color: '#FFFFFF',
-          fontFamily: "'ClashGrotesk', system-ui, sans-serif",
+          fontFamily: "'Inter', system-ui, sans-serif",
           fontWeight: 800,
           fontSize: 38,
           lineHeight: 1,

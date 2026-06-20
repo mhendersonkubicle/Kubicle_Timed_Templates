@@ -106,7 +106,7 @@ export const wordDefinitionMeta = {
 
 const BANNER_SRC = staticFile('Template-Specific-Assets/WordDefinition/word_definition_banner.png');
 const ICON_PILL_SRC = staticFile('Template-Specific-Assets/WordDefinition/icon_pill.png');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
 const SATOSHI_MEDIUM_SRC  = staticFile('fonts/Satoshi-Medium.woff2');
 
 // ─── Layout constants (lifted directly from the prototype's defaults) ─────────
@@ -180,7 +180,7 @@ let fontsPromise: Promise<void> | null = null;
 function loadFonts(): Promise<void> {
   if (fontsPromise) return fontsPromise;
   fontsPromise = (async () => {
-    const inter   = new FontFace('ClashGrotesk',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const inter   = new FontFace('Inter',  `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const satoshi = new FontFace('Satoshi', `url(${SATOSHI_MEDIUM_SRC}) format('woff2')`,  { weight: '500', display: 'block' });
     const [i, s]  = await Promise.all([inter.load(), satoshi.load()]);
     const fonts   = document.fonts as FontFaceSet & { add(fc: FontFace): void };
@@ -286,7 +286,7 @@ function TypewriterTitle({
         position: 'absolute',
         left: TITLE_LEFT,
         top:  TITLE_TOP,
-        fontFamily: "'ClashGrotesk', system-ui, sans-serif",
+        fontFamily: "'Inter', system-ui, sans-serif",
         fontWeight: 800,
         fontSize: TITLE_SIZE,
         lineHeight: TITLE_LINE_HEIGHT,
@@ -356,7 +356,7 @@ function Description({
         position: 'absolute',
         left: TITLE_LEFT,
         top:  TITLE_TOP + TITLE_SIZE + DESC_TOP_OFFSET,
-        fontFamily: "'Satoshi', 'ClashGrotesk', system-ui, sans-serif",
+        fontFamily: "'Satoshi', 'Inter', system-ui, sans-serif",
         fontWeight: 500,
         fontSize: DESC_SIZE,
         lineHeight: DESC_LINE_HEIGHT,

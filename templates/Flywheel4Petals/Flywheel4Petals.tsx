@@ -141,7 +141,7 @@ export const flywheel4PetalsMeta = {
 
 const SATOSHI_BOLD_SRC   = staticFile('fonts/Satoshi-Bold.woff2');
 const SATOSHI_MEDIUM_SRC = staticFile('fonts/Satoshi-Medium.woff2');
-const INTER_EXTRABOLD_SRC = staticFile('fonts/ClashGrotesk-Bold.woff2');
+const INTER_EXTRABOLD_SRC = staticFile('fonts/Inter-ExtraBold.woff2');
 
 // ─── Layout constants (1920×1080 canvas) ─────────────────────────────────────
 
@@ -280,7 +280,7 @@ function loadFonts(): Promise<void> {
   fontsPromise = (async () => {
     const bold   = new FontFace('Satoshi', `url(${SATOSHI_BOLD_SRC}) format('woff2')`,    { weight: '700', display: 'block' });
     const medium = new FontFace('Satoshi', `url(${SATOSHI_MEDIUM_SRC}) format('woff2')`,  { weight: '500', display: 'block' });
-    const inter  = new FontFace('ClashGrotesk',   `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
+    const inter  = new FontFace('Inter',   `url(${INTER_EXTRABOLD_SRC}) format('woff2')`, { weight: '800', display: 'block' });
     const [b, m, i] = await Promise.all([bold.load(), medium.load(), inter.load()]);
     const fonts = document.fonts as FontFaceSet & { add(fc: FontFace): void };
     fonts.add(b);
@@ -647,7 +647,7 @@ function PetalContent({
           transform: `translate(-50%, -50%) scale(${numberScale})`,
           opacity: numberOp,
           color: TEXT_WHITE,
-          fontFamily: "'ClashGrotesk', system-ui, sans-serif",
+          fontFamily: "'Inter', system-ui, sans-serif",
           fontWeight: 800,
           fontSize: 72,
           letterSpacing: '-0.04em',
