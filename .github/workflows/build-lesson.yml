@@ -160,6 +160,10 @@ jobs:
           test -d "$PROJ/src" || { echo "Build produced no $PROJ/src"; exit 1; }
           python script-pipeline/bundle-project.py "$PROJ"
 
+      - name: Generate producer breakdown (script -> scenes -> templates, for approval)
+        if: steps.determine.outputs.skip != 'true'
+        run: python script-pipeline/scene-breakdown.py "projects/${COURSE_ID}-l${LESSON_NUMBER}"
+
       - name: Compile-check (bundle, no render)
         if: steps.determine.outputs.skip != 'true'
         run: |

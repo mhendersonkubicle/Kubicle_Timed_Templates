@@ -91,3 +91,11 @@ build referenced an asset that is not in the libraries (catch this, never ship i
 
 `fit-timing.py` anchors every reveal to the moment its phrase is spoken , elements appear exactly on their narration beat. Never move a reveal off its cue to fill a gap. If a scene is too sparse for its length (fit-timing warns of a long static stretch), fix it in the scene PLAN: split that beat into its own scene, or pick a denser template, so the content is being named throughout the scene. Match a template's reveal count to the span; do not stretch a 2-3 reveal template over 25s+.
 
+
+## Producer breakdown (for approval)
+
+After building and bundling, run `python script-pipeline/scene-breakdown.py
+projects/<courseId>-l<n>` to generate `BREAKDOWN.md` , the full narration script
+laid over the scenes (transition points = scene boundaries), with the template per
+scene, on-screen copy, reveal beats, and flags. This is the producer's approval
+artifact; see `PRODUCER.md` for the review flow.
