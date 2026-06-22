@@ -26,7 +26,7 @@ export default async (req) => {
     lessonNumber: String(b.lessonNumber),
     lessonTitle: b.lessonTitle,
     requirements: b.requirements || '',
-    model: b.model || 'claude-sonnet-4-6',
+    model: 'claude-sonnet-4-6',  // locked: Sonnet only, no other options
     submitter: b.submitter || '',
     submittedAt: new Date().toISOString(),
     srtUrl: b.srtUrl,

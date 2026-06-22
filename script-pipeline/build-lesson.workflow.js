@@ -121,7 +121,10 @@ const QA_SCHEMA = {
 
 const RULES_PREAMBLE =
   `Follow the standards in ${RULES} and each template's GUIDANCE.md: SRT-derived timing, ` +
-  `variety (one template per lesson), semantic fit, no dead air, frame-fit character limits, ` +
+  `variety (one template per lesson), semantic fit, no dead air, scene momentum (keep scenes short: ` +
+  `aim for 8-12s, 15-18s is the exception not the rule, split any beat that would run longer than ~18s ` +
+  `into two scenes at a narration boundary; the first element of every scene must appear within ~3.5s), ` +
+  `frame-fit character limits, ` +
   `icon-contrast (-dark art on dark/coloured surfaces, -light on light), never guess icon ids, ` +
   `re-mention pulses from the SRT, a LessonTitle card opening EVERY lesson, the BulletList6Pills course-outline ONLY in the first lesson, ` +
   `presenter-led character variants only where they fit; a CASE STUDY about a specific company uses ` +
@@ -135,7 +138,8 @@ const plan = await agent([
   `Read the subtitle file: ${SRT} (each numbered cue has a timestamp + text). Read the template catalogue: ${INDEX}.`,
   `Open EVERY lesson with a LessonTitle card as scene 1 (derive the lesson title from the content). The BulletList6Pills course-outline beat ("in this course we'll cover...") appears ONLY in the first lesson: this lesson ${FIRST ? 'IS' : 'is NOT'} the first, so ${FIRST ? 'include the course-outline' : 'do NOT include a course-outline'}.`,
   `Segment the narration into consecutive scenes by CUE RANGES (cueStart..cueEnd, 1-based, contiguous, covering all cues).`,
-  `Assign each scene the single best template under the variety + semantic-fit + no-dead-air rules. Derive a concise lessonTitle from the content.`,
+  `SCENE MOMENTUM & LENGTH (drives engagement + variety): keep scenes SHORT. Aim for 8-12 seconds each; 15-18s is the exception, not the rule, and a scene over ~18s should almost always be SPLIT into two scenes at a natural narration boundary (a new sub-topic, a "however", the shift from context to the worked example, the shift from naming a list to unpacking it). When one beat carries a long lead-in of context THEN the actual content (e.g. 25s of setup before a checklist's items), split the context into its own short establishing scene so the content scene starts naming things immediately. More, shorter scenes also mean more template variety and better storytelling, prefer splitting over one long static scene. Each scene's FIRST element must be able to appear within ~3.5s of the scene start (the engine clamps the first reveal early, so do NOT assign a template whose content only gets named 10s+ in to a long scene, split it instead). Match a template's reveal count to the scene span: do not stretch a 2-3 reveal template over 20s+.`,
+  `Assign each scene the single best template under the variety + semantic-fit + no-dead-air + scene-momentum rules. Derive a concise lessonTitle from the content.`,
   `COURSE-LEVEL VARIETY (soft recommendation): run  python "${PIPE}/course-templates.py" ${COURSE_ID} --exclude ${PROJECT}  to see which CONTENT templates earlier lessons of THIS course already used (and how often). When a beat has MULTIPLE templates that fit equally well, prefer one that is unused or least-used in the course so far, to avoid bias toward favourites (e.g. YinYang2Points). This NEVER overrides good fit, always pick the best template for the beat; only use course history to break ties among equally-good options. Structural templates (LessonTitle, LessonGoal, LessonSummary, CaseStudyIntro, BulletList6Pills) recur normally and are exempt. The within-lesson at-most-once rule still applies; variety resets per course.`,
   `CASE STUDIES: if a beat introduces a worked example about a specific company, assign CaseStudyIntro ONLY for the establishing beat where the company is named (it shows just a company LOGO centred, not an icon). Put the case-study DETAIL/points in the FOLLOWING scene using an ICON-LEFT / BULLETS-RIGHT single-colour template: Checklist5Pills (hero icon left + bullet pills right), or Topic1Subtopics6 if not already used. Do NOT use the cycling IconPointsV1 (a case-study follow-up is short; no time to cycle all the points) or the multicoloured Points3Subtopics2.`,
   `Return lessonTitle + scenes in order.`,

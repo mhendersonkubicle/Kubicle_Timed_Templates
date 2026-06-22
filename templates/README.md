@@ -65,12 +65,14 @@ Across all templates: **narration order must match reveal order.** A template's 
 
 ### The no-dead-air principle (selection, not a timing hack)
 
-A scene must never open with a static/blank stage and no animation for more than ~1-2 seconds. **Do NOT fix this by front-loading the content reveals**, pulling items in early makes them pop before they are narrated and reads as out of sync. Dead air is a **selection** problem, solved in this order:
+A scene must never open with a static/blank stage and no animation for more than ~1-2 seconds. The engine handles the OPENING beat for you: a scene's first content reveal is clamped to land by ~3.5s (`FIRST_CONTENT_CAP`) so the stage is never empty. But **do NOT lean on that, and do NOT hand-front-load the REST of the content reveals**, pulling later items in early makes them pop before they are narrated and reads as out of sync. Dead air across the body of a scene is a **selection + length** problem, solved in this order:
 
 1. **Default: choose a template with a staging animation.** Prefer a template whose `setup` brings an intermediate/staging animation on screen within the first ~1s (a panel pans in, a container rises, a background scales, an anchor fades in, a scaffold appears). That motion covers the gap before the first spoken content while the content reveals stay cued to the SRT. If a beat's best content-fit template has a **no-op / blank `setup`** (nothing animates in) and the narration has a lead-in before the first content word, pick an alternative template that *does* stage in.
 2. **Fallback: add a scene.** If the dead-air stretch is long and no staging-capable template fits the content, split the beat into an establishing/transition scene so the stage is never static for too long.
 
-Content reveals always stay synced to the SRT; never speed them up to paper over dead air. Templates with a no-op setup (currently flagged `staging: none` in their guidance, e.g. `BigPoints3V2`, `CirclePoints4`) must not be chosen for a beat whose first spoken content arrives more than ~2s in.
+**Keep scenes short for momentum + variety.** Aim for 8-12s per scene; 15-18s is the exception, not the rule. A scene over ~18s (`LONG_SCENE_CAP`) should almost always be SPLIT into two scenes at a natural narration boundary (a new sub-topic, a "however", context-then-example, naming-a-list-then-unpacking-it). A long stretch of context before the real content is itself a split point: make the context its own short establishing scene so the content scene starts naming things straight away. More, shorter scenes mean more template variety and better storytelling; prefer splitting over one long static scene.
+
+The body reveals always stay synced to the SRT; never speed them up to paper over dead air. Templates with a no-op setup (currently flagged `staging: none` in their guidance, e.g. `BigPoints3V2`, `CirclePoints4`) must not be chosen for a beat whose first spoken content arrives more than ~2s in.
 
 ### The preview-then-expand principle (reveal on naming, pulse on expansion)
 
@@ -145,7 +147,7 @@ Compositions are delivered to **local Remotion Studio** (`npx remotion studio`) 
 
 ## On-beat reveals (and what to do about long gaps)
 
-Every reveal is **anchored to the narration**: an element appears at the exact moment its statement is spoken. That on-beat sync is the point , do NOT slide reveals off their cue to "keep things moving" or fill time. `fit-timing.py` anchors each reveal to where its phrase occurs in the SRT.
+Every reveal is **anchored to the narration**: an element appears at the exact moment its statement is spoken. That on-beat sync is the point , do NOT slide reveals off their cue to "keep things moving" or fill time. `fit-timing.py` anchors each reveal to where its phrase occurs in the SRT. **The one exception is each scene's FIRST content reveal**: it is the establishing beat and is clamped to land by ~3.5s (`FIRST_CONTENT_CAP`) so the stage is never left empty waiting on the voiceover. Only that first reveal is moved; every subsequent reveal stays strictly on-beat (the engine does not even-spread).
 
-If a scene is so sparse that on-beat reveals leave a long static stretch (e.g. a 2-reveal template over 28s), that is a **structural** signal, not a timing one: **split the beat into its own scene, or use a denser template** so each scene's content is being named throughout. `fit-timing.py` emits a "static stretch" warning when this happens; fix it by changing the scene plan, never by moving reveals away from the words they belong to. Openers (LessonTitle/LessonGoal) are the one exception , they front-load deliberately.
+If a scene is so sparse that on-beat reveals leave a long static stretch (e.g. a 2-reveal template over 28s), or the scene simply runs too long (over ~18s, `LONG_SCENE_CAP`), that is a **structural** signal, not a timing one: **split the beat into its own scene, or use a denser template** so each scene's content is being named throughout. `fit-timing.py` emits a "static stretch" warning and a "scene too long" warning when these happen; fix them by changing the scene plan (shorter scenes, more of them), never by moving body reveals away from the words they belong to. Openers (LessonTitle/LessonGoal) front-load all reveals deliberately.
 

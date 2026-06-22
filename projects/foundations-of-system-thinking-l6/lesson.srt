@@ -1,0 +1,226 @@
+1
+00:00:00,000 --> 00:00:02,229
+Lesson 6: Emergence.
+
+2
+00:00:03,229 --> 00:00:07,723
+In this lesson, we'll define 'emergence'
+and explain why emergent outcomes are
+
+3
+00:00:07,723 --> 00:00:09,591
+difficult to predict in advance.
+
+4
+00:00:10,591 --> 00:00:14,499
+Emergence refers to behaviours or
+outcomes that arise from the interactions
+
+5
+00:00:14,499 --> 00:00:18,670
+between the different parts of a system.
+The system produces something that none
+
+6
+00:00:18,670 --> 00:00:20,994
+of its components could produce in
+isolation.
+
+7
+00:00:20,994 --> 00:00:25,704
+Take "team culture". The individual
+members of a team do relatively discrete
+
+8
+00:00:25,704 --> 00:00:30,727
+things: they communicate in certain ways,
+they respond to requests within certain
+
+9
+00:00:30,727 --> 00:00:34,369
+timeframes, they handle conflict using
+particular patterns.
+
+10
+00:00:34,369 --> 00:00:37,202
+None of them individually creates a
+culture.
+
+11
+00:00:37,202 --> 00:00:41,989
+Yet from the accumulation of those
+interactions over time, something arises
+
+12
+00:00:41,989 --> 00:00:47,034
+which we recognise as a team's character.
+That character is emergent; no single
+
+13
+00:00:47,034 --> 00:00:49,880
+person designed it and no policy mandated
+it.
+
+14
+00:00:49,880 --> 00:00:53,224
+The same dynamic operates at an
+organisational level.
+
+15
+00:00:53,224 --> 00:00:57,585
+When a firm develops a reputation for
+being the most responsive in its market,
+
+16
+00:00:57,585 --> 00:01:00,190
+it didn't come from any one person's
+behaviour.
+
+17
+00:01:00,190 --> 00:01:04,765
+It emerged from a pattern of interactions
+across the organisation over time,
+
+18
+00:01:04,765 --> 00:01:09,524
+reinforced by structures, incentives, and
+norms that nobody sat down to design.
+
+19
+00:01:09,524 --> 00:01:14,798
+So, if we understand emergence, why does
+it consistently surprise us? The answer
+
+20
+00:01:14,798 --> 00:01:19,471
+lies in how we tend to explain outcomes;
+we explain them by pointing to
+
+21
+00:01:19,471 --> 00:01:20,205
+components.
+
+22
+00:01:20,205 --> 00:01:24,880
+When something goes well, we look for the
+person who made it happen. When something
+
+23
+00:01:24,880 --> 00:01:27,217
+goes wrong, we look for whoever caused
+it.
+
+24
+00:01:27,217 --> 00:01:31,633
+However, in complex systems, many of the
+most significant outcomes aren't
+
+25
+00:01:31,633 --> 00:01:36,477
+traceable to any individual component;
+they emerge from the interactions between
+
+26
+00:01:36,477 --> 00:01:36,784
+them.
+
+27
+00:01:38,784 --> 00:01:42,777
+When we understand that emergence can't
+be traced to a single cause, we can
+
+28
+00:01:42,777 --> 00:01:44,450
+respond to it more effectively.
+
+29
+00:01:44,450 --> 00:01:49,511
+The shift systems thinking asks us to
+make, when we encounter surprising or
+
+30
+00:01:49,511 --> 00:01:54,435
+undesirable outcomes, is from "who caused
+this?" to "what produced this?"
+
+31
+00:01:55,435 --> 00:01:59,893
+The shift is toward understanding the
+structural conditions that made the
+
+32
+00:01:59,893 --> 00:02:04,413
+outcome more likely. Asking "who caused
+this" almost always leads us to an
+
+33
+00:02:04,413 --> 00:02:05,094
+individual.
+
+34
+00:02:05,094 --> 00:02:09,524
+That individual may well have contributed
+to the outcome, but if we stop there,
+
+35
+00:02:09,524 --> 00:02:13,500
+we've addressed a symptom and left the
+structural conditions unchanged.
+
+36
+00:02:13,500 --> 00:02:18,882
+The next person in that role will face
+the same conditions and produce a similar
+
+37
+00:02:18,882 --> 00:02:24,196
+result. Asking "what produced this" leads
+us to the interactions, the incentive
+
+38
+00:02:24,196 --> 00:02:28,965
+structures, the feedback loops, and the
+delays that shaped the outcome.
+
+39
+00:02:28,965 --> 00:02:34,071
+Those are the things that, if addressed,
+will change what the system produces.
+
+40
+00:02:34,071 --> 00:02:39,441
+This shift applies across team dynamics,
+organisational strategy, and professional
+
+41
+00:02:39,441 --> 00:02:40,900
+practice of all kinds.
+
+42
+00:02:42,900 --> 00:02:44,711
+Let's stop the lesson here.
+
+43
+00:02:44,711 --> 00:02:48,792
+In this lesson, we first defined
+emergence as behaviour that arises from
+
+44
+00:02:48,792 --> 00:02:51,723
+interactions rather than from individual
+components.
+
+45
+00:02:51,723 --> 00:02:55,903
+We then examined why emergence surprises
+us.
+
+46
+00:02:55,903 --> 00:03:00,368
+Finally, we introduced the shift from
+individual blame to structural analysis
+
+47
+00:03:00,368 --> 00:03:02,776
+as a core discipline of systems thinking.
+

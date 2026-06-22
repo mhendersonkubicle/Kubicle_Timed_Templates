@@ -15,7 +15,6 @@ on:
       lessonTitle:  { description: 'Lesson title', required: true }
       inputsDir:    { description: 'Repo path holding lesson.srt + narration.mp3 (e.g. inputs/marketing-in-professional-services-l5)', required: true }
       requirements: { description: 'Optional notes (case study company, emphasis)', required: false, default: '' }
-      model:        { description: 'Claude model', required: false, default: 'claude-opus-4-8' }
   # Programmatic trigger (Fleet can use this if it has a dispatch tool).
   repository_dispatch:
     types: [build-lesson]
@@ -36,7 +35,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60   # fail cleanly instead of hanging if a build runs away
+    timeout-minutes: 45   # runaway catcher. A single-pass Sonnet build finishes well
+                          # under this; the hard DOLLAR cap is the Anthropic Console
+                          # workspace spend limit (set it to ~$15), not wall-clock.
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -88,8 +89,11 @@ jobs:
             echo "LESSON_TITLE=${{ github.event.inputs.lessonTitle || github.event.client_payload.lessonTitle }}"    >> "$GITHUB_ENV"
             echo "INPUTS_DIR=${{ github.event.inputs.inputsDir || github.event.client_payload.inputsDir }}"     >> "$GITHUB_ENV"
             echo "REQUIREMENTS=${{ github.event.inputs.requirements || github.event.client_payload.requirements }}" >> "$GITHUB_ENV"
-            echo "MODEL=${{ github.event.inputs.model || github.event.client_payload.model || 'claude-opus-4-8' }}"  >> "$GITHUB_ENV"
           fi
+          # LOCKED: every build uses Sonnet, the cheaper model. This unconditional
+          # write is last, so it overrides any model from the form/dispatch/request.json.
+          # There is intentionally no other option.
+          echo "MODEL=claude-sonnet-4-6" >> "$GITHUB_ENV"
 
       - name: Fetch input files if URLs were provided (Slack or presigned storage)
         if: steps.determine.outputs.skip != 'true'

@@ -29,16 +29,22 @@ FRONTLOAD_TEMPLATES = {'LessonTitle', 'LessonGoal'}
 FRONTLOAD_START = 0.7    # first reveal after setup
 FRONTLOAD_STEP = 0.6     # spacing between subsequent reveals
 
-# Keep-moving rule: a scene must not sit still for long. The first content reveal
-# lands by FIRST_CONTENT_CAP, and no static stretch (before the first reveal,
-# between reveals, or after the last reveal) exceeds MAX_STATIC_GAP. If the
-# narration-anchored timing would hang longer than that, the reveals are spread
-# evenly across the scene (revealing slightly ahead of narration is acceptable for
-# dynamism). If even an even spread can't get gaps under MAX_STATIC_GAP, the scene
-# is too sparse for its length and a warning says to split it / use a denser template.
-FIRST_CONTENT_CAP = 2.5
-MAX_STATIC_GAP = 5.0
-END_TAIL_PAD = 2.5
+# Keep-moving rule (momentum). Openers front-load fully (above). For EVERY OTHER
+# scene, the FIRST content reveal is the scene's establishing beat and must land by
+# FIRST_CONTENT_CAP, so the stage is never left empty/awkward waiting on the
+# voiceover. Only this first reveal is moved (it may appear slightly ahead of its
+# narration anchor, that early establishing motion is the point). Every SUBSEQUENT
+# reveal stays strictly ON-BEAT, anchored to the exact moment its phrase is spoken;
+# we do NOT even-spread or slide later reveals to fill time.
+#
+# If on-beat timing then still leaves a static stretch longer than MAX_STATIC_GAP
+# between/after reveals, or the scene runs longer than LONG_SCENE_CAP, that is a
+# STRUCTURAL signal, not a timing one: split the beat into its own scene, or use a
+# denser template. Both are flagged here for the director; never papered over by
+# sliding reveals away from the words they belong to.
+FIRST_CONTENT_CAP = 3.5   # the scene's first content reveal lands by this many seconds
+MAX_STATIC_GAP = 5.0      # a gap between/after reveals longer than this -> split signal
+LONG_SCENE_CAP = 18.0     # a scene longer than this -> split into two scenes
 
 def to_s(t):
     h, m, rest = t.split(':'); s, ms = rest.split(',')
@@ -102,7 +108,6 @@ def main():
         seq = [{'target': 'setup', 'at': 0.2}]
         if sc.get('setupIn') is not None:
             seq[0]['in'] = sc['setupIn']
-        rem_objs = []
         slots = sc.get('slots', [])
         unmatched = []
         frontload = sc.get('template') in FRONTLOAD_TEMPLATES or sc.get('frontload') is True
@@ -119,26 +124,39 @@ def main():
                 else:
                     at = round(max(0.0, t - span_start), 2)
             seq.append({'target': sl['target'], 'at': at})
-            rem_objs.append({'target': sl['target'], 'anchor': sl.get('anchor', ''), 'revealAt': at})
         # keep reveal order monotonic by `at` (stable) after setup
         head, tail = seq[0], sorted(seq[1:], key=lambda s: s['at'])
 
-        # Reveals stay ANCHORED TO THE NARRATION: an element appears exactly when
-        # its statement is spoken (that on-beat sync is the whole point). We do NOT
-        # move reveals off their cue to fill gaps. If a scene is so sparse it leaves
-        # a long static stretch, that is a STRUCTURAL signal (split the beat into its
-        # own scene, or use a denser template) , flagged here, never "fixed" by
-        # sliding reveals away from the words they belong to.
+        # ESTABLISHING-REVEAL GUARANTEE: the scene's first content reveal is its
+        # opening beat and must land by FIRST_CONTENT_CAP, so the stage is never
+        # left empty/awkward waiting on the voiceover. Only this first reveal is
+        # moved (lowering it cannot break order); every SUBSEQUENT reveal stays
+        # strictly ON-BEAT. We do NOT even-spread or slide later reveals to fill time.
+        if not frontload and tail and tail[0]['at'] > FIRST_CONTENT_CAP:
+            tail[0]['at'] = FIRST_CONTENT_CAP
+
+        # rebuild rementions from the FINAL reveal times so pulse timing matches
+        anchor_by_target = {sl['target']: sl.get('anchor', '') for sl in slots}
+        rem_objs = [{'target': r['target'], 'anchor': anchor_by_target.get(r['target'], ''),
+                     'revealAt': r['at']} for r in tail]
+
+        # STRUCTURAL flags for the director (never "fixed" by sliding reveals): a
+        # static stretch between/after reveals over MAX_STATIC_GAP, or a scene over
+        # LONG_SCENE_CAP. Both mean: split the beat, or use a denser template. The
+        # lead-in gap is excluded here, it is already bounded by FIRST_CONTENT_CAP.
         if not frontload and tail:
             n = len(tail)
-            gaps = ([tail[0]['at']]
-                    + [tail[i]['at'] - tail[i - 1]['at'] for i in range(1, n)]
+            gaps = ([tail[i]['at'] - tail[i - 1]['at'] for i in range(1, n)]
                     + [dur - tail[-1]['at']])
-            if max(gaps) > MAX_STATIC_GAP:
+            if gaps and max(gaps) > MAX_STATIC_GAP:
                 warnings.append(
                     f"{sc['id']}: {n} reveal(s) over {dur:.0f}s leaves a {max(gaps):.0f}s static stretch; "
                     f"split this beat into its own scene or use a denser template "
                     f"(do NOT move reveals off their narration beat to hide it)")
+        if not frontload and dur > LONG_SCENE_CAP:
+            warnings.append(
+                f"{sc['id']}: scene runs {dur:.0f}s, over the {LONG_SCENE_CAP:.0f}s norm; "
+                f"split it into two scenes at a narration boundary (shorter scenes = more momentum + variety)")
 
         out_scenes.append({
             'id': sc['id'],

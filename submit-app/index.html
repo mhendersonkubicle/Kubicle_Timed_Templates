@@ -70,15 +70,8 @@
         <label>Course name <span class="muted">(exact, used on every lesson)</span></label>
         <input type="text" id="course" placeholder="Marketing in Professional Services" required />
 
-        <div class="row">
-          <div><label>Lesson number</label><input type="number" id="lnum" min="1" step="1" placeholder="1" required /></div>
-          <div><label>Model</label>
-            <select id="model">
-              <option value="claude-sonnet-4-6">Sonnet (cheaper)</option>
-              <option value="claude-opus-4-8">Opus (higher quality)</option>
-            </select>
-          </div>
-        </div>
+        <label>Lesson number</label>
+        <input type="number" id="lnum" min="1" step="1" placeholder="1" required />
 
         <label>Lesson title</label>
         <input type="text" id="ltitle" placeholder="Core Principles of Marketing" required />
@@ -154,7 +147,6 @@
           lessonNumber: $('lnum').value.trim(),
           lessonTitle: $('ltitle').value.trim(),
           requirements: $('req').value.trim(),
-          model: $('model').value,
           srtUrl: p.files[0].getUrl,
           mp3Url: p.files[1].getUrl,
         });
