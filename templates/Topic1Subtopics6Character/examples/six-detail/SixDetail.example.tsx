@@ -17,8 +17,8 @@ import { Topic1Subtopics6Character } from '../../Topic1Subtopics6Character';
 export const SixDetailExample: React.FC = () => (
   <Topic1Subtopics6Character
     mainTitle="Data Modelling"
-    titleIcon="ai-assistant"
-    character={{ id: 'presenter-grey', characterHeight: 850, characterY: 163 }}
+    titleIcon="business-strategy-target-dark"
+    character={{ id: 'male_middleage_white', characterHeight: 850, characterY: 163 }}
     details={[
       'Define entities and relationships',
       'Choose a normalisation level',

@@ -1,6 +1,6 @@
 ---
 name: lesson-video-pipeline
-description: Turn one lesson's narration (MP3) and subtitles (SRT) into a validated, multi-scene Remotion lesson video, keeping every lesson in the same course visually consistent. Use when a lesson request arrives (in Slack or chat) with a course name, lesson number, lesson title, and the SRT + MP3 files. Builds the composition, runs the timing/pulse/icon pipeline, verifies it by rendering, and reports back.
+description: Turn one lesson's narration (MP3) and subtitles (SRT) into a validated, multi-scene Remotion lesson video, keeping every lesson in the same course visually consistent. Use when SRT + MP3 are provided with a course name, lesson number, and lesson title. Plans the scenes, then shares the DIRECTION (template per scene, narration, scene length, on-screen text with character limits) plus a link to the scene library, and WAITS for the producer to confirm before anything is rendered. On approval, finalises the composition and hands it to local Remotion Studio to export.
 ---
 
 # Lesson Video Pipeline
@@ -38,17 +38,31 @@ Separate lesson runs must still feel like one course. The memory lives in `proje
 
 **At the end of every run:** make sure `projects/<courseId>/course.json` exists and is correct, and that this lesson's project `projects/<courseId>-l<N>/` is saved. That is what the NEXT lesson will read.
 
-## Build steps
+## How a lesson is built (the local flow)
 
-1. Stage the inputs (copy the SRT and MP3 into the build location).
-2. Run the one-command pipeline:
+This flow has a HARD human-in-the-loop gate: you PLAN, you SHARE the direction, you WAIT for the producer's confirmation, and only THEN do you finalise and hand the lesson to render. Never skip the gate, and never render before it is approved.
+
+1. **Stage the inputs.** Copy the SRT and MP3 into the build location (`inputs/<courseId>-l<N>/`).
+2. **Plan and build the composition.** Either run the one-command pipeline
    `node script-pipeline/build-lesson.workflow.js` with arguments:
    - `srt`, `audio` , the two files.
    - `courseTitle` , the course name, VERBATIM.
    - `courseIcon` , the frozen icon id from `course.json`.
    - `lessonNumber`, `isFirstLesson` , true only when lesson number is 1.
    - `projectName` = `<courseId>-l<N>`, `courseId` = `<courseId>`.
-3. The pipeline picks and fits templates, resolves icons, derives timing from the SRT, adds re-mention pulses, stages assets, and writes the composition.
+
+   ...or build it directly following the rules below. Segment the SRT into scenes, pick the best template per scene, fit each scene's on-screen copy WITHIN that template's character limits, resolve every icon to a real id, derive on-beat timing from the SRT, add re-mention pulses, stage assets, and write the composition.
+3. **Make the project self-contained.** Run `python script-pipeline/bundle-project.py projects/<courseId>-l<N>`.
+4. **Generate the DIRECTION.** Run `python script-pipeline/scene-breakdown.py projects/<courseId>-l<N>`. It writes `BREAKDOWN.md`: the full narration laid over the scenes (transition points = scene boundaries), the template chosen per scene, the scene length, every on-screen text line with its `(used/limit)` character count, the reveal beats, the flags, and a link to the scene library.
+5. **GATE , share the direction and WAIT for confirmation.** Present the producer with the direction (the contents of `BREAKDOWN.md`) AND a link to the scene library: `TEMPLATE-CATALOG.html` at the repo root, a rendered example of every template, so they can see what each looks like and ask to swap one. Ask them to approve, or to change any scene's template, on-screen text, or timing. **Do NOT render, deliver, or call the lesson finished until they explicitly confirm.** Apply any requested changes (enforcing character limits, see below), regenerate the direction, and re-share. Loop until every scene is approved.
+6. **Only on approval, hand off to render.** Deliver to local Remotion Studio with `python script-pipeline/open-in-studio.py <courseId>-l<N>` for the producer to preview and export. Do not auto-render an MP4 unless explicitly asked.
+
+## Character limits are mandatory
+
+Every on-screen text field has a maximum character count, fixed in the template's zod schema (also listed in its `GUIDANCE.md`, and shown as the `(used/limit)` column in `BREAKDOWN.md`), so the text always fits its frame. These are not suggestions:
+
+- Never write copy that exceeds a field's limit; tighten the wording until it fits.
+- If the producer asks for text longer than the limit, **push back**: state the limit, explain it is a frame-fit constraint, and offer either a trimmed version that fits or a roomier template from the scene library that can hold the longer copy. Never silently overflow a frame, and never raise or remove a template's limit to force text in.
 
 ## Rules that are easy to drop (do not drop them)
 
@@ -70,7 +84,7 @@ The render bench can be STALE compared to the durable project copy after the ver
 
 ## Deliver
 
-Rendering is heavy and local. Default behaviour: build and validate the lesson, save the project, and report that the lesson is ready to open in Remotion Studio and export. If asked to render to a file, render the MP4 and report the path. Post a short status back to the requester (Slack channel or chat) with the lesson title, scene count, total length, and the templates used.
+Rendering is heavy and local, and it only happens AFTER the producer has approved the direction (the gate above). Once approved: save the project and tell the producer it is ready to open in Remotion Studio and export (`python script-pipeline/open-in-studio.py <courseId>-l<N>`). Render an MP4 to a file only if explicitly asked, then report the path. Report the lesson title, scene count, total length, and the templates used.
 
 ## Make the project self-contained
 
@@ -80,10 +94,12 @@ each used template's assets, and narration.mp3 into the project's `public/`, so
 the lesson renders anywhere with no missing-file errors. It exits non-zero if the
 build referenced an asset that is not in the libraries (catch this, never ship it).
 
-## Producer breakdown (for approval)
+## Producer confirmation document (the gate artifact)
 
-After building and bundling, run `python script-pipeline/scene-breakdown.py
-projects/<courseId>-l<n>` to generate `BREAKDOWN.md` , the full narration script
-laid over the scenes (transition points = scene boundaries), with the template per
-scene, on-screen copy, reveal beats, and flags. This is the producer's approval
-artifact; see `PRODUCER.md` for the review flow.
+`python script-pipeline/scene-breakdown.py projects/<courseId>-l<n>` generates
+`BREAKDOWN.md` , the full narration script laid over the scenes (transition points =
+scene boundaries), with the template per scene, scene length, on-screen copy with its
+`(used/limit)` character count, reveal beats, and flags (including any text over its
+limit). This IS the sign-off gate from step 5: the producer reviews it against the
+scene library (`TEMPLATE-CATALOG.html`) and approves each scene or asks for changes
+before anything renders. See `PRODUCER.md` for the full review flow.

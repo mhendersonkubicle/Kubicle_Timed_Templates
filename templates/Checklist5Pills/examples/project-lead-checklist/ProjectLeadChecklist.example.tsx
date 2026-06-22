@@ -21,7 +21,7 @@ export const ProjectLeadChecklistExample: React.FC = () => (
       'Review every pull request',
       'Share progress weekly',
     ]}
-    hero={{ kind: 'icon', id: 'strategy' }}
+    hero={{ kind: 'icon', id: 'strategic-consulting-target-light' }}
     timings={{
       sequence: [
         { target: 'setup', at: 0.2, in: 1.0 },

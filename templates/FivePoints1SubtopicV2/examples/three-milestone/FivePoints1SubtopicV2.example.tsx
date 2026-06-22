@@ -17,7 +17,7 @@ export const FivePoints1SubtopicV2ThreeMilestoneExample: React.FC = () => (
       { title: 'Plan',     description: 'Map scope and risks', icon: 'locations-pin-dark' },
       { title: 'Launch',   description: 'Roll out and measure', icon: 'enterprise-growth-dark' },
     ]}
-    anchor={{ kind: 'icon', id: 'graphic' }}
+    anchor={{ kind: 'icon', id: 'business-strategy-growth-dark' }}
     timings={{
       sequence: [
         { target: 'setup', at: 0.3, in: 1.6 },

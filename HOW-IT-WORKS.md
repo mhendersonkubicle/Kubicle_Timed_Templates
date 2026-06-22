@@ -10,8 +10,8 @@ A self-serve, internal course-production pipeline. No Slack, no Fleet.
    `request.json` into `inputs/<courseId>-l<n>/` in this repo.
 3. **Build** , committing `request.json` auto-starts the **Build Lesson** GitHub
    Action (`.github/workflows/build-lesson.yml`). It runs Claude Code with the
-   `lesson-video-pipeline` skill: picks templates, derives SRT timing (openers
-   front-load), resolves icons, bundles every asset into the project
+   `lesson-video-pipeline` skill: picks templates, derives on-beat SRT timing,
+   resolves icons, bundles every asset into the project
    (`bundle-project.py`), and commits the finished project to `projects/`.
 4. **Track** , the form's **Requests** tab lists every request and its status
    (Building -> Ready to render), with the collect command.
