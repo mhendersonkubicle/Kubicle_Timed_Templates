@@ -54,7 +54,7 @@ Separate lesson runs must still feel like one course. The memory lives in `proje
 
 - **Course identity is identical across all lessons.** `courseTitle` equals the course name verbatim; the top-left course icon is the one frozen in `course.json`. (This is the L3 "wrong course name" bug; pin it.)
 - **Pulsing is mandatory** wherever an already-revealed item is named again later, especially in long scenes. Never ship a long or preview-then-expand scene with empty `pulses`.
-- **No dead air; keep scenes short.** Every scene's first element must appear within ~3.5s. The engine clamps the first reveal early automatically (establishing beat); the rest stay on-beat. Beyond that, momentum is a PLANNING job: aim for 8-12s scenes (15-18s is the exception, not the rule), and SPLIT any beat that would run over ~18s, or any long stretch of context before the real content, into its own scene at a narration boundary. Prefer a template with a staging animation. Never hand-front-load the remaining content reveals to hide a gap; split instead. More, shorter scenes also buy variety and storytelling.
+- **No dead air.** If a scene would sit silent for several seconds before its first reveal, either pick a template that has a staging animation, or split the quiet lead-in into its own scene. Never front-load content to hide the gap.
 - **Icon contrast.** Match the icon suffix to the surface, and force icons to solid white on saturated brand-colour fills (Process5Steps, Flywheel4Petals, SplitscreenPointsV1).
 - **Template variety across the course** (soft). Prefer less-used templates when several fit equally; never sacrifice a genuinely better fit.
 - **Case studies** use `CaseStudyIntro` plus a company logo from `Logos/` (not an icon), followed by an icon-left bullet template.
@@ -72,13 +72,6 @@ The render bench can be STALE compared to the durable project copy after the ver
 
 Rendering is heavy and local. Default behaviour: build and validate the lesson, save the project, and report that the lesson is ready to open in Remotion Studio and export. If asked to render to a file, render the MP4 and report the path. Post a short status back to the requester (Slack channel or chat) with the lesson title, scene count, total length, and the templates used.
 
-## Openers front-load (LessonTitle, LessonGoal)
-
-When you feed scenes to `fit-timing.py`, include each scene's `template`. For
-`LessonTitle` and `LessonGoal`, fit-timing front-loads the reveals into the first
-few seconds automatically (ignoring the narration), so the opener animation plays
-early. Do not hand-anchor opener reveals to SRT cues.
-
 ## Make the project self-contained
 
 After writing the project, run `python script-pipeline/bundle-project.py
@@ -86,11 +79,6 @@ projects/<courseId>-l<n>`. It copies every referenced icon, the case-study logo,
 each used template's assets, and narration.mp3 into the project's `public/`, so
 the lesson renders anywhere with no missing-file errors. It exits non-zero if the
 build referenced an asset that is not in the libraries (catch this, never ship it).
-
-## Reveals are on-beat; the first reveal is early; fix sparsity structurally
-
-`fit-timing.py` anchors every reveal to the moment its phrase is spoken , elements appear exactly on their narration beat, with ONE exception: a scene's FIRST content reveal is its establishing beat and is clamped to land by ~3.5s (`FIRST_CONTENT_CAP`) so the stage is never left empty. Every SUBSEQUENT reveal stays strictly on-beat: never move one off its cue to fill a gap, and never even-spread. If on-beat timing still leaves a long static stretch (gap over `MAX_STATIC_GAP`), or a scene runs over ~18s (`LONG_SCENE_CAP`), fit-timing WARNS , that is a STRUCTURAL signal: fix it in the scene PLAN by splitting the beat into its own (shorter) scene or picking a denser template, so content is being named throughout. Match a template's reveal count to the span; do not stretch a 2-3 reveal template over 20s+.
-
 
 ## Producer breakdown (for approval)
 
