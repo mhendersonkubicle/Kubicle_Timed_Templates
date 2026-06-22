@@ -9,7 +9,7 @@ Follow the `lesson-video-pipeline` skill at `.claude/skills/lesson-video-pipelin
 1. **Confirm the request.** You need: course name, lesson number, lesson title, the SRT + MP3, and any requirements. Ask for whatever is missing before starting.
 2. **Plan and build the composition.** Segment the SRT into scenes, pick the best-fit template per scene, fit each scene's on-screen copy within that template's character limits, resolve every icon to a real id, derive on-beat timing, and write the composition. Then `bundle-project.py` to make it self-contained.
 3. **Generate the DIRECTION.** Run `python script-pipeline/scene-breakdown.py projects/<courseId>-l<N>` to write `BREAKDOWN.md`.
-4. **GATE , share and wait.** Show the user the direction (the `BREAKDOWN.md` contents) AND link the scene library: `TEMPLATE-CATALOG.html` at the repo root, a rendered example of every template. Ask them to approve, or to change any scene's template, on-screen text, or timing. **Do NOT render, hand off, or call the lesson finished until they explicitly confirm.** Apply changes, regenerate the direction, and re-share until approved.
+4. **GATE , share and wait.** Show the user the direction (the `BREAKDOWN.md` contents) AND serve them the scene library: `TEMPLATE-CATALOG.html` at the repo root, a rendered example of every template (if it is missing, build it with `python script-pipeline/scene-catalog/build-catalog.py`). Ask them to approve, or to change any scene's template, on-screen text, or timing. **Do NOT render, hand off, or call the lesson finished until they explicitly confirm.** Apply changes, regenerate the direction, and re-share until approved.
 5. **On approval, hand off to render.** `python script-pipeline/open-in-studio.py <courseId>-l<N>` opens it in local Remotion Studio to preview and export. Never auto-render an MP4 unless explicitly asked.
 
 ## Hard rules
@@ -23,7 +23,7 @@ Follow the `lesson-video-pipeline` skill at `.claude/skills/lesson-video-pipelin
 
 ## Where things are
 
-- Scene library (rendered catalog of all templates): `TEMPLATE-CATALOG.html`
+- Scene library (rendered catalog of all templates): `TEMPLATE-CATALOG.html` (regenerate with `python script-pipeline/scene-catalog/build-catalog.py`)
 - Templates, rules, and per-template guidance: `templates/` (`SELECTION_INDEX.md`, `README.md`, each `GUIDANCE.md`)
 - Deterministic tools: `script-pipeline/`
 - Built lessons + course memory: `projects/`

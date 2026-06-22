@@ -3,3 +3,7 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# scene-catalog build intermediates (the committed output is TEMPLATE-CATALOG.html at the repo root)
+script-pipeline/scene-catalog/_build/
+script-pipeline/scene-catalog/out/

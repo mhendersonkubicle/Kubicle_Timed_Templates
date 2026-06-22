@@ -28,6 +28,11 @@ You provide a subtitle file (`.srt`) and the audio (`.mp3`). Claude Code plans t
 
 Open **`TEMPLATE-CATALOG.html`** in any browser: a rendered example of all 42 templates, grouped by category, each with a one-line "use when". Use it to see what is available and to pick replacements during review. (A grey target glyph in an example just means that example referenced a placeholder icon; your lessons resolve real icons.)
 
+Regenerate it any time (after adding or changing a template) with:
+```
+python script-pipeline/scene-catalog/build-catalog.py
+```
+
 ## Map of the repo
 
 - `templates/` , the 42 templates, with `SELECTION_INDEX.md`, `README.md` (the design rules), and a `GUIDANCE.md` + worked example per template.
