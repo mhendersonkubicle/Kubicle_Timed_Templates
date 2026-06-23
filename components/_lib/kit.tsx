@@ -9,9 +9,35 @@
 // cueToReveal) and passes it to the component, exactly like a template's cue().
 
 import React from 'react';
-import { Easing, Img, interpolate, staticFile } from 'remotion';
+import { Easing, Img, interpolate, staticFile, delayRender, continueRender } from 'remotion';
 
 export const FPS = 30;
+
+// Load the brand fonts (Inter headings, Satoshi body) so components render in
+// brand type even when shown in isolation. Call useFonts() at the top of any
+// composing template or component example.
+const KIT_FONTS = [
+  { family: 'Inter', weight: '700', file: 'Inter-Bold.woff2' },
+  { family: 'Inter', weight: '800', file: 'Inter-ExtraBold.woff2' },
+  { family: 'Satoshi', weight: '500', file: 'Satoshi-Medium.woff2' },
+  { family: 'Satoshi', weight: '700', file: 'Satoshi-Bold.woff2' },
+  { family: 'Satoshi', weight: '900', file: 'Satoshi-Black.woff2' },
+];
+let _fontsLoaded = false;
+export function useFonts(): void {
+  const [handle] = React.useState(() => delayRender('kit-fonts'));
+  React.useEffect(() => {
+    if (_fontsLoaded) { continueRender(handle); return; }
+    Promise.all(
+      KIT_FONTS.map((f) =>
+        new FontFace(f.family, `url(${staticFile('fonts/' + f.file)})`, { weight: f.weight })
+          .load()
+          .then((ff) => (document as unknown as { fonts: FontFaceSet }).fonts.add(ff))
+          .catch(() => undefined)),
+    ).then(() => { _fontsLoaded = true; continueRender(handle); });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handle]);
+}
 
 // Brand palette (hex), taken from the source templates.
 export const COLORS = {

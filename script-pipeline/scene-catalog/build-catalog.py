@@ -17,6 +17,7 @@ ICONS = os.path.join(REPO, 'Icons')
 CHARS = os.path.join(REPO, 'CHARACTER LIBRARY (PNG)')
 LOGOS = os.path.join(REPO, 'Logos')
 FONTS = os.path.join(REPO, 'fonts')
+COMPONENTS = os.path.join(REPO, 'components')
 HARNESS = os.path.join(REPO, 'harness')
 BUILD = os.path.join(HERE, '_build')
 OUT = os.path.join(HERE, 'out')
@@ -51,14 +52,19 @@ def reset_build():
 
 
 def copy_templates():
-    dst_root = os.path.join(BUILD, 'src', 'templates')
-    for root, _, files in os.walk(TEMPLATES):
-        for f in files:
-            if f.endswith('.tsx'):
-                src = os.path.join(root, f)
-                dst = os.path.join(dst_root, os.path.relpath(src, TEMPLATES))
-                os.makedirs(os.path.dirname(dst), exist_ok=True)
-                shutil.copy(src, dst)
+    # copy templates/**/*.tsx and components/**/*.tsx into the build so their
+    # example imports (and the component kit) resolve.
+    for base, sub in [(TEMPLATES, 'templates'), (COMPONENTS, 'components')]:
+        if not os.path.isdir(base):
+            continue
+        dst_root = os.path.join(BUILD, 'src', sub)
+        for root, _, files in os.walk(base):
+            for f in files:
+                if f.endswith('.tsx'):
+                    src = os.path.join(root, f)
+                    dst = os.path.join(dst_root, os.path.relpath(src, base))
+                    os.makedirs(os.path.dirname(dst), exist_ok=True)
+                    shutil.copy(src, dst)
 
 
 def stage_assets():
@@ -130,7 +136,42 @@ def generate():
             'import': './templates/' + rel[:-4], 'frame': frame, 'dur': frame + 60,
             'category': sel.get(tdir, {}).get('category', ''),
             'useWhen': sel.get(tdir, {}).get('useWhen', ''),
+            'kind': 'template',
         })
+
+    # ---- components: one example still each (the Components tab) ----
+    if os.path.isdir(COMPONENTS):
+        for cname in sorted(os.listdir(COMPONENTS)):
+            cdir = os.path.join(COMPONENTS, cname)
+            if not os.path.isdir(cdir) or cname.startswith('_'):
+                continue
+            exf = os.path.join(cdir, cname + '.example.tsx')
+            comp_tsx = os.path.join(cdir, cname + '.tsx')
+            if not (os.path.isfile(exf) and os.path.isfile(comp_tsx)):
+                continue
+            txt = open(exf, encoding='utf-8').read()
+            mname = re.search(r'export\s+(?:const|function)\s+([A-Za-z0-9_]+)', txt)
+            if not mname:
+                continue
+            for m in re.findall(r"\b\w*[Ii]con\w*\s*:\s*['\"]([^'\"]+)['\"]", txt):
+                icon_refs.add(m)
+            for m in re.findall(r"['\"]([a-z0-9]+(?:-[a-z0-9]+)+)['\"]", txt):
+                if re.search(r"-(?:light|dark)(?:-\d+)?$", m):
+                    icon_refs.add(m)
+            # caption = first comment line of the component file, minus a "Name , " prefix
+            desc = ''
+            for line in open(comp_tsx, encoding='utf-8'):
+                s = line.strip()
+                if s.startswith('//'):
+                    desc = s.lstrip('/ ').strip()
+                    break
+            if desc.lower().startswith(cname.lower()):
+                desc = desc[len(cname):].lstrip(' ,').strip()
+            entries.append({
+                'template': cname, 'compId': cname, 'component': mname.group(1),
+                'import': './components/' + os.path.relpath(exf, COMPONENTS).replace('\\', '/')[:-4],
+                'frame': 45, 'dur': 105, 'category': '', 'useWhen': desc, 'kind': 'component',
+            })
 
     # Root.tsx + index.ts
     imports = '\n'.join(f"import {{ {e['component']} }} from '{e['import']}';" for e in entries)
@@ -176,13 +217,25 @@ def render():
 def build_html(entries):
     def b64(p):
         return base64.b64encode(open(p, 'rb').read()).decode()
-    groups, total = {}, 0
+
+    def card(e):
+        return ('<figure class="card">'
+                f'<div class="shot"><img loading="lazy" src="{e["img"]}" alt="{html.escape(e["template"])}"></div>'
+                f'<figcaption><div class="name">{html.escape(e["template"])}</div>'
+                f'<div class="use">{html.escape(e["useWhen"])}</div></figcaption></figure>')
+
+    tmpl, comp = [], []
     for e in entries:
         png = os.path.join(OUT, e['compId'] + '.png')
         if not os.path.exists(png):
             continue
         e['img'] = 'data:image/png;base64,' + b64(png)
-        groups.setdefault(e['category'] or 'other', []).append(e); total += 1
+        (comp if e.get('kind') == 'component' else tmpl).append(e)
+
+    # Templates tab: grouped by category.
+    groups = {}
+    for e in tmpl:
+        groups.setdefault(e['category'] or 'other', []).append(e)
     order = ['opener', 'goal', 'definition', 'comparison', 'list', 'process', 'timeline',
              'cycle', 'hierarchy', 'people', 'chat', 'diagram', 'case-study', 'summary', 'other']
     def rank(c):
@@ -192,47 +245,73 @@ def build_html(entries):
                 return i
         return len(order)
     cats = sorted(groups.keys(), key=lambda c: (rank(c), c.lower()))
-    cards = []
+    tpl_html = []
     for c in cats:
         items = sorted(groups[c], key=lambda e: e['template'].lower())
-        cards.append(f'<h2 class="cat">{html.escape(c)} <span class="n">{len(items)}</span></h2>')
-        cards.append('<div class="grid">')
-        for e in items:
-            cards.append('<figure class="card">'
-                         f'<div class="shot"><img loading="lazy" src="{e["img"]}" alt="{html.escape(e["template"])}"></div>'
-                         f'<figcaption><div class="name">{html.escape(e["template"])}</div>'
-                         f'<div class="use">{html.escape(e["useWhen"])}</div></figcaption></figure>')
-        cards.append('</div>')
+        tpl_html.append(f'<h2 class="cat">{html.escape(c)} <span class="n">{len(items)}</span></h2>')
+        tpl_html.append('<div class="grid">' + ''.join(card(e) for e in items) + '</div>')
+
+    # Components tab: a single grid, alphabetical.
+    comp_items = sorted(comp, key=lambda e: e['template'].lower())
+    cmp_html = ('<div class="grid">' + ''.join(card(e) for e in comp_items) + '</div>') if comp_items \
+        else '<p class="sub">No components yet.</p>'
+
     doc = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kubicle Template Catalog</title><style>
+<title>Kubicle Scene Library</title><style>
   :root { --bg:#0a1626; --panel:#102339; --ink:#eaf2fb; --muted:#94a9c0; --accent:#3aa0ff; --line:#1d3450; }
   * { box-sizing:border-box; } body { margin:0; background:var(--bg); color:var(--ink);
     font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
-  header { padding:34px 40px 10px; } h1 { margin:0; font-size:1.7rem; letter-spacing:-0.01em; }
-  .sub { color:var(--muted); margin:6px 0 0; font-size:.92rem; max-width:70ch; line-height:1.5; }
-  .legend { color:var(--muted); font-size:.8rem; margin-top:10px; } .legend b { color:var(--ink); }
+  header { padding:30px 40px 0; } h1 { margin:0; font-size:1.7rem; letter-spacing:-0.01em; }
+  .sub { color:var(--muted); margin:6px 0 0; font-size:.92rem; max-width:74ch; line-height:1.5; }
+  .tabs { display:flex; gap:6px; padding:18px 40px 0; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:5; }
+  .tab { appearance:none; border:0; background:transparent; color:var(--muted); font:inherit; font-weight:700;
+    font-size:.98rem; padding:12px 18px; cursor:pointer; border-bottom:3px solid transparent; }
+  .tab.active { color:var(--ink); border-bottom-color:var(--accent); }
+  .tab .n { color:var(--muted); font-weight:500; font-size:.82rem; }
   main { padding:8px 40px 64px; }
-  h2.cat { text-transform:capitalize; font-size:1.05rem; margin:34px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .panel { display:none; } .panel.active { display:block; }
+  h2.cat { text-transform:capitalize; font-size:1.05rem; margin:28px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line); }
   h2.cat .n { color:var(--muted); font-weight:500; font-size:.85rem; }
   .grid { display:grid; gap:20px; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); }
   .card { margin:0; background:var(--panel); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
   .shot { background:#000; aspect-ratio:16/9; } .shot img { width:100%; height:100%; object-fit:contain; display:block; }
   figcaption { padding:12px 14px 14px; } .name { font-weight:700; font-size:1rem; }
   .use { color:var(--muted); font-size:.82rem; line-height:1.45; margin-top:5px; }
-  @media print { body { background:#fff; color:#0a1626; } .card { background:#fff; border-color:#ccd6e0; break-inside:avoid; }
-    .shot { background:#0a1626; } header, main { padding-left:18px; padding-right:18px; } .use,.sub,.legend,h2.cat .n { color:#566; } }
+  @media print { body{background:#fff;color:#0a1626;} .panel{display:block!important;} .tabs{display:none;}
+    .card{background:#fff;border-color:#ccd6e0;break-inside:avoid;} .shot{background:#0a1626;}
+    header,main{padding-left:18px;padding-right:18px;} .use,.sub,h2.cat .n{color:#566;} }
 </style></head><body>
-<header><h1>Kubicle Motion Template Catalog</h1>
-  <p class="sub">One rendered example of every template in the library, grouped by category. Use it to pick the right template for a beat.</p>
-  <p class="legend"><b>__TOTAL__ templates.</b> A grey target glyph is a placeholder where an example referenced an icon id not in the master Icons library; real lessons resolve real icons.</p>
-</header><main>
-__CARDS__
-</main></body></html>"""
-    doc = doc.replace('__TOTAL__', str(total)).replace('__CARDS__', '\n'.join(cards))
+<header><h1>Kubicle Scene Library</h1>
+  <p class="sub">Rendered examples of every template and every reusable component. Templates are fixed scenes; components are the building blocks that combine into new templates.</p>
+</header>
+<div class="tabs">
+  <button class="tab active" data-panel="templates">Templates <span class="n">__NT__</span></button>
+  <button class="tab" data-panel="components">Components <span class="n">__NC__</span></button>
+</div>
+<main>
+  <section class="panel active" id="panel-templates">__TPL__</section>
+  <section class="panel" id="panel-components">
+    <p class="sub" style="margin:18px 0 10px">Each component shown in isolation (colour variants where relevant). Combine them to assemble new templates , see <code>components/README.md</code>. A grey target glyph is a placeholder icon.</p>
+    __CMP__
+  </section>
+</main>
+<script>
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      t.classList.add('active');
+      document.getElementById('panel-' + t.dataset.panel).classList.add('active');
+    });
+  });
+</script>
+</body></html>"""
+    doc = (doc.replace('__NT__', str(len(tmpl))).replace('__NC__', str(len(comp)))
+              .replace('__TPL__', '\n'.join(tpl_html)).replace('__CMP__', cmp_html))
     open(os.path.join(REPO, 'TEMPLATE-CATALOG.html'), 'w', encoding='utf-8').write(doc)
     mb = len(doc.encode('utf-8')) / 1e6
-    print(f"  wrote TEMPLATE-CATALOG.html ({mb:.1f} MB), {total} templates, {len(cats)} categories")
+    print(f"  wrote TEMPLATE-CATALOG.html ({mb:.1f} MB), {len(tmpl)} templates + {len(comp)} components")
 
 
 def main():
