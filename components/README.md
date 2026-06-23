@@ -1,6 +1,6 @@
 # Component library
 
-Reusable, code-first building blocks extracted from the templates' visual pieces.
+Reusable building blocks extracted from the templates' visual pieces.
 A template is a fixed layout; a **component** is one piece of it (a pill, a tab, an
 icon badge, a side panel) that can be placed anywhere and combined with others to
 assemble new templates. So "the YinYang left side merged with Splitscreen icon
@@ -8,10 +8,16 @@ pills" is just a short layout file that imports both.
 
 ## The contract (every component follows it)
 
-- **Code-first** , built in CSS/SVG, no baked PNGs. Colour, text, icon, and size
-  are props, so the same component can be blue, pink, teal, or any hex.
+- **Hybrid look (PNG where it matters)** , a component is either *code-first*
+  (CSS/SVG, fully recolourable and resizable) for simple shapes, or *asset-backed*
+  (the template's real PNG artwork) where CSS cannot match it (gradients, bevels,
+  the YinYang split-curve). Asset-backed pieces are pixel-faithful but fixed-size
+  and limited to the colour variants that ship as artwork. Text, icon, reveal, and
+  placement are always props either way.
 - **Placement-agnostic** , a component renders inside its own box; the composing
-  template positions it on the 1920x1080 canvas (wrap it in `<Place x y>`).
+  template positions it on the 1920x1080 canvas (wrap it in `<Place x y>`). A few
+  full-frame "canvas-region" components (e.g. `YinYangSide`, whose artwork spans the
+  stage) are the exception: render them directly, not inside `<Place>`.
 - **Reveal-driven** , a component takes the current `frame` and a `Reveal`
   (`{ startFrame, inFrames, pulseFrames? }`) and animates its own entrance. This is
   the same reveal-sequence model the templates and `fit-timing.py` already use, so
@@ -43,20 +49,22 @@ The composing template owns the canvas background, the layout coordinates, and t
 
 ## Components
 
-| Component | What it is | From |
-|---|---|---|
-| [`IconPill`](IconPill/) | Caption pill with an optional circular icon badge; colour is a prop | SplitscreenPointsV1 `AnimPill` |
-| [`WordTab`](WordTab/) | Top-left tab holding a word/label; slides down | WordDefinition banner |
-| [`IconBadge`](IconBadge/) | Icon in a coloured circle inside a white surround; slides in from a side | WordDefinition icon pill |
-| [`YinYangSide`](YinYangSide/) | One side of a comparison: a coloured title bar over 1-2 icon+caption boxes | YinYang2Points `ContainerGroup` |
+| Component | What it is | Build | From |
+|---|---|---|---|
+| [`IconPill`](IconPill/) | Caption pill with an optional circular icon badge | asset-backed (blue / pink) | SplitscreenPointsV1 `AnimPill` |
+| [`WordTab`](WordTab/) | Top-left tab holding a word/label; slides down | code-first (any colour) | WordDefinition banner |
+| [`IconBadge`](IconBadge/) | Icon in a coloured circle inside a white surround | code-first (any colour) | WordDefinition icon pill |
+| [`YinYangSide`](YinYangSide/) | One full-frame side of a comparison: title bar over 1-2 icon/caption boxes | asset-backed, canvas-region | YinYang2Points `ContainerGroup` |
 
 This is the proven first set. The rest of the library is extracted from the
 remaining templates against this same contract (title bars, checklist pills,
 process steps, coverflow tiles, chat bubbles, milestone cards, character cards,
 and so on).
 
-## Note on fidelity
+## Note on fidelity (the hybrid rule)
 
-Code-first means a component matches the design but may differ very slightly from
-the original baked pixels (gradients, the YinYang split curve is approximated as
-clean rounded panels). In exchange you get true recolouring and free placement.
+Choose per piece: use **asset-backed** when the artwork has gradients, bevels, or
+curves CSS cannot match (pixel-faithful, but fixed size and only the colour variants
+that ship as PNGs); use **code-first** for simple shapes (plain pills, circles, bars)
+that CSS reproduces faithfully and that benefit from free recolouring and resizing.
+The wide fan-out follows the same rule, template by template.

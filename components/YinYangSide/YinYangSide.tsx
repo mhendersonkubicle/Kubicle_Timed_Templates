@@ -1,69 +1,72 @@
-// YinYangSide , one side of a two-sided comparison: a coloured title bar above
-// one or two boxes, each box an icon over a caption. Extracted from
-// YinYang2Points' ContainerGroup. `side` sets the default accent (left = blue,
-// right = teal) but any colour can be passed. Code-first approximation of the
-// original split-panel shape (clean rounded panels, not the baked yin-yang curve).
+// YinYangSide , one side of the YinYang comparison. ASSET-BACKED: renders the
+// real base + title-bar + box artwork (the split-curve cannot be reproduced in
+// CSS) and overlays only the dynamic title, icons, and captions at the template's
+// measured coordinates. This is a CANVAS-REGION component: it occupies its half
+// of the 1920x1080 stage (render it directly, not inside <Place>), so pair the
+// two sides, or pair one side with other components placed in the other half.
 import React from 'react';
+import { Img, staticFile } from 'remotion';
 import {
-  appear, pulse, easeOutBack, easeOutCubic, resolveColor, shade, Icon,
+  appear, pulse, easeOutCubic, easeOutBack, resolveColor, Icon,
   FONT_HEAD, FONT_BODY, type Reveal, type ColorVariant,
 } from '../_lib/kit';
+
+const A = 'Template-Specific-Assets/YinYang2Points/';
+const SIDES = {
+  left:  { base: 'base_1.png', title: 'title1_box.png', boxes: 'base_1_two_boxes.png', titleCx: 490,  iconCxs: [284, 673],   singleCx: 490,  accent: '#0496FF' },
+  right: { base: 'base_2.png', title: 'title2_box.png', boxes: 'base_2_two_boxes.png', titleCx: 1445, iconCxs: [1256, 1644], singleCx: 1445, accent: '#F865B0' },
+} as const;
+
+// measured geometry (from YinYang2Points)
+const TITLE_CY = 348, TITLE_SIZE = 55.5, TITLE_MAXW = 690;
+const ICON_SIZE = 300, ICON_CY = 600;
+const BOX_CY = 856, BOX_W = 354, BOX_H = 127, BOX_RADIUS = 13, BOX_TEXT_SIZE = 37;
+const FULL: React.CSSProperties = { position: 'absolute', left: 0, top: 0, width: 1920, height: 1080, display: 'block', pointerEvents: 'none' };
 
 export type YinYangBox = { icon: string; text: string; reveal: Reveal };
 export type YinYangSideProps = {
   frame: number;
+  side?: 'left' | 'right';
   title: string;
   titleReveal: Reveal;
-  boxes: YinYangBox[];          // 1 or 2
-  side?: 'left' | 'right';      // default accent: left=blue, right=teal
-  accent?: ColorVariant;        // override the accent colour
-  width?: number;               // default 620
+  boxes: YinYangBox[];        // 1 or 2
+  accent?: ColorVariant;      // override the icon accent (default: left blue, right pink)
 };
 
-export const YinYangSide: React.FC<YinYangSideProps> = ({
-  frame, title, titleReveal, boxes, side = 'left', accent, width = 620,
-}) => {
-  const c = resolveColor(accent ?? (side === 'left' ? 'blue' : 'teal'));
-  const titleProg = appear(frame, titleReveal, easeOutCubic);
-  const titleH = 96;
-  const boxH = 188;
-  const gap = 22;
+export const YinYangSide: React.FC<YinYangSideProps> = ({ frame, side = 'left', title, titleReveal, boxes, accent }) => {
+  const s = SIDES[side];
+  const acc = accent ? resolveColor(accent) : s.accent;
+  const baseProg = appear(frame, titleReveal, easeOutCubic);
+  const two = boxes.length >= 2;
+  const centers = two ? s.iconCxs : [s.singleCx];
 
   return (
-    <div style={{ width }}>
-      {/* coloured title bar */}
-      <div style={{
-        height: titleH, borderRadius: 18, background: `linear-gradient(180deg, ${c}, ${shade(c, -16)})`,
-        display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: gap,
-        transform: `translateY(${-30 * (1 - titleProg)}px)`, opacity: titleProg,
-        boxShadow: '0 8px 20px rgba(0,0,0,0.18)',
-      }}>
-        <span style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: 44, color: '#FFFFFF', whiteSpace: 'nowrap' }}>
-          {title}
-        </span>
+    <div style={{ position: 'absolute', inset: 0, opacity: baseProg }}>
+      <Img src={staticFile(A + s.base)} style={FULL} />
+      <Img src={staticFile(A + s.title)} style={FULL} />
+      {two
+        ? <Img src={staticFile(A + s.boxes)} style={FULL} />
+        : <div style={{ position: 'absolute', left: s.singleCx - BOX_W / 2, top: BOX_CY - BOX_H / 2, width: BOX_W, height: BOX_H, borderRadius: BOX_RADIUS, background: '#FFFFFF', boxShadow: '0 6px 16px rgba(0,0,0,0.16)' }} />}
+
+      {/* title text on the coloured bar */}
+      <div style={{ position: 'absolute', left: s.titleCx - TITLE_MAXW / 2, top: TITLE_CY - TITLE_SIZE * 0.72, width: TITLE_MAXW, textAlign: 'center' }}>
+        <span style={{ fontFamily: FONT_HEAD, fontWeight: 800, fontSize: TITLE_SIZE, color: '#FFFFFF', whiteSpace: 'nowrap' }}>{title}</span>
       </div>
 
-      {/* boxes (icon over caption) */}
+      {/* per-box icon (above) + caption (in the white box) */}
       {boxes.slice(0, 2).map((b, i) => {
-        const s = appear(frame, b.reveal, easeOutBack);
-        if (s <= 0) return <div key={i} style={{ height: boxH, marginBottom: gap }} />;
+        const cx = centers[i] ?? s.singleCx;
+        const sc = appear(frame, b.reveal, easeOutBack);
+        if (sc <= 0) return null;
         const p = pulse(frame, b.reveal);
         return (
-          <div key={i} style={{
-            height: boxH, borderRadius: 18, background: '#FFFFFF', marginBottom: gap,
-            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16,
-            transform: `scale(${s * p})`, transformOrigin: 'center center',
-            boxShadow: '0 6px 16px rgba(0,0,0,0.16)',
-          }}>
-            <div style={{
-              width: 78, height: 78, borderRadius: '50%', background: c,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Icon id={b.icon} size={44} tint="#FFFFFF" />
+          <div key={i}>
+            <div style={{ position: 'absolute', left: cx - ICON_SIZE / 2, top: ICON_CY - ICON_SIZE / 2, width: ICON_SIZE, height: ICON_SIZE, transform: `scale(${sc * p})`, transformOrigin: 'center center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon id={b.icon} size={ICON_SIZE * 0.6} tint={acc} />
             </div>
-            <span style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: 32, color: '#0C1A28', textAlign: 'center' }}>
-              {b.text}
-            </span>
+            <div style={{ position: 'absolute', left: cx - (BOX_W - 24) / 2, top: BOX_CY - BOX_TEXT_SIZE * 0.72, width: BOX_W - 24, textAlign: 'center', opacity: sc }}>
+              <span style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: BOX_TEXT_SIZE, color: '#0C1A28', whiteSpace: 'nowrap' }}>{b.text}</span>
+            </div>
           </div>
         );
       })}

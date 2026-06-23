@@ -1,59 +1,49 @@
 // IconPill , a caption pill with an optional circular icon badge on the left.
-// Extracted from SplitscreenPointsV1's AnimPill; the circle/pill colour is a prop
-// (blue / pink / teal / any hex), so it works on either side of a comparison or
-// anywhere a labelled point is needed. Pops in with easeOutBack, caption fades in.
+// ASSET-BACKED: uses the real SplitscreenPointsV1 pill artwork (pixel-faithful),
+// with the icon + caption overlaid at the original geometry. Colour is the pill
+// variant that ships as a PNG: 'blue' (left) or 'pink' (right). Pops in with
+// easeOutBack; caption fades in. Fixed size (the artwork's pill size).
 import React from 'react';
-import {
-  appear, pulse, easeOutBack, easeOutQuad, resolveColor, shade, Icon, FONT_BODY, FPS,
-  type Reveal, type ColorVariant,
-} from '../_lib/kit';
+import { Img, staticFile } from 'remotion';
+import { appear, pulse, easeOutBack, easeOutQuad, Icon, FONT_BODY, FPS, type Reveal } from '../_lib/kit';
+
+// Pill geometry inside each 1920x1080 pill PNG (from SplitscreenPointsV1).
+const PILL_W = 693, PILL_H = 111, CIRCLE_D = 111, PILL_Y = 353;
+const VARIANTS: Record<string, { src: string; originX: number; textColor: string }> = {
+  blue: { src: 'Template-Specific-Assets/SplitscreenPointsV1/pill_left_side.png', originX: 156, textColor: '#FFFFFF' },
+  pink: { src: 'Template-Specific-Assets/SplitscreenPointsV1/pill_right_side.png', originX: 1032, textColor: '#0C1A28' },
+};
 
 export type IconPillProps = {
   frame: number;
   reveal: Reveal;
   text: string;
-  icon?: string;            // icon id (icons/<id>.svg); rendered white inside the badge
-  color?: ColorVariant;     // pill colour, default 'blue'
-  textColor?: string;       // caption colour override
-  width?: number;           // default 560
-  height?: number;          // default 96
+  icon?: string;             // icon id; rendered white in the circle
+  color?: 'blue' | 'pink';   // the pill variant that exists as artwork; default 'blue'
 };
 
-export const IconPill: React.FC<IconPillProps> = ({
-  frame, reveal, text, icon, color = 'blue', textColor, width = 560, height = 96,
-}) => {
+export const IconPill: React.FC<IconPillProps> = ({ frame, reveal, text, icon, color = 'blue' }) => {
   const scale = appear(frame, reveal, easeOutBack);
   if (scale <= 0) return null;
-  const c = resolveColor(color);
+  const v = VARIANTS[color] ?? VARIANTS.blue;
   const p = pulse(frame, reveal);
-  const textOp = appear(frame, { startFrame: reveal.startFrame + Math.round(0.18 * FPS), inFrames: Math.round(0.4 * FPS) }, easeOutQuad);
-  // light fills (pink/teal/pale hex) read better with dark ink captions
-  const isLight = color === 'pink' || color === 'teal' || /^#[E-Fe-f]/.test(c);
-  const cap = textColor ?? (isLight ? '#0C1A28' : '#FFFFFF');
-  const r = height / 2;
-  const badge = height - 20;
+  const textOp = appear(frame, { startFrame: reveal.startFrame + Math.round(0.18 * FPS), inFrames: Math.round(0.3 * FPS) }, easeOutQuad);
 
   return (
-    <div style={{ width, height, transform: `scale(${scale * p})`, transformOrigin: 'left center' }}>
-      <div style={{
-        position: 'relative', width, height, borderRadius: r,
-        background: `linear-gradient(180deg, ${c}, ${shade(c, -14)})`,
-        boxShadow: '0 8px 20px rgba(0,0,0,0.18)',
-        display: 'flex', alignItems: 'center',
-        paddingLeft: icon ? height + 10 : 30, paddingRight: 30,
-      }}>
+    <div style={{ width: PILL_W, height: PILL_H, transform: `scale(${scale * p})`, transformOrigin: 'left center' }}>
+      <div style={{ position: 'relative', width: PILL_W, height: PILL_H }}>
+        {/* real pill artwork, windowed to this pill out of the full-frame PNG */}
+        <Img src={staticFile(v.src)} style={{ position: 'absolute', top: -PILL_Y, left: -v.originX, width: 1920, height: 1080, display: 'block' }} />
         {icon && (
-          <div style={{
-            position: 'absolute', left: 10, top: 10, width: badge, height: badge, borderRadius: '50%',
-            background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <Icon id={icon} size={badge * 0.56} tint={c} />
+          <div style={{ position: 'absolute', left: 0, top: 0, width: CIRCLE_D, height: CIRCLE_D, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 3 }}>
+            <Icon id={icon} size={CIRCLE_D * 0.58} tint="#FFFFFF" />
           </div>
         )}
-        <span style={{
-          fontFamily: FONT_BODY, fontWeight: 700, fontSize: 34, color: cap, opacity: textOp,
-          whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
-        }}>{text}</span>
+        <div style={{ position: 'absolute', left: CIRCLE_D + 18, top: 0, height: PILL_H, display: 'flex', alignItems: 'center', opacity: textOp, zIndex: 3 }}>
+          <span style={{ fontFamily: FONT_BODY, fontWeight: 500, fontSize: 40, color: v.textColor, whiteSpace: 'nowrap', letterSpacing: '-0.3px', transform: 'translateY(-5px)' }}>
+            {text}
+          </span>
+        </div>
       </div>
     </div>
   );

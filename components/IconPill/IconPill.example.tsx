@@ -13,8 +13,8 @@ export const IconPillExample: React.FC = () => {
       background: `linear-gradient(160deg, ${COLORS.oxford}, ${COLORS.navy})`,
       alignItems: 'center', justifyContent: 'center', gap: 48,
     }}>
-      <IconPill frame={frame} reveal={r} text="Reads the record" icon="science-magnifyingglass-dark" color="blue" width={840} height={120} />
-      <IconPill frame={frame} reveal={r} text="Updates the field" icon="core-values-value-dark" color="pink" width={840} height={120} />
+      <IconPill frame={frame} reveal={r} text="Reads the record" icon="science-magnifyingglass-dark" color="blue" />
+      <IconPill frame={frame} reveal={r} text="Updates the field" icon="core-values-value-dark" color="pink" />
     </AbsoluteFill>
   );
 };
