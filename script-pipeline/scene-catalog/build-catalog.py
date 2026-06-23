@@ -211,7 +211,27 @@ def generate():
 
 def render():
     env = {**os.environ, 'REPO': REPO, 'HARNESS': HARNESS, 'BUILD': BUILD, 'OUT': OUT}
-    run(['node', os.path.join(HERE, 'render.mjs')], cwd=HERE, env=env)
+    # bundle once, then render in small chunks across FRESH node processes so
+    # Chrome's memory stays bounded (one process can't render ~80 stills) and a
+    # single crashing still is isolated rather than aborting the whole run.
+    run(['node', os.path.join(HERE, 'render.mjs')], cwd=HERE, env={**env, 'MODE': 'bundle'})
+    manifest = json.load(open(os.path.join(BUILD, 'catalog-manifest.json'), encoding='utf-8'))
+    n, CH = len(manifest), 12
+
+    def render_slice(start, count):
+        run(['node', os.path.join(HERE, 'render.mjs')], cwd=HERE,
+            env={**env, 'MODE': 'render', 'START': str(start), 'COUNT': str(count)})
+
+    for start in range(0, n, CH):
+        try:
+            render_slice(start, CH)
+        except subprocess.CalledProcessError:
+            print(f'  chunk at {start} crashed the renderer; isolating one-by-one')
+            for i in range(start, min(start + CH, n)):
+                try:
+                    render_slice(i, 1)
+                except subprocess.CalledProcessError:
+                    print(f'    SKIP {manifest[i]["compId"]} (crashes the renderer)')
 
 
 def build_html(entries):

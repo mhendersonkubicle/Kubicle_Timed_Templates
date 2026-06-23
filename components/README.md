@@ -55,11 +55,14 @@ The composing template owns the canvas background, the layout coordinates, and t
 | [`WordTab`](WordTab/) | Top-left tab holding a word/label; slides down | code-first (any colour) | WordDefinition banner |
 | [`IconBadge`](IconBadge/) | Icon in a coloured circle inside a white surround | code-first (any colour) | WordDefinition icon pill |
 | [`YinYangSide`](YinYangSide/) | One full-frame side of a comparison: title bar over 1-2 icon/caption boxes | asset-backed, canvas-region | YinYang2Points `ContainerGroup` |
+| [`VerifiedBadge`](VerifiedBadge/) | Serrated 16-point starburst badge with a white tick; shown inline beside a role or name label | code-first (any colour) | CharacterProfileCard inline badge |
 
-This is the proven first set. The rest of the library is extracted from the
-remaining templates against this same contract (title bars, checklist pills,
-process steps, coverflow tiles, chat bubbles, milestone cards, character cards,
-and so on).
+The table above lists a few originals; the library now spans **36 components**
+extracted across the templates (chat bubbles, profile-card shells, step badges,
+progress bars/spines, tick nodes, headlines/eyebrows, hierarchy nodes, banners,
+and more), all built against this same contract and hybrid rule. Browse the full
+set, rendered, in the scene-library catalog's **Components** tab
+(`TEMPLATE-CATALOG.html`), and each component's own `GUIDANCE.md`.
 
 ## Note on fidelity (the hybrid rule)
 
